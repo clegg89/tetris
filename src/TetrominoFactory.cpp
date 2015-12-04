@@ -305,7 +305,6 @@ Tetromino TetrominoFactory::pTetros[] =
 
 TetrominoFactory::TetrominoFactory()
 {
-    srand(time(NULL));
 }
 
 TetrominoFactory::~TetrominoFactory()
@@ -314,6 +313,7 @@ TetrominoFactory::~TetrominoFactory()
 
 Tetromino* TetrominoFactory::GetRand()
 {
+    srand(time(NULL));
     int index = rand() % NUM_TETROMINO;
 
     return &TetrominoFactory::pTetros[index];

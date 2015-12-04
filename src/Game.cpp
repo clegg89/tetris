@@ -74,6 +74,8 @@ bool Game::Load()
 
 void Game::Update()
 {
+    static unsigned int prev_time = 0;
+    unsigned int curr_time;
     SDL_Event oEvent;
 
     while(SDL_PollEvent(&oEvent) != 0)
@@ -95,7 +97,6 @@ void Game::Update()
                     break;
                 case SDLK_s:
                 case SDLK_DOWN:
-                    this->pBoard->SetSpeed(MOVE_SPEED_FAST);
                     break;
                 case SDLK_a:
                 case SDLK_LEFT:
@@ -115,20 +116,24 @@ void Game::Update()
             {
                 case SDLK_s:
                 case SDLK_DOWN:
-                    this->pBoard->SetSpeed(MOVE_SPEED_NORMAL);
                     break;
             }
         }
     }
 
-    this->pBoard->MoveDown();
-
-    if (this->pBoard->IsTetrominoDead())
+    curr_time = SDL_GetTicks();
+    if (curr_time > prev_time + TIME_BETWEEN_MOVES_MS)
     {
-        this->pBoard->EraseLines();
-        this->pBoard->AddTetromino(this->pNextTetro);
+        prev_time = curr_time;
+        this->pBoard->MoveDown();
 
-        this->pNextTetro = TetrominoFactory::GetRand();
+        if (this->pBoard->IsTetrominoDead())
+        {
+            this->pBoard->EraseLines();
+            this->pBoard->AddTetromino(this->pNextTetro);
+
+            this->pNextTetro = TetrominoFactory::GetRand();
+        }
     }
 }
 

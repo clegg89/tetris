@@ -183,7 +183,7 @@ void Board::FillBlocks()
         {
             int boardY = j + tetroY;
 
-            if (boardX >= 0 && boardY >= 0)
+            if (boardX >= 0 && boardY >= 0 && !(this->IsFilled(boardX, boardY)))
             {
                 this->pBoard[boardX][boardY] = this->pTetro->IsBlockFilled(i, j);
             }

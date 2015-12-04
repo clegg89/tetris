@@ -22,4 +22,6 @@
 #define BOARD_WIDTH         10
 #define BOARD_HEIGHT        16
 
+#define TIME_BETWEEN_MOVES_MS 1000
+
 #endif /* _TETRIS_H_ */
