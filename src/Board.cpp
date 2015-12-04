@@ -73,6 +73,9 @@ void Board::EraseLines()
 
 bool Board::IsFilled(int x, int y)
 {
+	if (x < 0 || y < 0)
+		return false;
+
     return this->pBoard[x][y];
 }
 
@@ -83,7 +86,6 @@ void Board::Rotate()
     if (!this->IsMovePossible(this->pTetro->GetX(), this->pTetro->GetY()))
     {
         this->pTetro->RotateCounterClockwise();
-        this->FillBlocks();
     }
 }
 
@@ -99,7 +101,6 @@ void Board::MoveLeft()
     if (this->IsMovePossible(tetroX, this->pTetro->GetY()))
     {
         this->pTetro->SetX(tetroX);
-        this->FillBlocks();
     }
 }
 
@@ -110,7 +111,6 @@ void Board::MoveRight()
     if (this->IsMovePossible(tetroX, this->pTetro->GetY()))
     {
         this->pTetro->SetX(tetroX);
-        this->FillBlocks();
     }
 }
 
@@ -131,7 +131,6 @@ void Board::MoveDown()
     if (this->IsMovePossible(this->pTetro->GetX(), tetroY))
     {
         this->pTetro->SetY(tetroY);
-        this->FillBlocks();
     }
     else
     {
@@ -171,7 +170,7 @@ bool Board::IsMovePossible(int tetroX, int tetroY)
     return true;
 }
 
-void Board::FillBlocks()
+void Board::StoreTetromino()
 {
     int tetroX = this->pTetro->GetX();
     int tetroY = this->pTetro->GetY();

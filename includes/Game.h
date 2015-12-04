@@ -23,7 +23,6 @@ class Game
         SDL_Renderer* pRenderer;
 
         Board* pBoard;
-        Tetromino* pNextTetro;
 
     public:
         Game();

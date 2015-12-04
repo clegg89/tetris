@@ -16,7 +16,6 @@ class Board
     private:
         void EraseLine(int posY);
         bool IsMovePossible(int tetroX, int tetroY);
-        void FillBlocks();
 
     protected:
         bool pBoard[BOARD_WIDTH][BOARD_HEIGHT];
@@ -28,9 +27,12 @@ class Board
         Board();
         virtual ~Board();
 
+        Tetromino* GetTetro() { return this->pTetro; }
+
         void Init();
         void AddTetromino(Tetromino *tetro);
         bool IsTetrominoDead();
+        void StoreTetromino();
         void EraseLines();
         bool IsFilled(int x, int y);
 
