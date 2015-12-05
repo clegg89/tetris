@@ -186,3 +186,15 @@ void Board::StoreTetromino()
         }
     }
 }
+
+bool Board::IsGameOver()
+{
+    // Search the first row, if any blocks are filled, game is over.
+    for (int i = 0; i < BOARD_WIDTH; ++i)
+    {
+        if (this->IsFilled(i, 0))
+            return true;
+    }
+
+    return false;
+}

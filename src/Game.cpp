@@ -133,6 +133,7 @@ void Game::Update()
         {
         	this->pBoard->StoreTetromino();
             this->pBoard->EraseLines();
+            this->pGameOver = this->pBoard->IsGameOver();
 
             this->pBoard->AddTetromino(TetrominoFactory::GetRand());
         }

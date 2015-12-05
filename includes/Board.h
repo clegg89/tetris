@@ -34,6 +34,7 @@ class Board
         void StoreTetromino();
         void EraseLines();
         bool IsFilled(int x, int y);
+        bool IsGameOver();
 
         void Rotate();
         void MoveLeft();
