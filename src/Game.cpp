@@ -15,6 +15,7 @@ Game::Game() : pBgColor( {0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE} ), pTetroColor( {0
     this->pWindow = NULL;
     this->pRenderer = NULL;
     this->pBoard = NULL;
+    this->pGameSpeed = 0;
 }
 
 Game::~Game()
@@ -61,6 +62,8 @@ bool Game::Init()
     this->pBoard->Init();
     this->pBoard->AddTetromino(TetrominoFactory::GetRand());
 
+    this->pGameSpeed = TIME_BETWEEN_MOVES_MS;
+
     return true;
 }
 
@@ -94,6 +97,7 @@ void Game::Update()
                     break;
                 case SDLK_s:
                 case SDLK_DOWN:
+                    this->pGameSpeed = TIME_BETWEEN_MOVES_MS / 2;
                     break;
                 case SDLK_a:
                 case SDLK_LEFT:
@@ -113,13 +117,14 @@ void Game::Update()
             {
                 case SDLK_s:
                 case SDLK_DOWN:
+                    this->pGameSpeed = TIME_BETWEEN_MOVES_MS;
                     break;
             }
         }
     }
 
     curr_time = SDL_GetTicks();
-    if (curr_time > prev_time + TIME_BETWEEN_MOVES_MS)
+    if (curr_time > prev_time + this->pGameSpeed)
     {
         prev_time = curr_time;
         this->pBoard->MoveDown();

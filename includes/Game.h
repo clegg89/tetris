@@ -21,6 +21,7 @@ class Game
         bool pGameOver;
         SDL_Window*   pWindow;
         SDL_Renderer* pRenderer;
+        int pGameSpeed;
 
         Board* pBoard;
 

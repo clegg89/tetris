@@ -20,7 +20,6 @@ class Board
     protected:
         bool pBoard[BOARD_WIDTH][BOARD_HEIGHT];
         Tetromino* pTetro;
-        int pTetroSpeed;
         bool pIsTetroDead;
 
     public:
@@ -37,7 +36,6 @@ class Board
         bool IsFilled(int x, int y);
 
         void Rotate();
-        void SetSpeed(int speed);
         void MoveLeft();
         void MoveRight();
         void MoveDown();

@@ -12,7 +12,6 @@
 Board::Board()
 {
     this->pTetro = NULL;
-    this->pTetroSpeed = MOVE_SPEED_NORMAL;
     this->pIsTetroDead = true;
 }
 
@@ -89,11 +88,6 @@ void Board::Rotate()
     }
 }
 
-void Board::SetSpeed(int speed)
-{
-    this->pTetroSpeed = speed;
-}
-
 void Board::MoveLeft()
 {
     int tetroX = this->pTetro->GetX() - 1;
@@ -125,7 +119,7 @@ void Board::MoveDown()
     int tetroY = this->pTetro->GetY();
 
     // Increment the Y value
-    tetroY += this->pTetroSpeed;
+    tetroY++;
 
     // Check for collisions
     if (this->IsMovePossible(this->pTetro->GetX(), tetroY))
@@ -159,7 +153,7 @@ bool Board::IsMovePossible(int tetroX, int tetroY)
 
             if (tetroY + j >= 0)
             {
-                if (this->pTetro->IsBlockFilled(i, j) && this->IsFilled(tetroX, tetroY))
+                if (this->pTetro->IsBlockFilled(i, j) && this->IsFilled(tetroX + i, tetroY + j))
                 {
                     return false;
                 }
