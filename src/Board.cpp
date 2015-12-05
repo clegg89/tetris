@@ -72,7 +72,8 @@ void Board::EraseLines()
 
 bool Board::IsFilled(int x, int y)
 {
-	if (x < 0 || y < 0)
+	if (x < 0 || y < 0 ||
+	    x >= BOARD_WIDTH || y >= BOARD_HEIGHT)
 		return false;
 
     return this->pBoard[x][y];
@@ -176,7 +177,9 @@ void Board::StoreTetromino()
         {
             int boardY = j + tetroY;
 
-            if (boardX >= 0 && boardY >= 0 && !(this->IsFilled(boardX, boardY)))
+            if (boardX >= 0 && boardY >= 0 &&
+                boardX < BOARD_WIDTH && boardY < BOARD_HEIGHT &&
+                !(this->IsFilled(boardX, boardY)))
             {
                 this->pBoard[boardX][boardY] = this->pTetro->IsBlockFilled(i, j);
             }

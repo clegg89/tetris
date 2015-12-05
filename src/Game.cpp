@@ -97,7 +97,7 @@ void Game::Update()
                     break;
                 case SDLK_s:
                 case SDLK_DOWN:
-                    this->pGameSpeed = TIME_BETWEEN_MOVES_MS / 2;
+                    this->pGameSpeed = TIME_BETWEEN_MOVES_MS / 4;
                     break;
                 case SDLK_a:
                 case SDLK_LEFT:
