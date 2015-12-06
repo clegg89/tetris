@@ -145,8 +145,8 @@ void Game::Render()
 	Tetromino* currentTetro;
 
 	SDL_Rect filledSquare;
-	filledSquare.w = BLOCK_SIZE_PIXELS;
-	filledSquare.h = BLOCK_SIZE_PIXELS;
+	filledSquare.w = BLOCK_SIZE_PIXELS - 2;
+	filledSquare.h = BLOCK_SIZE_PIXELS - 2;
 
     /* Clear the Screen */
     SDL_SetRenderDrawColor(this->pRenderer, this->pBgColor.r, this->pBgColor.g, this->pBgColor.b, this->pBgColor.a);
@@ -159,8 +159,8 @@ void Game::Render()
             if (this->pBoard->IsFilled(i, j))
             {
                 //Draw Rect
-                filledSquare.x = i * BLOCK_SIZE_PIXELS;
-                filledSquare.y = j * BLOCK_SIZE_PIXELS;
+                filledSquare.x = (i * BLOCK_SIZE_PIXELS) + 2;
+                filledSquare.y = (j * BLOCK_SIZE_PIXELS) + 2;
 
                 SDL_SetRenderDrawColor(this->pRenderer, this->pTetroColor.r, this->pTetroColor.g, this->pTetroColor.b, this->pTetroColor.a);
                 SDL_RenderFillRect(this->pRenderer, &filledSquare);
@@ -176,8 +176,8 @@ void Game::Render()
     	{
     		if (currentTetro->IsBlockFilled(i, j))
     		{
-    			filledSquare.x = (i + currentTetro->GetX()) * BLOCK_SIZE_PIXELS;
-    			filledSquare.y = (j + currentTetro->GetY()) * BLOCK_SIZE_PIXELS;
+    			filledSquare.x = ((i + currentTetro->GetX()) * BLOCK_SIZE_PIXELS) + 2;
+    			filledSquare.y = ((j + currentTetro->GetY()) * BLOCK_SIZE_PIXELS) + 2;
 
                 SDL_SetRenderDrawColor(this->pRenderer, this->pTetroColor.r, this->pTetroColor.g, this->pTetroColor.b, this->pTetroColor.a);
                 SDL_RenderFillRect(this->pRenderer, &filledSquare);
