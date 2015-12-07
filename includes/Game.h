@@ -6,19 +6,19 @@
  */
 
 #include <SDL.h>
+#include "GameIO.h"
 #include "Board.h"
 #include "Tetromino.h"
 
 class Game
 {
     private:
-        const SDL_Color pBgColor;
-        const SDL_Color pTetroColor;
-        const int pWindowWidth;
-        const int pWindowHeight;
+        static void KeyUpCB(SDL_Keycode, void*);
+        static void KeyDownCB(SDL_Keycode, void*);
 
     protected:
         bool pGameOver;
+        GameIO *pGameIO;
         SDL_Window*   pWindow;
         SDL_Renderer* pRenderer;
         int pGameSpeed;
