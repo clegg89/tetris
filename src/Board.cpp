@@ -8,6 +8,10 @@
 #include <iostream>
 #include "Board.h"
 
+static SDL_Color empty_block =
+{
+        0, 0, 0, SDL_ALPHA_OPAQUE
+};
 
 Board::Board()
 {
@@ -26,7 +30,7 @@ void Board::Init()
     {
         for (int j = 0; j < BOARD_HEIGHT; ++j)
         {
-            this->pBoard[i][j] = false;
+            this->pBoard[i][j] = &empty_block;
         }
     }
 }
@@ -76,6 +80,11 @@ bool Board::IsFilled(int x, int y)
 	    x >= BOARD_WIDTH || y >= BOARD_HEIGHT)
 		return false;
 
+    return (this->pBoard[x][y] != &empty_block);
+}
+
+SDL_Color* Board::GetBlockColor(int x, int y)
+{
     return this->pBoard[x][y];
 }
 
@@ -181,7 +190,10 @@ void Board::StoreTetromino()
                 boardX < BOARD_WIDTH && boardY < BOARD_HEIGHT &&
                 !(this->IsFilled(boardX, boardY)))
             {
-                this->pBoard[boardX][boardY] = this->pTetro->IsBlockFilled(i, j);
+                if (this->pTetro->IsBlockFilled(i, j))
+                {
+                    this->pBoard[boardX][boardY] = this->pTetro->GetColor();
+                }
             }
         }
     }

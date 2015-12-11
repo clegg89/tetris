@@ -18,7 +18,7 @@ class Board
         bool IsMovePossible(int tetroX, int tetroY);
 
     protected:
-        bool pBoard[BOARD_WIDTH][BOARD_HEIGHT];
+        SDL_Color* pBoard[BOARD_WIDTH][BOARD_HEIGHT];
         Tetromino* pTetro;
         bool pIsTetroDead;
 
@@ -34,6 +34,7 @@ class Board
         void StoreTetromino();
         void EraseLines();
         bool IsFilled(int x, int y);
+        SDL_Color* GetBlockColor(int x, int y);
         bool IsGameOver();
 
         void Rotate();

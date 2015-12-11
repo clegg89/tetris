@@ -31,7 +31,6 @@ class GameIO
     protected:
         const int pWindowHeight, pWindowWidth;
         const SDL_Color pBgColor;
-        const SDL_Color pFgColor; // TODO: Move this to Board/Tetro
         SDL_Window*   pWindow;
         SDL_Renderer* pRenderer;
         KeyCallback pKeyCallbacks[2];
