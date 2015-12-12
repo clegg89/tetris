@@ -66,7 +66,7 @@ void Board::EraseLines()
         int i = 0;
         while (i < BOARD_WIDTH)
         {
-            if (!this->pBoard[i][j]) { break; }
+            if (!this->IsFilled(i, j)) { break; }
             i++;
         }
 
