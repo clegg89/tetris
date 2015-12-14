@@ -17,6 +17,7 @@ Game::Game()
     this->pRenderer = NULL;
     this->pBoard = NULL;
     this->pGameSpeed = 0;
+    this->pNextTetro = NULL;
 }
 
 Game::~Game()
@@ -26,7 +27,7 @@ Game::~Game()
 
 bool Game::Init()
 {
-    this->pGameIO = new GameIO(480, 640, {0, 0, 0, SDL_ALPHA_OPAQUE});
+    this->pGameIO = new GameIO(480, 640, {0, 0, 0, SDL_ALPHA_OPAQUE}, {0, 0xFF, 0xFF, SDL_ALPHA_OPAQUE});
     if (!this->pGameIO->Init())
     {
         return false;
@@ -38,9 +39,14 @@ bool Game::Init()
     this->pBoard = new Board();
 
     this->pBoard->Init();
-    this->pBoard->AddTetromino(TetrominoFactory::GetRand());
+    this->pNextTetro = TetrominoFactory::GetRand();
+    this->pNextTetro->SetColor();
+    this->pBoard->AddTetromino(this->pNextTetro);
 
     this->pGameSpeed = TIME_BETWEEN_MOVES_MS;
+
+    this->pNextTetro = TetrominoFactory::GetRand();
+    this->pNextTetro->SetColor();
 
     return true;
 }
@@ -69,19 +75,25 @@ void Game::Update()
             this->pBoard->EraseLines();
             this->pGameOver = this->pBoard->IsGameOver();
 
-            this->pBoard->AddTetromino(TetrominoFactory::GetRand());
+            this->pBoard->AddTetromino(this->pNextTetro);
+
+            this->pNextTetro = TetrominoFactory::GetRand();
+            this->pNextTetro->SetColor();
         }
     }
 }
 
 void Game::Render()
 {
-
 	this->pGameIO->ClearScreen();
+
+	this->pGameIO->DrawBorder();
 
     this->pGameIO->DrawBoard(this->pBoard);
 
     this->pGameIO->DrawTetromino(this->pBoard->GetTetro());
+
+    this->pGameIO->DrawNextTetromino(this->pNextTetro);
 
     this->pGameIO->Present();
 }

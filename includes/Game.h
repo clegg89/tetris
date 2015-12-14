@@ -22,6 +22,7 @@ class Game
         SDL_Window*   pWindow;
         SDL_Renderer* pRenderer;
         int pGameSpeed;
+        Tetromino* pNextTetro;
 
         Board* pBoard;
 

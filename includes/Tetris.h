@@ -19,8 +19,12 @@
 #define MOVE_SPEED_FAST     1
 
 #define BLOCK_SIZE_PIXELS   30
+#define BORDER_SIZE_PIXELS  20
 #define BOARD_WIDTH         10
 #define BOARD_HEIGHT        16
+
+#define NEXT_TETROMINO_X    13
+#define NEXT_TETROMINO_Y    5
 
 #define TIME_BETWEEN_MOVES_MS 1000
 

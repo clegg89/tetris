@@ -28,15 +28,18 @@ typedef struct
 class GameIO
 {
     private:
+        void internalDrawTetro(Tetromino* tetro, int x, int y);
+        void internalDrawBlock(SDL_Color* color, int x, int y);
+
     protected:
         const int pWindowHeight, pWindowWidth;
-        const SDL_Color pBgColor;
+        const SDL_Color pBgColor, pBorderColor;
         SDL_Window*   pWindow;
         SDL_Renderer* pRenderer;
         KeyCallback pKeyCallbacks[2];
 
     public:
-        GameIO(const int windowHeight, const int windowWidth, const SDL_Color bgColor);
+        GameIO(const int windowHeight, const int windowWidth, const SDL_Color bgColor, const SDL_Color borderCOlor);
         virtual ~GameIO();
 
         bool Init();
@@ -45,8 +48,10 @@ class GameIO
         void RegisterKeyCB(tKeyCB callback, void* context, int keyDirection);
 
         void ClearScreen();
+        void DrawBorder();
         void DrawBoard(Board* board);
         void DrawTetromino(Tetromino* tetro);
+        void DrawNextTetromino(Tetromino* tetro);
         void Present();
 
         bool PollInputs();

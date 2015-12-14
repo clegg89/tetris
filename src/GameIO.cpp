@@ -8,7 +8,7 @@
 
 #include "GameIO.h"
 
-GameIO::GameIO(const int windowHeight, const int windowWidth, const SDL_Color bgColor) : pWindowHeight( windowHeight ), pWindowWidth( windowWidth ), pBgColor( bgColor )
+GameIO::GameIO(const int windowHeight, const int windowWidth, const SDL_Color bgColor, const SDL_Color borderColor) : pWindowHeight( windowHeight ), pWindowWidth( windowWidth ), pBgColor( bgColor ), pBorderColor( borderColor )
 {
     this->pWindow = NULL;
     this->pRenderer = NULL;
@@ -93,53 +93,72 @@ void GameIO::ClearScreen()
     SDL_RenderClear(this->pRenderer);
 }
 
+void GameIO::DrawBorder()
+{
+    SDL_Rect fill_rect;
+
+    fill_rect.x = 0;
+    fill_rect.y = 0;
+    fill_rect.w = ( BORDER_SIZE_PIXELS * 2 ) + ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
+    fill_rect.h = ( BLOCK_SIZE_PIXELS * BOARD_HEIGHT );
+
+    SDL_SetRenderDrawColor(this->pRenderer, this->pBorderColor.r, this->pBorderColor.g, this->pBorderColor.b, this->pBorderColor.a);
+    SDL_RenderFillRect(this->pRenderer, &fill_rect);
+
+    fill_rect.x += BORDER_SIZE_PIXELS;
+    fill_rect.w = ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
+    fill_rect.h = ( BLOCK_SIZE_PIXELS * BOARD_HEIGHT );
+
+    SDL_SetRenderDrawColor(this->pRenderer, this->pBgColor.r, this->pBgColor.g, this->pBgColor.b, this->pBgColor.a);
+    SDL_RenderFillRect(this->pRenderer, &fill_rect);
+}
+
 void GameIO::DrawBoard(Board* board)
 {
-	SDL_Rect filledSquare;
-	SDL_Color* squareColor;
-
-	filledSquare.w = BLOCK_SIZE_PIXELS - 2;
-	filledSquare.h = BLOCK_SIZE_PIXELS - 2;
-
     for (int i = 0; i < BOARD_WIDTH; ++i)
     {
         for (int j = 0; j < BOARD_HEIGHT; ++j)
         {
-            squareColor = board->GetBlockColor(i, j);
-
-            filledSquare.x = (i * BLOCK_SIZE_PIXELS) + 2;
-            filledSquare.y = (j * BLOCK_SIZE_PIXELS) + 2;
-
-            SDL_SetRenderDrawColor(this->pRenderer, squareColor->r, squareColor->g, squareColor->b, squareColor->a);
-            SDL_RenderFillRect(this->pRenderer, &filledSquare);
+            this->internalDrawBlock(board->GetBlockColor(i, j), i, j);
         }
     }
 }
 
 void GameIO::DrawTetromino(Tetromino* tetro)
 {
-	SDL_Rect filledSquare;
-	SDL_Color* squareColor;
+    this->internalDrawTetro(tetro, tetro->GetX(), tetro->GetY());
+}
 
-	filledSquare.w = BLOCK_SIZE_PIXELS - 2;
-	filledSquare.h = BLOCK_SIZE_PIXELS - 2;
+void GameIO::DrawNextTetromino(Tetromino* tetro)
+{
+    this->internalDrawTetro(tetro, NEXT_TETROMINO_X, NEXT_TETROMINO_Y);
+}
 
-    squareColor = tetro->GetColor();
-
+void GameIO::internalDrawTetro(Tetromino* tetro, int x, int y)
+{
     for (int i = 0; i < TETROMINO_BLOCKS; ++i)
     {
     	for (int j = 0; j < TETROMINO_BLOCKS; ++j)
     	{
     		if (tetro->IsBlockFilled(i, j))
     		{
-    			filledSquare.x = ((i + tetro->GetX()) * BLOCK_SIZE_PIXELS) + 2;
-    			filledSquare.y = ((j + tetro->GetY()) * BLOCK_SIZE_PIXELS) + 2;
-
-                SDL_SetRenderDrawColor(this->pRenderer, squareColor->r, squareColor->g, squareColor->b, squareColor->a);
-                SDL_RenderFillRect(this->pRenderer, &filledSquare);
+    		    this->internalDrawBlock(tetro->GetColor(), (i + x), (j + y));
     		}
 		}
 	}
+}
+
+void GameIO::internalDrawBlock(SDL_Color* color, int x, int y)
+{
+    SDL_Rect filledSquare;
+
+    filledSquare.w = BLOCK_SIZE_PIXELS - 2;
+    filledSquare.h = BLOCK_SIZE_PIXELS - 2;
+    filledSquare.x = BORDER_SIZE_PIXELS + ( x * BLOCK_SIZE_PIXELS ) + 2;
+    filledSquare.y = ( y * BLOCK_SIZE_PIXELS ) + 2;
+
+    SDL_SetRenderDrawColor(this->pRenderer, color->r, color->g, color->b, color->a);
+    SDL_RenderFillRect(this->pRenderer, &filledSquare);
 }
 
 void GameIO::Present()

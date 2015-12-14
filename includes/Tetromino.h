@@ -37,6 +37,7 @@ class Tetromino
         void SetY(int y);
         bool IsBlockFilled(int x, int y);
         SDL_Color *GetColor();
+        void SetColor();
 };
 
 

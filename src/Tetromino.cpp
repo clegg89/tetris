@@ -46,7 +46,6 @@ void Tetromino::Init()
 {
     this->pXPos = this->pOffset[this->pRotationIndex][0];
     this->pYPos = this->pOffset[this->pRotationIndex][1];
-    this->pColor = this->getRandColor();
 }
 
 void Tetromino::RotateClockwise()
@@ -102,4 +101,9 @@ bool Tetromino::IsBlockFilled(int x, int y)
 SDL_Color* Tetromino::GetColor()
 {
     return this->pColor;
+}
+
+void Tetromino::SetColor()
+{
+    this->pColor = this->getRandColor();
 }
