@@ -12,6 +12,7 @@ GameIO::GameIO(const int windowHeight, const int windowWidth, const SDL_Color bg
 {
     this->pWindow = NULL;
     this->pRenderer = NULL;
+    this->pBlockTexture = NULL;
 
     this->pKeyCallbacks[0] = { NULL, NULL };
     this->pKeyCallbacks[1] = { NULL, NULL };
@@ -24,6 +25,9 @@ GameIO::~GameIO()
 
 bool GameIO::Init()
 {
+    SDL_Surface* loadedSurface;
+    const char * blockImagePath = "media/block.bmp";
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         SDL_Log("SDL ERROR: %s", SDL_GetError());
@@ -56,11 +60,33 @@ bool GameIO::Init()
 
     SDL_SetRenderDrawColor(this->pRenderer, this->pBgColor.r, this->pBgColor.g, this->pBgColor.b, this->pBgColor.a);
 
+    loadedSurface = SDL_LoadBMP(blockImagePath);
+    if( loadedSurface == NULL )
+    {
+        SDL_Log( "Unable to load image %s! SDL_image Error: %s\n", blockImagePath, SDL_GetError() );
+        return false;
+    }
+
+    this->pBlockTexture = SDL_CreateTextureFromSurface(this->pRenderer, loadedSurface);
+    if( this->pBlockTexture == NULL )
+    {
+        SDL_Log( "Unable to create texture! SDL Error: %s\n", SDL_GetError());
+        SDL_FreeSurface(loadedSurface);
+        return false;
+    }
+
+    SDL_FreeSurface(loadedSurface);
+
     return true;
 }
 
 void GameIO::Destroy()
 {
+    if( this->pBlockTexture )
+    {
+        SDL_DestroyTexture(this->pBlockTexture);
+        this->pBlockTexture = NULL;
+    }
     if(this->pRenderer)
     {
         SDL_DestroyRenderer(this->pRenderer);
@@ -119,7 +145,10 @@ void GameIO::DrawBoard(Board* board)
     {
         for (int j = 0; j < BOARD_HEIGHT; ++j)
         {
-            this->internalDrawBlock(board->GetBlockColor(i, j), i, j);
+            if (board->IsFilled(i, j))
+            {
+                this->internalDrawBlock(board->GetBlockColor(i, j), i, j);
+            }
         }
     }
 }
@@ -152,13 +181,15 @@ void GameIO::internalDrawBlock(SDL_Color* color, int x, int y)
 {
     SDL_Rect filledSquare;
 
-    filledSquare.w = BLOCK_SIZE_PIXELS - 2;
-    filledSquare.h = BLOCK_SIZE_PIXELS - 2;
-    filledSquare.x = BORDER_SIZE_PIXELS + ( x * BLOCK_SIZE_PIXELS ) + 2;
-    filledSquare.y = ( y * BLOCK_SIZE_PIXELS ) + 2;
+    filledSquare.w = BLOCK_SIZE_PIXELS;
+    filledSquare.h = BLOCK_SIZE_PIXELS;
+    filledSquare.x = BORDER_SIZE_PIXELS + ( x * BLOCK_SIZE_PIXELS );
+    filledSquare.y = ( y * BLOCK_SIZE_PIXELS );
 
-    SDL_SetRenderDrawColor(this->pRenderer, color->r, color->g, color->b, color->a);
-    SDL_RenderFillRect(this->pRenderer, &filledSquare);
+    //SDL_SetRenderDrawColor(this->pRenderer, color->r, color->g, color->b, color->a);
+    //SDL_RenderFillRect(this->pRenderer, &filledSquare);
+    SDL_SetTextureColorMod(this->pBlockTexture, color->r, color->g, color->b);
+    SDL_RenderCopy(this->pRenderer, this->pBlockTexture, NULL, &filledSquare);
 }
 
 void GameIO::Present()

@@ -36,6 +36,7 @@ class GameIO
         const SDL_Color pBgColor, pBorderColor;
         SDL_Window*   pWindow;
         SDL_Renderer* pRenderer;
+        SDL_Texture* pBlockTexture;
         KeyCallback pKeyCallbacks[2];
 
     public:
