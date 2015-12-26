@@ -9,6 +9,7 @@
 #define _GAMEIO_H_
 
 #include <SDL.h>
+#include <SDL_mixer.h>
 
 #include "Tetris.h"
 #include "Board.h"
@@ -38,6 +39,7 @@ class GameIO
         SDL_Renderer* pRenderer;
         SDL_Texture* pBlockTexture;
         KeyCallback pKeyCallbacks[2];
+        Mix_Music* pBgMusic;
 
     public:
         GameIO(const int windowHeight, const int windowWidth, const SDL_Color bgColor, const SDL_Color borderCOlor);
@@ -54,6 +56,9 @@ class GameIO
         void DrawTetromino(Tetromino* tetro);
         void DrawNextTetromino(Tetromino* tetro);
         void Present();
+
+        void LoadBgMusicFromFile(const char* filename);
+        void PlayBgMusic();
 
         bool PollInputs();
 };

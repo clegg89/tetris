@@ -16,6 +16,8 @@ GameIO::GameIO(const int windowHeight, const int windowWidth, const SDL_Color bg
 
     this->pKeyCallbacks[0] = { NULL, NULL };
     this->pKeyCallbacks[1] = { NULL, NULL };
+
+    this->pBgMusic = NULL;
 }
 
 GameIO::~GameIO()
@@ -28,10 +30,20 @@ bool GameIO::Init()
     SDL_Surface* loadedSurface;
     const char * blockImagePath = "media/block.bmp";
 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
     {
         SDL_Log("SDL ERROR: %s", SDL_GetError());
         return false;
+    }
+
+    if (Mix_Init(MIX_INIT_MP3))
+    {
+        SDL_Log("Error: Could not initialize mixer: %s", Mix_GetError());
+    }
+
+    if (Mix_OpenAudio( MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2046 ) != 0)
+    {
+        SDL_Log("Error: Could not open audio: %s", Mix_GetError());
     }
 
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
@@ -82,6 +94,16 @@ bool GameIO::Init()
 
 void GameIO::Destroy()
 {
+    if( this->pBgMusic )
+    {
+        if( Mix_PlayingMusic() )
+        {
+            Mix_HaltMusic();
+        }
+
+        Mix_FreeMusic(this->pBgMusic);
+    }
+
     if( this->pBlockTexture )
     {
         SDL_DestroyTexture(this->pBlockTexture);
@@ -98,6 +120,9 @@ void GameIO::Destroy()
         SDL_DestroyWindow(this->pWindow);
         this->pWindow = NULL;
     }
+
+    Mix_CloseAudio();
+    Mix_Quit();
 
     SDL_Quit();
 }
@@ -197,6 +222,29 @@ void GameIO::Present()
     SDL_RenderPresent(this->pRenderer);
 }
 
+void GameIO::LoadBgMusicFromFile(const char * filename)
+{
+    if (this->pBgMusic)
+        return;
+
+    this->pBgMusic = Mix_LoadMUS(filename);
+    if (this->pBgMusic == NULL)
+    {
+        SDL_Log("Error: Could not load music from file %s: %s", filename, Mix_GetError());
+    }
+}
+
+void GameIO::PlayBgMusic()
+{
+    if (!this->pBgMusic)
+        return;
+
+    if (!Mix_PlayingMusic())
+    {
+        Mix_PlayMusic(this->pBgMusic, -1);
+    }
+}
+
 bool GameIO::PollInputs()
 {
     SDL_Event oEvent;
@@ -205,6 +253,7 @@ bool GameIO::PollInputs()
     {
         if (oEvent.type == SDL_QUIT)
         {
+            Mix_HaltMusic();
             return false;
         }
         else if (oEvent.type == SDL_KEYDOWN)

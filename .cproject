@@ -29,6 +29,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/includes}&quot;"/>
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.warnings.allwarn.1472992794" name="All warnings (-Wall)" superClass="gnu.cpp.compiler.option.warnings.allwarn" value="false" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.warnings.nowarn.279891066" name="Inhibit all warnings (-w)" superClass="gnu.cpp.compiler.option.warnings.nowarn" value="true" valueType="boolean"/>
@@ -41,6 +42,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/includes}&quot;"/>
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
 								</option>
 								<option id="gnu.c.compiler.option.warnings.nowarn.1673410839" name="Inhibit all warnings (-w)" superClass="gnu.c.compiler.option.warnings.nowarn" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1525300374" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -52,10 +54,12 @@
 									<listOptionValue builtIn="false" value="SDL2main"/>
 									<listOptionValue builtIn="false" value="SDL2"/>
 									<listOptionValue builtIn="false" value="SDL2_image"/>
+									<listOptionValue builtIn="false" value="SDL2_mixer"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1918595617" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${SDL_HOME}/lib"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/lib"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.936640190" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-subsystem,windows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.2044618142" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -97,6 +101,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/includes}&quot;"/>
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.warnings.allwarn.2026019677" name="All warnings (-Wall)" superClass="gnu.cpp.compiler.option.warnings.allwarn" value="false" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.warnings.nowarn.1388486470" name="Inhibit all warnings (-w)" superClass="gnu.cpp.compiler.option.warnings.nowarn" value="true" valueType="boolean"/>
@@ -109,6 +114,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/includes}&quot;"/>
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
 								</option>
 								<option id="gnu.c.compiler.option.warnings.nowarn.1273653923" name="Inhibit all warnings (-w)" superClass="gnu.c.compiler.option.warnings.nowarn" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.94698364" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -117,13 +123,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.338201147" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.1684291667" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="mingw32"/>
-									<listOptionValue builtIn="false" value="SDL2_image"/>
 									<listOptionValue builtIn="false" value="SDL2main"/>
 									<listOptionValue builtIn="false" value="SDL2"/>
+									<listOptionValue builtIn="false" value="SDL2_image"/>
+									<listOptionValue builtIn="false" value="SDL2_mixer"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.966450973" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${SDL_HOME}/lib"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/lib"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.340594014" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="--subsystem windows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1933625087" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
