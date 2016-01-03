@@ -22,10 +22,8 @@ class Tetromino
         int pYPos;
         SDL_Color* pColor;
 
-        SDL_Color* getRandColor();
-
     public:
-        Tetromino(int (&blocks)[TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS], int (&offset)[TETROMINO_ROTATIONS][2]);
+        Tetromino(int (&blocks)[TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS], int (&offset)[TETROMINO_ROTATIONS][2], SDL_Color* pColor);
         virtual ~Tetromino();
 
         void Init();

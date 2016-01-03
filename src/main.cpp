@@ -17,13 +17,13 @@ int main(int argc, char* args[])
 
     if (!g_pGame->Init())
     {
-        std::cerr << "Error Initializing Pong" << std::endl;
+        std::cerr << "Error Initializing Game" << std::endl;
         return -1;
     }
 
     if (!g_pGame->Load())
     {
-        std::cerr << "Error Loading Pong" << std::endl;
+        std::cerr << "Error Loading Game" << std::endl;
         g_pGame->Close();
         return -2;
     }

@@ -10,32 +10,11 @@
 #include <cstdlib>
 #include <ctime>
 
-static SDL_Color tetromino_colors[] =
-{
-        { 0xFF, 0x00, 0x00, SDL_ALPHA_OPAQUE },
-        { 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE },
-        { 0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE },
-};
-
-static const int num_tetromino_colors = sizeof(tetromino_colors)/sizeof(tetromino_colors[0]);
-
-SDL_Color* Tetromino::getRandColor()
-{
-    int i;
-
-    srand(time(NULL));
-
-    i = rand() % num_tetromino_colors;
-
-    return &tetromino_colors[i];
-}
-
-Tetromino::Tetromino(int (&blocks)[TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS], int (&offset)[TETROMINO_ROTATIONS][2]) : pBlocks (blocks), pOffset (offset)
+Tetromino::Tetromino(int (&blocks)[TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS], int (&offset)[TETROMINO_ROTATIONS][2], SDL_Color* color) : pBlocks (blocks), pOffset (offset), pColor (color)
 {
     this->pRotationIndex = 0;
     this->pXPos = 0;
     this->pYPos = 0;
-    this->pColor = NULL;
 }
 
 Tetromino::~Tetromino()
@@ -105,5 +84,6 @@ SDL_Color* Tetromino::GetColor()
 
 void Tetromino::SetColor()
 {
-    this->pColor = this->getRandColor();
+    // No longer necessary, all tetros have preset colors.
+    //this->pColor = this->getRandColor();
 }
