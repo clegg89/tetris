@@ -5,9 +5,9 @@
  * @author Casey Smith
  */
 
-#include <SDL.h>
 #include "Game.h"
 #include "TetrominoFactory.h"
+#include "Timer.h"
 
 Game::Game()
 {
@@ -27,7 +27,7 @@ Game::~Game()
 
 bool Game::Init()
 {
-    this->pGameIO = new GameIO(480, 640, {0, 0, 0, SDL_ALPHA_OPAQUE}, {0, 0xFF, 0xFF, SDL_ALPHA_OPAQUE});
+    this->pGameIO = new GameIO(480, 640, {0, 0, 0, 0xFF}, {0, 0xFF, 0xFF, 0xFF});
     if (!this->pGameIO->Init())
     {
         return false;
@@ -66,7 +66,7 @@ void Game::Update()
 
     this->pGameIO->PollInputs();
 
-    curr_time = SDL_GetTicks();
+    curr_time = Timer_GetTicks(); //SDL_GetTicks();
     if (curr_time > prev_time + this->pGameSpeed)
     {
         prev_time = curr_time;

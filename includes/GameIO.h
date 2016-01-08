@@ -18,6 +18,8 @@
 #define IO_KEY_DOWN 0
 #define IO_KEY_UP   1
 
+typedef SDL_Color LColor;
+
 typedef void (*tKeyCB)(SDL_Keycode, void*);
 
 typedef struct
@@ -42,7 +44,7 @@ class GameIO
         Mix_Music* pBgMusic;
 
     public:
-        GameIO(const int windowHeight, const int windowWidth, const SDL_Color bgColor, const SDL_Color borderCOlor);
+        GameIO(const int windowHeight, const int windowWidth, const LColor bgColor, const LColor borderCOlor);
         virtual ~GameIO();
 
         bool Init();
