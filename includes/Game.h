@@ -5,7 +5,6 @@
  * @author Casey Smith
  */
 
-#include <SDL.h>
 #include "GameIO.h"
 #include "Board.h"
 #include "Tetromino.h"
@@ -13,14 +12,14 @@
 class Game
 {
     private:
-        static void KeyUpCB(SDL_Keycode, void*);
-        static void KeyDownCB(SDL_Keycode, void*);
+        static void KeyUpCB(void*, eKeyDirection);
+        static void KeyDownCB(void*, eKeyDirection);
+        static void KeyRightCB(void*, eKeyDirection);
+        static void KeyLeftCB(void*, eKeyDirection);
 
     protected:
         bool pGameOver;
         GameIO *pGameIO;
-        SDL_Window*   pWindow;
-        SDL_Renderer* pRenderer;
         int pGameSpeed;
         Tetromino* pNextTetro;
 

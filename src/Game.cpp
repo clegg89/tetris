@@ -13,8 +13,6 @@ Game::Game()
 {
     this->pGameOver = false;
     this->pGameIO = NULL;
-    this->pWindow = NULL;
-    this->pRenderer = NULL;
     this->pBoard = NULL;
     this->pGameSpeed = 0;
     this->pNextTetro = NULL;
@@ -33,8 +31,10 @@ bool Game::Init()
         return false;
     }
 
-    this->pGameIO->RegisterKeyCB(Game::KeyDownCB, this, IO_KEY_DOWN);
-    this->pGameIO->RegisterKeyCB(Game::KeyUpCB, this, IO_KEY_UP);
+    this->pGameIO->RegisterKeyCB(Game::KeyUpCB, this, KEYCODE_UP);
+    this->pGameIO->RegisterKeyCB(Game::KeyDownCB, this, KEYCODE_DOWN);
+    this->pGameIO->RegisterKeyCB(Game::KeyLeftCB, this, KEYCODE_LEFT);
+    this->pGameIO->RegisterKeyCB(Game::KeyRightCB, this, KEYCODE_RIGHT);
 
     this->pBoard = new Board();
 
@@ -64,7 +64,11 @@ void Game::Update()
     static unsigned int prev_time = 0;
     unsigned int curr_time;
 
-    this->pGameIO->PollInputs();
+    if (!this->pGameIO->PollInputs())
+    {
+        this->pGameOver = true;
+        return;
+    }
 
     curr_time = Timer_GetTicks(); //SDL_GetTicks();
     if (curr_time > prev_time + this->pGameSpeed)
@@ -116,45 +120,46 @@ bool Game::IsGameOver()
     return this->pGameOver;
 }
 
-void Game::KeyUpCB(SDL_Keycode keycode, void* pThis)
+void Game::KeyUpCB(void* pThis, eKeyDirection direction)
 {
     Game* self = static_cast<Game*>(pThis);
 
-    switch (keycode)
+    if (direction  == IO_KEY_DOWN)
     {
-        case SDLK_s:
-        case SDLK_DOWN:
-            self->pGameSpeed = TIME_BETWEEN_MOVES_MS;
-            break;
+        self->pBoard->Rotate();
     }
 }
 
-void Game::KeyDownCB(SDL_Keycode keycode, void* pThis)
+void Game::KeyDownCB(void* pThis, eKeyDirection direction)
 {
     Game* self = static_cast<Game*>(pThis);
 
-    switch (keycode)
+    if (direction  == IO_KEY_DOWN)
     {
-        case SDLK_ESCAPE:
-            self->pGameOver = true;
-            break;
-        case SDLK_w:
-        case SDLK_UP:
-            self->pBoard->Rotate();
-            break;
-        case SDLK_s:
-        case SDLK_DOWN:
-            self->pGameSpeed = TIME_BETWEEN_MOVES_MS / 4;
-            break;
-        case SDLK_a:
-        case SDLK_LEFT:
-            self->pBoard->MoveLeft();
-            break;
-        case SDLK_d:
-        case SDLK_RIGHT:
-            self->pBoard->MoveRight();
-            break;
-        default:
-            break;
+        self->pGameSpeed = TIME_BETWEEN_MOVES_MS / 4;
+    }
+    else
+    {
+        self->pGameSpeed = TIME_BETWEEN_MOVES_MS;
+    }
+}
+
+void Game::KeyLeftCB(void* pThis, eKeyDirection direction)
+{
+    Game* self = static_cast<Game*>(pThis);
+
+    if (direction  == IO_KEY_DOWN)
+    {
+        self->pBoard->MoveLeft();
+    }
+}
+
+void Game::KeyRightCB(void* pThis, eKeyDirection direction)
+{
+    Game* self = static_cast<Game*>(pThis);
+
+    if (direction  == IO_KEY_DOWN)
+    {
+        self->pBoard->MoveRight();
     }
 }

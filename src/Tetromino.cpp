@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <ctime>
 
-Tetromino::Tetromino(int (&blocks)[TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS], int (&offset)[TETROMINO_ROTATIONS][2], SDL_Color* color) : pBlocks (blocks), pOffset (offset), pColor (color)
+Tetromino::Tetromino(int (&blocks)[TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS], int (&offset)[TETROMINO_ROTATIONS][2], Color* color) : pBlocks (blocks), pOffset (offset), pColor (color)
 {
     this->pRotationIndex = 0;
     this->pXPos = 0;
@@ -77,7 +77,7 @@ bool Tetromino::IsBlockFilled(int x, int y)
     return false;
 }
 
-SDL_Color* Tetromino::GetColor()
+Color* Tetromino::GetColor()
 {
     return this->pColor;
 }

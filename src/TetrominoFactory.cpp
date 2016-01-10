@@ -10,23 +10,15 @@
 #include <cstdlib>
 #include <ctime>
 
-#define RED     { 0xFF, 0x00, 0x00, SDL_ALPHA_OPAQUE }
-#define GREEN   { 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE }
-#define BLUE    { 0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE }
-#define ORANGE  { 0xFF, 0xA5, 0x00, SDL_ALPHA_OPAQUE }
-#define CYAN    { 0x00, 0xFF, 0xFF, SDL_ALPHA_OPAQUE }
-#define YELLOW  { 0xFF, 0x00, 0xFF, SDL_ALPHA_OPAQUE }
-#define MAGENTA { 0xFF, 0xFF, 0x00, SDL_ALPHA_OPAQUE }
-
-static SDL_Color TetroColors[NUM_TETROMINO] =
+static Color TetroColors[NUM_TETROMINO] =
 {
-        YELLOW,
-        ORANGE,
-        RED,
-        CYAN,
-        BLUE,
-        MAGENTA,
-        GREEN
+        Color( 0xFF, 0x00, 0xFF, 0xFF ), // Yellow
+        Color( 0xFF, 0xA5, 0x00, 0xFF ), // Orange
+        Color( 0xFF, 0x00, 0x00, 0xFF ), // Red
+        Color( 0x00, 0xFF, 0xFF, 0xFF ), // Cyan
+        Color( 0x00, 0x00, 0xFF, 0xFF ), // Blue
+        Color( 0xFF, 0xFF, 0x00, 0xFF ), // Magenta
+        Color( 0x00, 0xFF, 0x00, 0xFF ), // Green
 };
 
 static int PossibleTetros[NUM_TETROMINO][TETROMINO_ROTATIONS][TETROMINO_BLOCKS][TETROMINO_BLOCKS] =

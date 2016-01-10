@@ -10,6 +10,7 @@
 
 #include "Tetris.h"
 #include "Tetromino.h"
+#include "Color.h"
 
 class Board
 {
@@ -18,7 +19,7 @@ class Board
         bool IsMovePossible(int tetroX, int tetroY);
 
     protected:
-        SDL_Color* pBoard[BOARD_WIDTH][BOARD_HEIGHT];
+        Color* pBoard[BOARD_WIDTH][BOARD_HEIGHT];
         Tetromino* pTetro;
         bool pIsTetroDead;
 
@@ -34,7 +35,7 @@ class Board
         void StoreTetromino();
         void EraseLines();
         bool IsFilled(int x, int y);
-        SDL_Color* GetBlockColor(int x, int y);
+        Color* GetBlockColor(int x, int y);
         bool IsGameOver();
 
         void Rotate();

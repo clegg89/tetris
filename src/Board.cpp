@@ -8,10 +8,7 @@
 #include <iostream>
 #include "Board.h"
 
-static SDL_Color empty_block =
-{
-        0, 0, 0, SDL_ALPHA_OPAQUE
-};
+static Color empty_block(0, 0, 0, 0xFF);
 
 Board::Board()
 {
@@ -83,7 +80,7 @@ bool Board::IsFilled(int x, int y)
     return (this->pBoard[x][y] != &empty_block);
 }
 
-SDL_Color* Board::GetBlockColor(int x, int y)
+Color* Board::GetBlockColor(int x, int y)
 {
     return this->pBoard[x][y];
 }

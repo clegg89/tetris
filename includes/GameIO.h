@@ -8,19 +8,26 @@
 #ifndef _GAMEIO_H_
 #define _GAMEIO_H_
 
-#include <SDL.h>
-#include <SDL_mixer.h>
-
 #include "Tetris.h"
+#include "Color.h"
 #include "Board.h"
 #include "Tetromino.h"
 
-#define IO_KEY_DOWN 0
-#define IO_KEY_UP   1
+typedef enum
+{
+    IO_KEY_DOWN,
+    IO_KEY_UP,
+} eKeyDirection;
 
-typedef SDL_Color LColor;
+typedef enum
+{
+    KEYCODE_UP    = 0,
+    KEYCODE_DOWN  = 1,
+    KEYCODE_RIGHT = 2,
+    KEYCODE_LEFT  = 3,
+} eKeyCode;
 
-typedef void (*tKeyCB)(SDL_Keycode, void*);
+typedef void (*tKeyCB)(void*, eKeyDirection);
 
 typedef struct
 {
@@ -28,29 +35,29 @@ typedef struct
         void* context;
 } KeyCallback;
 
+class GameIOImpl;
+
 class GameIO
 {
     private:
         void internalDrawTetro(Tetromino* tetro, int x, int y);
-        void internalDrawBlock(SDL_Color* color, int x, int y);
+        void internalDrawBlock(Color* color, int x, int y);
+        void callKeyCallback(eKeyCode keycode, eKeyDirection direction);
 
     protected:
         const int pWindowHeight, pWindowWidth;
-        const SDL_Color pBgColor, pBorderColor;
-        SDL_Window*   pWindow;
-        SDL_Renderer* pRenderer;
-        SDL_Texture* pBlockTexture;
-        KeyCallback pKeyCallbacks[2];
-        Mix_Music* pBgMusic;
+        const Color pBgColor, pBorderColor;
+        GameIOImpl* pImpl;
+        KeyCallback pKeyCallbacks[4];
 
     public:
-        GameIO(const int windowHeight, const int windowWidth, const LColor bgColor, const LColor borderCOlor);
+        GameIO(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor);
         virtual ~GameIO();
 
         bool Init();
         void Destroy();
 
-        void RegisterKeyCB(tKeyCB callback, void* context, int keyDirection);
+        void RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode);
 
         void ClearScreen();
         void DrawBorder();
