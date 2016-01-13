@@ -12,30 +12,7 @@
 #include "Color.h"
 #include "Board.h"
 #include "Tetromino.h"
-
-typedef enum
-{
-    IO_KEY_DOWN,
-    IO_KEY_UP,
-} eKeyDirection;
-
-typedef enum
-{
-    KEYCODE_UP    = 0,
-    KEYCODE_DOWN  = 1,
-    KEYCODE_RIGHT = 2,
-    KEYCODE_LEFT  = 3,
-} eKeyCode;
-
-typedef void (*tKeyCB)(void*, eKeyDirection);
-
-typedef struct
-{
-        tKeyCB callback;
-        void* context;
-} KeyCallback;
-
-class GameIOImpl;
+#include "GameIOImpl.h"
 
 class GameIO
 {

@@ -8,6 +8,7 @@
 #include "GameIO.h"
 #include "Board.h"
 #include "Tetromino.h"
+#include "Timer.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
         GameIO *pGameIO;
         int pGameSpeed;
         Tetromino* pNextTetro;
+        Timer* pTimer;
 
         Board* pBoard;
 

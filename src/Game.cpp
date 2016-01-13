@@ -16,6 +16,7 @@ Game::Game()
     this->pBoard = NULL;
     this->pGameSpeed = 0;
     this->pNextTetro = NULL;
+    this->pTimer = NULL;
 }
 
 Game::~Game()
@@ -51,6 +52,8 @@ bool Game::Init()
     this->pGameIO->LoadBgMusicFromFile("media/tetris.mp3");
     this->pGameIO->PlayBgMusic();
 
+    this->pTimer = new Timer();
+
     return true;
 }
 
@@ -70,7 +73,7 @@ void Game::Update()
         return;
     }
 
-    curr_time = Timer_GetTicks(); //SDL_GetTicks();
+    curr_time = this->pTimer->GetTicks();
     if (curr_time > prev_time + this->pGameSpeed)
     {
         prev_time = curr_time;
@@ -110,6 +113,11 @@ void Game::Close()
     if(this->pBoard)
     {
         delete this->pBoard;
+    }
+
+    if(this->pTimer)
+    {
+        delete this->pTimer;
     }
 
     this->pGameIO->Destroy();

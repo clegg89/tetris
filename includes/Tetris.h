@@ -28,4 +28,26 @@
 
 #define TIME_BETWEEN_MOVES_MS 1000
 
+typedef enum
+{
+    IO_KEY_DOWN,
+    IO_KEY_UP,
+} eKeyDirection;
+
+typedef enum
+{
+    KEYCODE_UP    = 0,
+    KEYCODE_DOWN  = 1,
+    KEYCODE_RIGHT = 2,
+    KEYCODE_LEFT  = 3,
+} eKeyCode;
+
+typedef void (*tKeyCB)(void*, eKeyDirection);
+
+typedef struct
+{
+        tKeyCB callback;
+        void* context;
+} KeyCallback;
+
 #endif /* _TETRIS_H_ */

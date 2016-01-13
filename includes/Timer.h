@@ -8,8 +8,20 @@
 #ifndef _TIMER_H_
 #define _TIMER_H_
 
-#include <SDL.h>
+#include <cstdint>
 
-#define Timer_GetTicks SDL_GetTicks
+class TimerImpl;
+
+class Timer
+{
+    protected:
+        TimerImpl* pImpl;
+
+    public:
+        Timer();
+        virtual ~Timer();
+
+        uint32_t GetTicks();
+};
 
 #endif /* _TIMER_H_ */
