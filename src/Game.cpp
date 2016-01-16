@@ -49,7 +49,7 @@ bool Game::Init()
     this->pNextTetro = TetrominoFactory::GetRand();
     this->pNextTetro->SetColor();
 
-    this->pGameIO->LoadBgMusicFromFile("media/tetris.mp3");
+    this->pGameIO->LoadBgMusicFromFile("media/tetris.wav");
     this->pGameIO->PlayBgMusic();
 
     this->pTimer = new Timer();
