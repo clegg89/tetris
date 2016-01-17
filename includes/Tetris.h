@@ -26,7 +26,10 @@
 #define NEXT_TETROMINO_X    13
 #define NEXT_TETROMINO_Y    5
 
-#define TIME_BETWEEN_MOVES_MS 1000
+#define TIME_BETWEEN_MOVES_MS       1000
+#define FAST_TIME_BETWEEN_MOVES_MS  (TIME_BETWEEN_MOVES_MS / 4)
+
+#define LINES_PER_LEVEL     10
 
 typedef enum
 {

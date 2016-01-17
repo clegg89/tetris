@@ -56,8 +56,10 @@ void Board::EraseLine(int posY)
     }
 }
 
-void Board::EraseLines()
+int Board::EraseLines()
 {
+    int linesErased = 0;
+
     for (int j = 0; j < BOARD_HEIGHT; ++j)
     {
         int i = 0;
@@ -67,8 +69,14 @@ void Board::EraseLines()
             i++;
         }
 
-        if (i == BOARD_WIDTH) { this->EraseLine(j); }
+        if (i == BOARD_WIDTH)
+        {
+            this->EraseLine(j);
+            linesErased++;
+        }
     }
+
+    return linesErased;
 }
 
 bool Board::IsFilled(int x, int y)

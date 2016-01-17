@@ -33,7 +33,7 @@ class Board
         void AddTetromino(Tetromino *tetro);
         bool IsTetrominoDead();
         void StoreTetromino();
-        void EraseLines();
+        int EraseLines();
         bool IsFilled(int x, int y);
         Color* GetBlockColor(int x, int y);
         bool IsGameOver();

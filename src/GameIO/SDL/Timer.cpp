@@ -11,7 +11,7 @@
 class TimerImpl
 {
     public:
-        Uint32 GetTicks() { return SDL_GetTicks(); }
+        Uint32 GetMilliSec() { return SDL_GetTicks(); }
 };
 
 Timer::Timer()
@@ -24,9 +24,9 @@ Timer::~Timer()
     delete this->pImpl;
 }
 
-uint32_t Timer::GetTicks()
+uint32_t Timer::GetMilliSec()
 {
-    return this->pImpl->GetTicks();
+    return this->pImpl->GetMilliSec();
 }
 
 

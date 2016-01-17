@@ -21,7 +21,7 @@ class Game
     protected:
         bool pGameOver;
         GameIO *pGameIO;
-        int pGameSpeed;
+        int pGameSpeed, pLevel, pScore, pLinesCleared;
         Tetromino* pNextTetro;
         Timer* pTimer;
 
@@ -32,7 +32,6 @@ class Game
         virtual ~Game();
 
         bool Init();
-        bool Load();
         void Update();
         void Render();
         void Close();

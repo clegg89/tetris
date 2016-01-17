@@ -16,7 +16,7 @@ class TimerImpl
         TimerImpl();
         virtual ~TimerImpl();
 
-        Int32 GetTicks();
+        Int32 GetMilliSec();
 
     private:
         Clock* pClock;
@@ -32,7 +32,7 @@ TimerImpl::~TimerImpl()
     delete this->pClock;
 }
 
-Int32 TimerImpl::GetTicks()
+Int32 TimerImpl::GetMilliSec()
 {
     Time elapsed = this->pClock->getElapsedTime();
 
@@ -49,9 +49,9 @@ Timer::~Timer()
     delete this->pImpl;
 }
 
-uint32_t Timer::GetTicks()
+uint32_t Timer::GetMilliSec()
 {
-    return this->pImpl->GetTicks();
+    return this->pImpl->GetMilliSec();
 }
 
 

@@ -9,12 +9,23 @@
 #include "TetrominoFactory.h"
 #include "Timer.h"
 
+static const int scorePerLine[] =
+{
+        40,   // 1 Line
+        100,  // 2 Lines
+        300,  // 3 Lines
+        1200, // 4 Lines
+};
+
 Game::Game()
 {
     this->pGameOver = false;
     this->pGameIO = NULL;
     this->pBoard = NULL;
-    this->pGameSpeed = 0;
+    this->pGameSpeed = 0; // ms between block moves
+    this->pLevel = 0;
+    this->pScore = 0;
+    this->pLinesCleared = 0;
     this->pNextTetro = NULL;
     this->pTimer = NULL;
 }
@@ -26,6 +37,10 @@ Game::~Game()
 
 bool Game::Init()
 {
+    this->pLevel = 0;
+    this->pScore = 0;
+    this->pLinesCleared = 0;
+
     this->pGameIO = new GameIO(480, 640, {0, 0, 0, 0xFF}, {0, 0xFF, 0xFF, 0xFF});
     if (!this->pGameIO->Init())
     {
@@ -57,11 +72,6 @@ bool Game::Init()
     return true;
 }
 
-bool Game::Load()
-{
-    return true;
-}
-
 void Game::Update()
 {
     static unsigned int prev_time = 0;
@@ -73,16 +83,25 @@ void Game::Update()
         return;
     }
 
-    curr_time = this->pTimer->GetTicks();
-    if (curr_time > prev_time + this->pGameSpeed)
+    curr_time = this->pTimer->GetMilliSec();
+    if ((curr_time - prev_time) >= this->pGameSpeed)
     {
         prev_time = curr_time;
         this->pBoard->MoveDown();
 
         if (this->pBoard->IsTetrominoDead())
         {
+            int linesCleared;
         	this->pBoard->StoreTetromino();
-            this->pBoard->EraseLines();
+        	linesCleared = this->pBoard->EraseLines();
+        	this->pScore += scorePerLine[linesCleared] * (this->pLevel + 1);
+        	this->pLinesCleared += linesCleared;
+        	if (this->pLinesCleared >= LINES_PER_LEVEL)
+        	{
+        	    this->pLevel++;
+        	    this->pGameSpeed = TIME_BETWEEN_MOVES_MS - (this->pLevel * 100); // TODO Improve equation, will be negative after 10 levels
+        	    this->pLinesCleared -= LINES_PER_LEVEL;
+        	}
             this->pGameOver = this->pBoard->IsGameOver();
 
             this->pBoard->AddTetromino(this->pNextTetro);
@@ -144,11 +163,11 @@ void Game::KeyDownCB(void* pThis, eKeyDirection direction)
 
     if (direction  == IO_KEY_DOWN)
     {
-        self->pGameSpeed = TIME_BETWEEN_MOVES_MS / 4;
+        self->pGameSpeed = FAST_TIME_BETWEEN_MOVES_MS;
     }
     else
     {
-        self->pGameSpeed = TIME_BETWEEN_MOVES_MS;
+        self->pGameSpeed = TIME_BETWEEN_MOVES_MS - (self->pLevel * 100);
     }
 }
 

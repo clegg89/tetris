@@ -21,7 +21,7 @@ class Timer
         Timer();
         virtual ~Timer();
 
-        uint32_t GetTicks();
+        uint32_t GetMilliSec();
 };
 
 #endif /* _TIMER_H_ */

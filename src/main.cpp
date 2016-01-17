@@ -21,13 +21,6 @@ int main(int argc, char* args[])
         return -1;
     }
 
-    if (!g_pGame->Load())
-    {
-        std::cerr << "Error Loading Game" << std::endl;
-        g_pGame->Close();
-        return -2;
-    }
-
     while (!g_pGame->IsGameOver())
     {
         g_pGame->Update();
