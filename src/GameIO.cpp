@@ -5,6 +5,8 @@
  * @date Dec 6, 2015
  */
 
+#include <cstdio>
+
 #include "GameIO.h"
 
 GameIO::GameIO(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor) : pWindowHeight( windowHeight ), pWindowWidth( windowWidth ), pBgColor( bgColor ), pBorderColor( borderColor )
@@ -103,6 +105,27 @@ void GameIO::DrawNextTetromino(Tetromino* tetro)
     this->internalDrawTetro(tetro, NEXT_TETROMINO_X, NEXT_TETROMINO_Y);
 }
 
+void GameIO::PrintLevel(int level)
+{
+    static char levelStr[20];
+    Color color_white(0xFF, 0xFF, 0xFF, 0xFF);
+
+    sprintf(levelStr, "Level: %d", level);
+
+    this->pImpl->PrintText(levelStr, this->pWindowWidth, 0, HALIGN_RIGHT, VALIGN_TOP, &color_white);
+}
+
+void GameIO::PrintScore(int score)
+{
+    static char scoreStr[20];
+    int x = ( BORDER_SIZE_PIXELS * 2 ) + ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
+    Color color_white(0xFF, 0xFF, 0xFF, 0xFF);
+
+    sprintf(scoreStr, "Score: %d", score);
+
+    this->pImpl->PrintText(scoreStr, x, 0, HALIGN_LEFT, VALIGN_TOP, &color_white);
+}
+
 void GameIO::internalDrawTetro(Tetromino* tetro, int x, int y)
 {
     for (int i = 0; i < TETROMINO_BLOCKS; ++i)
@@ -132,6 +155,11 @@ void GameIO::internalDrawBlock(Color* color, int x, int y)
 void GameIO::Present()
 {
     this->pImpl->Present();
+}
+
+void GameIO::LoadFontFromFile(const char * filename, int size)
+{
+    this->pImpl->LoadFontFromFile(filename, size);
 }
 
 void GameIO::LoadBgMusicFromFile(const char * filename)

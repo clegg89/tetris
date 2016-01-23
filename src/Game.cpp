@@ -67,6 +67,7 @@ bool Game::Init()
     this->pGameIO->LoadBgMusicFromFile("media/tetris.wav");
     this->pGameIO->PlayBgMusic();
 
+    this->pGameIO->LoadFontFromFile("media/Rupee_Foradian.ttf", 22);
     this->pTimer = new Timer();
 
     return true;
@@ -94,13 +95,16 @@ void Game::Update()
             int linesCleared;
         	this->pBoard->StoreTetromino();
         	linesCleared = this->pBoard->EraseLines();
-        	this->pScore += scorePerLine[linesCleared] * (this->pLevel + 1);
-        	this->pLinesCleared += linesCleared;
-        	if (this->pLinesCleared >= LINES_PER_LEVEL)
+        	if (linesCleared > 0)
         	{
-        	    this->pLevel++;
-        	    this->pGameSpeed = TIME_BETWEEN_MOVES_MS - (this->pLevel * 100); // TODO Improve equation, will be negative after 10 levels
-        	    this->pLinesCleared -= LINES_PER_LEVEL;
+                this->pScore += scorePerLine[linesCleared-1] * (this->pLevel + 1);
+                this->pLinesCleared += linesCleared;
+                if (this->pLinesCleared >= LINES_PER_LEVEL)
+                {
+                    this->pLevel++;
+                    this->pGameSpeed = TIME_BETWEEN_MOVES_MS - (this->pLevel * 100); // TODO Improve equation, will be negative after 10 levels
+                    this->pLinesCleared -= LINES_PER_LEVEL;
+                }
         	}
             this->pGameOver = this->pBoard->IsGameOver();
 
@@ -123,6 +127,10 @@ void Game::Render()
     this->pGameIO->DrawTetromino(this->pBoard->GetTetro());
 
     this->pGameIO->DrawNextTetromino(this->pNextTetro);
+
+    this->pGameIO->PrintLevel(this->pLevel);
+
+    this->pGameIO->PrintScore(this->pScore);
 
     this->pGameIO->Present();
 }

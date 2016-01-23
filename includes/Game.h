@@ -24,7 +24,6 @@ class Game
         int pGameSpeed, pLevel, pScore, pLinesCleared;
         Tetromino* pNextTetro;
         Timer* pTimer;
-
         Board* pBoard;
 
     public:

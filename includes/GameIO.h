@@ -41,8 +41,11 @@ class GameIO
         void DrawBoard(Board* board);
         void DrawTetromino(Tetromino* tetro);
         void DrawNextTetromino(Tetromino* tetro);
+        void PrintLevel(int level);
+        void PrintScore(int score);
         void Present();
 
+        void LoadFontFromFile(const char* filename, int size);
         void LoadBgMusicFromFile(const char* filename);
         void PlayBgMusic();
 

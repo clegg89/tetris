@@ -7,6 +7,7 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 
 #include "GameIOImpl.h"
 
@@ -16,6 +17,7 @@ struct ioInternals
     SDL_Renderer* pRenderer;
     SDL_Texture* pBlockTexture;
     Mix_Music* pBgMusic;
+    TTF_Font* pGameFont;
 };
 
 GameIOImpl::GameIOImpl()
@@ -26,6 +28,7 @@ GameIOImpl::GameIOImpl()
     this->pInternals->pRenderer = NULL;
     this->pInternals->pBlockTexture = NULL;
     this->pInternals->pBgMusic = NULL;
+    this->pInternals->pGameFont = NULL;
 }
 
 GameIOImpl::~GameIOImpl()
@@ -46,7 +49,7 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
         return false;
     }
 
-    if (Mix_Init(MIX_INIT_MP3))
+    if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3)
     {
         SDL_Log("Error: Could not initialize mixer: %s", Mix_GetError());
     }
@@ -54,6 +57,11 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
     if (Mix_OpenAudio( MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2046 ) != 0)
     {
         SDL_Log("Error: Could not open audio: %s", Mix_GetError());
+    }
+
+    if (TTF_Init() != 0)
+    {
+        SDL_Log("Error: Could not initialize TTF: %s", TTF_GetError());
     }
 
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
@@ -169,9 +177,72 @@ void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h,
     SDL_RenderCopy(this->pInternals->pRenderer, this->pInternals->pBlockTexture, NULL, &fill_rect);
 }
 
+void GameIOImpl::PrintText(const char* text, const int x, const int y, hAlignment hAlign, vAlignment vAlign, const Color* color)
+{
+    SDL_Surface* tempSurface;
+    SDL_Texture* tempTexture;
+    SDL_Color fgColor = { color->r, color->g, color->b, color->a };
+    SDL_Rect fill_rect;
+
+
+    tempSurface = TTF_RenderText_Solid(this->pInternals->pGameFont, text, fgColor);
+    if (tempSurface == NULL)
+    {
+        SDL_Log("Error: Unable to create surface from font");
+        return;
+    }
+
+    tempTexture = SDL_CreateTextureFromSurface(this->pInternals->pRenderer, tempSurface);
+    if (tempTexture == NULL)
+    {
+        SDL_Log("Error: Unable to create texture from font surface");
+    }
+
+    fill_rect.x = x;
+    fill_rect.y = y;
+    fill_rect.w = tempSurface->w;
+    fill_rect.h = tempSurface->h;
+
+    if (hAlign == HALIGN_RIGHT)
+    {
+        fill_rect.x -= fill_rect.w;
+    }
+    else if (hAlign == HALIGN_CENTERED)
+    {
+        fill_rect.x -= fill_rect.w / 2;
+    }
+
+    if (vAlign == VALIGN_BOTTOM)
+    {
+        fill_rect.y -= fill_rect.h;
+    }
+    else if (hAlign == VALIGN_CENTERED)
+    {
+        fill_rect.y -= fill_rect.w / 2;
+    }
+
+    SDL_FreeSurface(tempSurface);
+
+    SDL_RenderCopy(this->pInternals->pRenderer, tempTexture, NULL, &fill_rect);
+
+    SDL_DestroyTexture(tempTexture);
+}
+
 void GameIOImpl::Present()
 {
     SDL_RenderPresent(this->pInternals->pRenderer);
+}
+
+void GameIOImpl::LoadFontFromFile(const char* filename, int size)
+{
+    if (this->pInternals->pGameFont)
+        return;
+
+    this->pInternals->pGameFont = TTF_OpenFont(filename, size);
+    if (this->pInternals->pGameFont == NULL)
+    {
+        SDL_Log("Error: Could not load font from file %s: %s", filename, TTF_GetError());
+    }
 }
 
 void GameIOImpl::LoadBgMusicFromFile(const char* filename)

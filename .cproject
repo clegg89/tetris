@@ -81,7 +81,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.783466272" name="SDL_Release" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="CMD /c cp ${SDL_HOME}/bin/SDL2.dll . &amp; cp ${SDL_ROOT}/SDL2_mixer/bin/*.dll .">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.783466272" name="SDL_Release" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="CMD /c cp ${SDL_HOME}/bin/SDL2.dll . &amp; cp ${SDL_ROOT}/SDL2_mixer/bin/*.dll . &amp; cp ${SDL_ROOT}/SDL2_ttf/bin/*.dll .">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.783466272." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.358312311" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.758581977" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -99,6 +99,7 @@
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_ttf/include/SDL2"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.warnings.allwarn.2026019677" name="All warnings (-Wall)" superClass="gnu.cpp.compiler.option.warnings.allwarn" useByScannerDiscovery="false" value="false" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.warnings.nowarn.1388486470" name="Inhibit all warnings (-w)" superClass="gnu.cpp.compiler.option.warnings.nowarn" useByScannerDiscovery="false" value="true" valueType="boolean"/>
@@ -113,6 +114,7 @@
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_ttf/include/SDL2"/>
 								</option>
 								<option id="gnu.c.compiler.option.warnings.nowarn.1273653923" name="Inhibit all warnings (-w)" superClass="gnu.c.compiler.option.warnings.nowarn" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.94698364" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -125,11 +127,13 @@
 									<listOptionValue builtIn="false" value="SDL2"/>
 									<listOptionValue builtIn="false" value="SDL2_image"/>
 									<listOptionValue builtIn="false" value="SDL2_mixer"/>
+									<listOptionValue builtIn="false" value="SDL2_ttf"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.966450973" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${SDL_HOME}/lib"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/lib"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/lib"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_ttf/lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.340594014" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-subsystem,windows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1933625087" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -157,12 +161,12 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.2072274559.1976310940" name="SDL_Debug" parent="cdt.managedbuild.config.gnu.mingw.exe.debug" postbuildStep="CMD /c cp ${SDL_HOME}/bin/SDL2.dll . &amp; cp ${SDL_ROOT}/SDL2_mixer/bin/*.dll .">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.2072274559.1976310940" name="SDL_Debug" parent="cdt.managedbuild.config.gnu.mingw.exe.debug" postbuildStep="CMD /c cp ${SDL_HOME}/bin/SDL2.dll . &amp; cp ${SDL_ROOT}/SDL2_mixer/bin/*.dll . &amp; cp ${SDL_ROOT}/SDL2_ttf/bin/*.dll .">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.2072274559.1976310940." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.debug.8115140" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.debug.891820789" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.debug"/>
 							<builder buildPath="${workspace_loc:/Tetris}/Debug" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1622447744" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
-							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.585960653" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
+							<tool command="as" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.585960653" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1993767107" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.14211248" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
@@ -175,6 +179,7 @@
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_ttf/include/SDL2"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.warnings.allwarn.888121194" name="All warnings (-Wall)" superClass="gnu.cpp.compiler.option.warnings.allwarn" useByScannerDiscovery="false" value="false" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.warnings.nowarn.1533027864" name="Inhibit all warnings (-w)" superClass="gnu.cpp.compiler.option.warnings.nowarn" useByScannerDiscovery="false" value="true" valueType="boolean"/>
@@ -189,6 +194,7 @@
 									<listOptionValue builtIn="false" value="${SDL_HOME}/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/include/SDL2"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/include/SDL2"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_ttf/include/SDL2"/>
 								</option>
 								<option id="gnu.c.compiler.option.warnings.nowarn.2106713385" name="Inhibit all warnings (-w)" superClass="gnu.c.compiler.option.warnings.nowarn" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.942501519" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -201,11 +207,13 @@
 									<listOptionValue builtIn="false" value="SDL2"/>
 									<listOptionValue builtIn="false" value="SDL2_image"/>
 									<listOptionValue builtIn="false" value="SDL2_mixer"/>
+									<listOptionValue builtIn="false" value="SDL2_ttf"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1291592942" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${SDL_HOME}/lib"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_image/lib"/>
 									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_mixer/lib"/>
+									<listOptionValue builtIn="false" value="${SDL_ROOT}/SDL2_ttf/lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.1377455418" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-subsystem,windows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1038177691" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">

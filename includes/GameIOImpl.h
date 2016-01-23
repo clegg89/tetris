@@ -13,6 +13,20 @@
 #include "Board.h"
 #include "Tetromino.h"
 
+typedef enum
+{
+    HALIGN_LEFT,
+    HALIGN_CENTERED,
+    HALIGN_RIGHT,
+} hAlignment;
+
+typedef enum
+{
+    VALIGN_TOP,
+    VALIGN_CENTERED,
+    VALIGN_BOTTOM,
+} vAlignment;
+
 struct ioInternals;
 
 class GameIOImpl
@@ -27,9 +41,12 @@ class GameIOImpl
         void ClearScreen(const Color* bgColor);
         void DrawRect(const int x, const int y, const int w, const int h, const Color* color);
         void DrawTexture(const int x, const int y, const int w, const int h, const Color* color);
+        void PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color);
         void Present();
 
+        void LoadFontFromFile(const char* filename, int size);
         void LoadBgMusicFromFile(const char* filename);
+
         void PlayBgMusic();
 
         bool PollInputs(const KeyCallback callbacks[4]);

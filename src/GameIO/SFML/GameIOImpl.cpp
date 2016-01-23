@@ -17,6 +17,8 @@ struct ioInternals
     sf::RenderWindow* pWindow;
     sf::Texture* pBlockTexture;
     sf::Music* pBgMusic;
+    sf::Font* pFont;
+    sf::Text* pText;
 };
 
 GameIOImpl::GameIOImpl()
@@ -46,11 +48,25 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
 
     this->pInternals->pBgMusic = new sf::Music();
 
+    this->pInternals->pFont = new sf::Font();
+
+    this->pInternals->pText = new sf::Text();
+
     return true;
 }
 
 void GameIOImpl::Destroy()
 {
+    if (this->pInternals->pFont)
+    {
+        delete this->pInternals->pFont;
+    }
+
+    if (this->pInternals->pText)
+    {
+        delete this->pInternals->pText;
+    }
+
     if (this->pInternals->pBgMusic)
     {
         if (this->pInternals->pBgMusic->getStatus() != sf::SoundSource::Status::Stopped)
@@ -99,9 +115,59 @@ void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h,
     this->pInternals->pWindow->draw(rect);
 }
 
+void GameIOImpl::PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color)
+{
+    sf::Color col(color->r, color->g, color->b, color->a);
+    int ox, oy;
+
+    ox = oy = 0;
+
+    if (this->pInternals->pText->getFont() == NULL)
+        return;
+
+    this->pInternals->pText->setColor(col);
+    this->pInternals->pText->setString(text);
+
+    if (hAlign == HALIGN_RIGHT)
+    {
+        ox = this->pInternals->pText->getLocalBounds().width + 1;
+    }
+    else if (hAlign == HALIGN_CENTERED)
+    {
+        ox = (this->pInternals->pText->getLocalBounds().width + 1) / 2;
+    }
+
+    if (vAlign == VALIGN_BOTTOM)
+    {
+        oy = this->pInternals->pText->getLocalBounds().height + 1;
+    }
+    else if (vAlign == VALIGN_CENTERED)
+    {
+        oy = (this->pInternals->pText->getLocalBounds().height + 1) / 2;
+    }
+
+    this->pInternals->pText->setOrigin(ox, oy);
+    this->pInternals->pText->setPosition(x, y);
+
+    this->pInternals->pWindow->draw(*this->pInternals->pText);
+}
+
 void GameIOImpl::Present()
 {
     this->pInternals->pWindow->display();
+}
+
+void GameIOImpl::LoadFontFromFile(const char* filename, int size)
+{
+    if (!this->pInternals->pFont->loadFromFile(filename))
+    {
+        std::cerr << "Error: Could not load Font file: " << filename << std::endl;
+    }
+    else
+    {
+        this->pInternals->pText->setFont(*this->pInternals->pFont);
+        this->pInternals->pText->setCharacterSize(static_cast<unsigned int>(size));
+    }
 }
 
 void GameIOImpl::LoadBgMusicFromFile(const char* filename)
