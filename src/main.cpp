@@ -23,6 +23,7 @@ int main(int argc, char* args[])
 
     while (!g_pGame->IsGameOver())
     {
+        g_pGame->HandleEvents();
         g_pGame->Update();
         g_pGame->Render();
     }

@@ -5,10 +5,17 @@
  * @author Casey Smith
  */
 
+#ifndef _GAME_H_
+#define _GAME_H_
+
+#include <vector>
+
 #include "GameIO.h"
 #include "Board.h"
 #include "Tetromino.h"
 #include "Timer.h"
+
+class GameState;
 
 class Game
 {
@@ -25,14 +32,24 @@ class Game
         Tetromino* pNextTetro;
         Timer* pTimer;
         Board* pBoard;
+        std::vector<GameState*> pStates;
 
     public:
         Game();
         virtual ~Game();
 
         bool Init();
+        void Close();
+
+        void ChangeState(GameState* state);
+        void PushState(GameState* state);
+        void PopState();
+
+        void HandleEvents();
         void Update();
         void Render();
-        void Close();
+
         bool IsGameOver();
 };
+
+#endif /* _GAME_H_ */
