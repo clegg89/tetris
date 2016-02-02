@@ -9,7 +9,9 @@
 
 #include "GameIO.h"
 
-GameIO::GameIO(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor) : pWindowHeight( windowHeight ), pWindowWidth( windowWidth ), pBgColor( bgColor ), pBorderColor( borderColor )
+GameIO GameIO::pSelf;
+
+GameIO::GameIO() : pWindowHeight( 640 ), pWindowWidth( 480 )
 {
     this->pImpl = new GameIOImpl();
 
@@ -17,23 +19,33 @@ GameIO::GameIO(const int windowHeight, const int windowWidth, const Color bgColo
     this->pKeyCallbacks[KEYCODE_DOWN].callback = NULL;
     this->pKeyCallbacks[KEYCODE_LEFT].callback = NULL;
     this->pKeyCallbacks[KEYCODE_RIGHT].callback = NULL;
+
+    this->pBgColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
+    this->pBorderColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
 }
 
 GameIO::~GameIO()
 {
-    delete this->pImpl;
-
     this->Destroy();
+
+    delete this->pImpl;
 }
 
-bool GameIO::Init()
+bool GameIO::Init(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor)
 {
+    this->pWindowHeight = windowHeight;
+    this->pWindowWidth = windowWidth;
+    this->pBgColor = bgColor;
+    this->pBorderColor = borderColor;
+
     return this->pImpl->Init(this->pWindowHeight, this->pWindowWidth, &(this->pBgColor));
 }
 
 void GameIO::Destroy()
 {
     this->pImpl->Destroy();
+
+    this->UnregisterKeyCBs();
 }
 
 static bool validateKeycode(eKeyCode keycode)
@@ -49,6 +61,14 @@ static bool validateKeycode(eKeyCode keycode)
     return true;
 }
 
+void GameIO::UnregisterKeyCBs(void)
+{
+    for (int i = 0; i < NUM_KEYCODES; ++i)
+    {
+        this->pKeyCallbacks[i].callback = NULL;
+        this->pKeyCallbacks[i].context = NULL;
+    }
+}
 void GameIO::RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode)
 {
     if (!validateKeycode(keycode))
@@ -170,6 +190,11 @@ void GameIO::LoadBgMusicFromFile(const char * filename)
 void GameIO::PlayBgMusic()
 {
     this->pImpl->PlayBgMusic();
+}
+
+void GameIO::PauseBgMusic()
+{
+    this->pImpl->PauseBgMusic();
 }
 
 void GameIO::callKeyCallback(eKeyCode keycode, eKeyDirection direction)

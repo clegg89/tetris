@@ -17,23 +17,28 @@
 class GameIO
 {
     private:
+        static GameIO pSelf;
         void internalDrawTetro(Tetromino* tetro, int x, int y);
         void internalDrawBlock(Color* color, int x, int y);
         void callKeyCallback(eKeyCode keycode, eKeyDirection direction);
 
     protected:
-        const int pWindowHeight, pWindowWidth;
-        const Color pBgColor, pBorderColor;
+        int pWindowHeight, pWindowWidth;
+        Color pBgColor, pBorderColor;
         GameIOImpl* pImpl;
-        KeyCallback pKeyCallbacks[4];
+        KeyCallback pKeyCallbacks[NUM_KEYCODES];
 
     public:
-        GameIO(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor);
+        GameIO();
         virtual ~GameIO();
 
-        bool Init();
+        static GameIO* Instance()
+        { return &pSelf; }
+
+        bool Init(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor);
         void Destroy();
 
+        void UnregisterKeyCBs(void);
         void RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode);
 
         void ClearScreen();
@@ -48,6 +53,7 @@ class GameIO
         void LoadFontFromFile(const char* filename, int size);
         void LoadBgMusicFromFile(const char* filename);
         void PlayBgMusic();
+        void PauseBgMusic();
 
         bool PollInputs();
 };

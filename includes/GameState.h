@@ -13,7 +13,7 @@
 class GameState
 {
     public:
-        virtual bool Init(const GameIO* io) = 0;
+        virtual bool Init() = 0;
         virtual void Close() = 0;
 
         virtual void Pause() = 0;
@@ -28,7 +28,7 @@ class GameState
 
     protected:
         GameState() { }
-        virtual ~GameState() = 0;
+        virtual ~GameState() { };
 };
 
 

@@ -39,10 +39,13 @@ typedef enum
 
 typedef enum
 {
-    KEYCODE_UP    = 0,
-    KEYCODE_DOWN  = 1,
-    KEYCODE_RIGHT = 2,
-    KEYCODE_LEFT  = 3,
+    KEYCODE_UP,
+    KEYCODE_DOWN,
+    KEYCODE_RIGHT,
+    KEYCODE_LEFT,
+
+    /* Add all Keycodes above this line */
+    NUM_KEYCODES,
 } eKeyCode;
 
 typedef void (*tKeyCB)(void*, eKeyDirection);

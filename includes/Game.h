@@ -11,27 +11,14 @@
 #include <vector>
 
 #include "GameIO.h"
-#include "Board.h"
-#include "Tetromino.h"
-#include "Timer.h"
 
 class GameState;
 
 class Game
 {
-    private:
-        static void KeyUpCB(void*, eKeyDirection);
-        static void KeyDownCB(void*, eKeyDirection);
-        static void KeyRightCB(void*, eKeyDirection);
-        static void KeyLeftCB(void*, eKeyDirection);
-
     protected:
         bool pGameOver;
         GameIO *pGameIO;
-        int pGameSpeed, pLevel, pScore, pLinesCleared;
-        Tetromino* pNextTetro;
-        Timer* pTimer;
-        Board* pBoard;
         std::vector<GameState*> pStates;
 
     public:
@@ -50,6 +37,7 @@ class Game
         void Render();
 
         bool IsGameOver();
+        void SetGameOver();
 };
 
 #endif /* _GAME_H_ */

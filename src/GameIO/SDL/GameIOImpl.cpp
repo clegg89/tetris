@@ -268,6 +268,17 @@ void GameIOImpl::PlayBgMusic()
     }
 }
 
+void GameIOImpl::PauseBgMusic()
+{
+    if (!this->pInternals->pBgMusic)
+        return;
+
+    if (!Mix_PlayingMusic())
+    {
+        Mix_PauseMusic();
+    }
+}
+
 void GameIOImpl::callKeyCallback(eKeyCode keycode, eKeyDirection direction, const KeyCallback callbacks[4])
 {
     if (callbacks[keycode].callback != NULL)

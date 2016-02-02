@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "Game.h"
+#include "PlayState.h"
 
 Game* g_pGame;
 
@@ -20,6 +21,8 @@ int main(int argc, char* args[])
         std::cerr << "Error Initializing Game" << std::endl;
         return -1;
     }
+
+    g_pGame->ChangeState(PlayState::Instance());
 
     while (!g_pGame->IsGameOver())
     {

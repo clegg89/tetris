@@ -48,6 +48,7 @@ class GameIOImpl
         void LoadBgMusicFromFile(const char* filename);
 
         void PlayBgMusic();
+        void PauseBgMusic();
 
         bool PollInputs(const KeyCallback callbacks[4]);
 
