@@ -33,8 +33,6 @@ GameIOImpl::GameIOImpl()
 
 GameIOImpl::~GameIOImpl()
 {
-    this->Destroy();
-
     delete this->pInternals;
 }
 
@@ -110,7 +108,7 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
     return true;
 }
 
-void GameIOImpl::Destroy()
+void GameIOImpl::Close()
 {
     if( this->pInternals->pBgMusic )
     {
@@ -120,6 +118,11 @@ void GameIOImpl::Destroy()
         }
 
         Mix_FreeMusic(this->pInternals->pBgMusic);
+    }
+
+    if(this->pInternals->pGameFont)
+    {
+    	TTF_CloseFont(this->pInternals->pGameFont);
     }
 
     if( this->pInternals->pBlockTexture )
@@ -141,6 +144,8 @@ void GameIOImpl::Destroy()
 
     Mix_CloseAudio();
     Mix_Quit();
+
+    TTF_Quit();
 
     SDL_Quit();
 }

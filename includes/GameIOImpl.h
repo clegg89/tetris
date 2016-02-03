@@ -36,7 +36,7 @@ class GameIOImpl
         virtual ~GameIOImpl();
 
         bool Init(const int windowHeight, const int windowWidth, const Color* bgColor);
-        void Destroy();
+        void Close();
 
         void ClearScreen(const Color* bgColor);
         void DrawRect(const int x, const int y, const int w, const int h, const Color* color);

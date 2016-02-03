@@ -28,8 +28,6 @@ GameIOImpl::GameIOImpl()
 
 GameIOImpl::~GameIOImpl()
 {
-    this->Destroy();
-
     delete this->pInternals;
 }
 
@@ -55,7 +53,7 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
     return true;
 }
 
-void GameIOImpl::Destroy()
+void GameIOImpl::Close()
 {
     if (this->pInternals->pFont)
     {

@@ -32,11 +32,8 @@ class GameIO
         KeyCallback pKeyCallbacks[NUM_KEYCODES];
 
     public:
-        static GameIO* Instance()
-        { return &pSelf; }
-
         bool Init(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor);
-        void Destroy();
+        void Close();
 
         void UnregisterKeyCBs(void);
         void RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode);
@@ -60,6 +57,9 @@ class GameIO
 
         int GetWindowHeight() { return this->pWindowHeight; }
         int GetWindowWidth() { return this->pWindowWidth; }
+
+        static GameIO* Instance()
+        { return &pSelf; }
 };
 
 

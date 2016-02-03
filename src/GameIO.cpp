@@ -15,11 +15,7 @@ GameIO::GameIO() : pWindowHeight( 640 ), pWindowWidth( 480 )
 {
     this->pImpl = new GameIOImpl();
 
-    this->pKeyCallbacks[KEYCODE_UP].callback = NULL;
-    this->pKeyCallbacks[KEYCODE_DOWN].callback = NULL;
-    this->pKeyCallbacks[KEYCODE_LEFT].callback = NULL;
-    this->pKeyCallbacks[KEYCODE_RIGHT].callback = NULL;
-    this->pKeyCallbacks[KEYCODE_SPACE].callback = NULL;
+    this->UnregisterKeyCBs();
 
     this->pBgColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
     this->pBorderColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
@@ -27,7 +23,7 @@ GameIO::GameIO() : pWindowHeight( 640 ), pWindowWidth( 480 )
 
 GameIO::~GameIO()
 {
-    this->Destroy();
+    this->UnregisterKeyCBs();
 
     delete this->pImpl;
 }
@@ -39,14 +35,19 @@ bool GameIO::Init(const int windowHeight, const int windowWidth, const Color bgC
     this->pBgColor = bgColor;
     this->pBorderColor = borderColor;
 
+    this->UnregisterKeyCBs();
+
     return this->pImpl->Init(this->pWindowHeight, this->pWindowWidth, &(this->pBgColor));
 }
 
-void GameIO::Destroy()
+void GameIO::Close()
 {
-    this->pImpl->Destroy();
+    this->pImpl->Close();
 
     this->UnregisterKeyCBs();
+
+    this->pWindowHeight = 0;
+    this->pWindowWidth = 0;
 }
 
 static bool validateKeycode(eKeyCode keycode)

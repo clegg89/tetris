@@ -16,7 +16,6 @@ Game::Game()
 
 Game::~Game()
 {
-    this->Close();
 }
 
 bool Game::Init()
@@ -39,6 +38,8 @@ void Game::Close()
         this->pStates.back()->Close();
         this->pStates.pop_back();
     }
+
+    this->pGameIO->Close();
 }
 
 void Game::ChangeState(GameState* state)
