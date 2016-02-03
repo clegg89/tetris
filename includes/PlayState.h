@@ -38,10 +38,10 @@ class PlayState : public GameState
         Tetromino* pNextTetro;
         Timer* pTimer;
         Board* pBoard;
+        GameIO* pGameIO;
 
     private:
         static PlayState pSelf;
-        GameIO* pGameIO;
 
         static void KeyUpCB(void*, eKeyDirection);
         static void KeyDownCB(void*, eKeyDirection);

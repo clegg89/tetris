@@ -43,6 +43,7 @@ typedef enum
     KEYCODE_DOWN,
     KEYCODE_RIGHT,
     KEYCODE_LEFT,
+    KEYCODE_SPACE,
 
     /* Add all Keycodes above this line */
     NUM_KEYCODES,

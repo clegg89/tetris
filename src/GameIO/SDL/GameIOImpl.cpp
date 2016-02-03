@@ -319,6 +319,9 @@ bool GameIOImpl::PollInputs(const KeyCallback callbacks[4])
                 case SDLK_RIGHT:
                     this->callKeyCallback(KEYCODE_RIGHT, (oEvent.type == SDL_KEYDOWN) ? IO_KEY_DOWN : IO_KEY_UP, callbacks);
                     break;
+                case SDLK_SPACE:
+                    this->callKeyCallback(KEYCODE_SPACE, (oEvent.type == SDL_KEYDOWN) ? IO_KEY_DOWN : IO_KEY_UP, callbacks);
+                    break;
                 default:
                     break;
             }

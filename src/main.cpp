@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include "Game.h"
-#include "PlayState.h"
+#include "IntroState.h"
 
 Game* g_pGame;
 
@@ -22,7 +22,7 @@ int main(int argc, char* args[])
         return -1;
     }
 
-    g_pGame->ChangeState(PlayState::Instance());
+    g_pGame->ChangeState(IntroState::Instance());
 
     while (!g_pGame->IsGameOver())
     {

@@ -23,15 +23,15 @@ class GameIO
         void callKeyCallback(eKeyCode keycode, eKeyDirection direction);
 
     protected:
+        GameIO();
+        virtual ~GameIO();
+
         int pWindowHeight, pWindowWidth;
         Color pBgColor, pBorderColor;
         GameIOImpl* pImpl;
         KeyCallback pKeyCallbacks[NUM_KEYCODES];
 
     public:
-        GameIO();
-        virtual ~GameIO();
-
         static GameIO* Instance()
         { return &pSelf; }
 
@@ -48,6 +48,7 @@ class GameIO
         void DrawNextTetromino(Tetromino* tetro);
         void PrintLevel(int level);
         void PrintScore(int score);
+        void Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color);
         void Present();
 
         void LoadFontFromFile(const char* filename, int size);
@@ -56,6 +57,9 @@ class GameIO
         void PauseBgMusic();
 
         bool PollInputs();
+
+        int GetWindowHeight() { return this->pWindowHeight; }
+        int GetWindowWidth() { return this->pWindowWidth; }
 };
 
 

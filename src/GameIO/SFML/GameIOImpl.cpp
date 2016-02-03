@@ -232,6 +232,9 @@ bool GameIOImpl::PollInputs(const KeyCallback callbacks[4])
                 case sf::Keyboard::Right:
                     this->callKeyCallback(KEYCODE_RIGHT, (oEvent.type == sf::Event::KeyPressed) ? IO_KEY_DOWN : IO_KEY_UP, callbacks);
                     break;
+                case sf::Keyboard::Space:
+                    this->callKeyCallback(KEYCODE_SPACE, (oEvent.type == sf::Event::KeyPressed) ? IO_KEY_DOWN : IO_KEY_UP, callbacks);
+                    break;
                 default:
                     break;
             }

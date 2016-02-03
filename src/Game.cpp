@@ -26,6 +26,9 @@ bool Game::Init()
         return false;
     }
 
+    this->pGameIO->LoadFontFromFile("media/Rupee_Foradian.ttf", 22);
+    this->pGameIO->LoadBgMusicFromFile("media/tetris.wav");
+
     return true;
 }
 

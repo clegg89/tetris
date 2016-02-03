@@ -6,8 +6,6 @@
  */
 
 #include "PlayState.h"
-#include "TetrominoFactory.h"
-#include "Timer.h"
 
 PlayState PlayState::pSelf;
 
@@ -52,6 +50,7 @@ bool PlayState::Init()
     this->pScore = 0;
     this->pLinesCleared = 0;
 
+    this->pGameIO->UnregisterKeyCBs();
     this->internalRegisterCBs();
 
     this->pBoard->Init();
@@ -64,10 +63,8 @@ bool PlayState::Init()
     this->pNextTetro = TetrominoFactory::GetRand();
     this->pNextTetro->SetColor();
 
-    this->pGameIO->LoadBgMusicFromFile("media/tetris.wav");
     this->pGameIO->PlayBgMusic();
 
-    this->pGameIO->LoadFontFromFile("media/Rupee_Foradian.ttf", 22);
 
     return true;
 }
@@ -79,6 +76,7 @@ void PlayState::Close()
     this->pScore = 0;
     this->pLinesCleared = 0;
     this->pNextTetro = NULL;
+    this->pGameIO->UnregisterKeyCBs();
 }
 
 void PlayState::Pause()

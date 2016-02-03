@@ -19,6 +19,7 @@ GameIO::GameIO() : pWindowHeight( 640 ), pWindowWidth( 480 )
     this->pKeyCallbacks[KEYCODE_DOWN].callback = NULL;
     this->pKeyCallbacks[KEYCODE_LEFT].callback = NULL;
     this->pKeyCallbacks[KEYCODE_RIGHT].callback = NULL;
+    this->pKeyCallbacks[KEYCODE_SPACE].callback = NULL;
 
     this->pBgColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
     this->pBorderColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
@@ -50,10 +51,11 @@ void GameIO::Destroy()
 
 static bool validateKeycode(eKeyCode keycode)
 {
-    if (keycode != KEYCODE_UP   &&
-        keycode != KEYCODE_DOWN &&
-        keycode != KEYCODE_LEFT &&
-        keycode != KEYCODE_RIGHT)
+    if (keycode != KEYCODE_UP    &&
+        keycode != KEYCODE_DOWN  &&
+        keycode != KEYCODE_LEFT  &&
+        keycode != KEYCODE_RIGHT &&
+        keycode != KEYCODE_SPACE)
     {
         return false;
     }
@@ -144,6 +146,11 @@ void GameIO::PrintScore(int score)
     sprintf(scoreStr, "Score: %d", score);
 
     this->pImpl->PrintText(scoreStr, x, 0, HALIGN_LEFT, VALIGN_TOP, &color_white);
+}
+
+void GameIO::Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color)
+{
+    this->pImpl->PrintText(text, x, y, hAlign, vAlign, color);
 }
 
 void GameIO::internalDrawTetro(Tetromino* tetro, int x, int y)
