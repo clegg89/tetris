@@ -18,7 +18,7 @@ class GameIO
 {
     private:
         static GameIO pSelf;
-        void internalDrawTetro(Tetromino* tetro, int x, int y);
+        void internalDrawTetro(Tetromino* tetro, int x, int y, bool isBase);
         void internalDrawBlock(Color color, int x, int y);
         void callKeyCallback(eKeyCode keycode, eKeyDirection direction);
 
@@ -38,6 +38,7 @@ class GameIO
         void RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode);
 
         void ClearScreen(const Color bgColor = Color(0x00, 0x00, 0x00, 0xFF));
+        void DrawRect(const int x, const int y, const int w, const int h, const Color color);
         void DrawBorder(const Color borderColor = Color(0x00, 0xFF, 0xFF, 0xFF), const Color bgColor = Color(0x00, 0x00, 0x00, 0xFF));
         void DrawBoard(Board* board);
         void DrawTetromino(Tetromino* tetro);

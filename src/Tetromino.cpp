@@ -23,6 +23,7 @@ Tetromino::~Tetromino()
 
 void Tetromino::Init()
 {
+    this->pRotationIndex = 0;
     this->pXPos = this->pOffset[this->pRotationIndex][0];
     this->pYPos = this->pOffset[this->pRotationIndex][1];
 }
@@ -67,9 +68,11 @@ void Tetromino::SetY(int y)
     this->pYPos = y;
 }
 
-bool Tetromino::IsBlockFilled(int x, int y)
+bool Tetromino::IsBlockFilled(int x, int y, bool baseTetro)
 {
-    if (this->pBlocks[this->pRotationIndex][x][y] != 0)
+    int rotIndex = (baseTetro) ? 0 : this->pRotationIndex;
+
+    if (this->pBlocks[rotIndex][x][y] != 0)
     {
         return true;
     }
@@ -80,10 +83,4 @@ bool Tetromino::IsBlockFilled(int x, int y)
 Color* Tetromino::GetColor()
 {
     return this->pColor;
-}
-
-void Tetromino::SetColor()
-{
-    // No longer necessary, all tetros have preset colors.
-    //this->pColor = this->getRandColor();
 }

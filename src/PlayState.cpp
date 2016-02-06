@@ -59,13 +59,13 @@ bool PlayState::Init()
 
     this->pBoard->Init();
     this->pNextTetro = TetrominoFactory::GetRand();
-    this->pNextTetro->SetColor();
+    this->pNextTetro->Init();
     this->pBoard->AddTetromino(this->pNextTetro);
 
     this->pGameSpeed = TIME_BETWEEN_MOVES_MS;
 
     this->pNextTetro = TetrominoFactory::GetRand();
-    this->pNextTetro->SetColor();
+    this->pNextTetro->Init();
 
     this->pGameIO->PlayBgMusic();
 
@@ -143,10 +143,11 @@ void PlayState::Update(Game *game)
         	    game->SetGameOver();
         	}
 
+            this->pNextTetro->Init();
             this->pBoard->AddTetromino(this->pNextTetro);
 
             this->pNextTetro = TetrominoFactory::GetRand();
-            this->pNextTetro->SetColor();
+            this->pNextTetro->Init();
         }
     }
 }

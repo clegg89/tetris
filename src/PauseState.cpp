@@ -81,7 +81,7 @@ void PauseState::Render(Game* game)
 
     play->Render(game);
 
-    io->ClearScreen(bgColor);
+    io->DrawRect(0, 0, io->GetWindowWidth(), io->GetWindowHeight(), bgColor);
     io->Print("Press Space to Continue", x, y, HALIGN_CENTERED, VALIGN_CENTERED, Color(0xFF, 0xFF, 0xFF, 0xFF));
 }
 

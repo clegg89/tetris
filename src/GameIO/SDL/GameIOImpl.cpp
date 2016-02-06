@@ -86,6 +86,7 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
         return false;
     }
 
+    SDL_SetRenderDrawBlendMode(this->pInternals->pRenderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(this->pInternals->pRenderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
 
     loadedSurface = SDL_LoadBMP(blockImagePath);

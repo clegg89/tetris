@@ -77,6 +77,11 @@ void GameIO::ClearScreen(const Color bgColor)
     this->pImpl->ClearScreen(bgColor);
 }
 
+void GameIO::DrawRect(const int x, const int y, const int w, const int h, const Color color)
+{
+    this->pImpl->DrawRect(x, y, w, h, color);
+}
+
 void GameIO::DrawBorder(const Color borderColor, const Color bgColor)
 {
     int x, y, w, h;
@@ -111,12 +116,12 @@ void GameIO::DrawBoard(Board* board)
 
 void GameIO::DrawTetromino(Tetromino* tetro)
 {
-    this->internalDrawTetro(tetro, tetro->GetX(), tetro->GetY());
+    this->internalDrawTetro(tetro, tetro->GetX(), tetro->GetY(), false);
 }
 
 void GameIO::DrawNextTetromino(Tetromino* tetro)
 {
-    this->internalDrawTetro(tetro, NEXT_TETROMINO_X, NEXT_TETROMINO_Y);
+    this->internalDrawTetro(tetro, NEXT_TETROMINO_X, NEXT_TETROMINO_Y, true);
 }
 
 void GameIO::PrintLevel(int level)
@@ -145,13 +150,13 @@ void GameIO::Print(const char* text, const int x, const int y, const hAlignment 
     this->pImpl->PrintText(text, x, y, hAlign, vAlign, color);
 }
 
-void GameIO::internalDrawTetro(Tetromino* tetro, int x, int y)
+void GameIO::internalDrawTetro(Tetromino* tetro, int x, int y, bool isBase)
 {
     for (int i = 0; i < TETROMINO_BLOCKS; ++i)
     {
     	for (int j = 0; j < TETROMINO_BLOCKS; ++j)
     	{
-    		if (tetro->IsBlockFilled(i, j))
+    		if (tetro->IsBlockFilled(i, j, isBase))
     		{
     		    this->internalDrawBlock(*(tetro->GetColor()), (i + x), (j + y));
     		}

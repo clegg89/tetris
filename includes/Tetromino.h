@@ -32,9 +32,8 @@ class Tetromino
         int GetY();
         void SetX(int x);
         void SetY(int y);
-        bool IsBlockFilled(int x, int y);
+        bool IsBlockFilled(int x, int y, bool baseTetro = false);
         Color *GetColor();
-        void SetColor();
 };
 
 
