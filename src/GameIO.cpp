@@ -16,9 +16,6 @@ GameIO::GameIO() : pWindowHeight( 640 ), pWindowWidth( 480 )
     this->pImpl = new GameIOImpl();
 
     this->UnregisterKeyCBs();
-
-    this->pBgColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
-    this->pBorderColor = Color(0xFF, 0xFF, 0xFF, 0xFF);
 }
 
 GameIO::~GameIO()
@@ -28,16 +25,14 @@ GameIO::~GameIO()
     delete this->pImpl;
 }
 
-bool GameIO::Init(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor)
+bool GameIO::Init(const int windowHeight, const int windowWidth)
 {
     this->pWindowHeight = windowHeight;
     this->pWindowWidth = windowWidth;
-    this->pBgColor = bgColor;
-    this->pBorderColor = borderColor;
 
     this->UnregisterKeyCBs();
 
-    return this->pImpl->Init(this->pWindowHeight, this->pWindowWidth, &(this->pBgColor));
+    return this->pImpl->Init(this->pWindowHeight, this->pWindowWidth, Color(0x00, 0x00, 0x00, 0xFF));
 }
 
 void GameIO::Close()
@@ -52,11 +47,7 @@ void GameIO::Close()
 
 static bool validateKeycode(eKeyCode keycode)
 {
-    if (keycode != KEYCODE_UP    &&
-        keycode != KEYCODE_DOWN  &&
-        keycode != KEYCODE_LEFT  &&
-        keycode != KEYCODE_RIGHT &&
-        keycode != KEYCODE_SPACE)
+    if (keycode >= NUM_KEYCODES)
     {
         return false;
     }
@@ -81,12 +72,12 @@ void GameIO::RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode)
     this->pKeyCallbacks[keycode].context = context;
 }
 
-void GameIO::ClearScreen()
+void GameIO::ClearScreen(const Color bgColor)
 {
-    this->pImpl->ClearScreen(&(this->pBgColor));
+    this->pImpl->ClearScreen(bgColor);
 }
 
-void GameIO::DrawBorder()
+void GameIO::DrawBorder(const Color borderColor, const Color bgColor)
 {
     int x, y, w, h;
 
@@ -95,13 +86,13 @@ void GameIO::DrawBorder()
     w = ( BORDER_SIZE_PIXELS * 2 ) + ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
     h = ( BLOCK_SIZE_PIXELS * BOARD_HEIGHT );
 
-    this->pImpl->DrawRect(x, y, w, h, &this->pBorderColor);
+    this->pImpl->DrawRect(x, y, w, h, borderColor);
 
     x += BORDER_SIZE_PIXELS;
     w = ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
     h = ( BLOCK_SIZE_PIXELS * BOARD_HEIGHT );
 
-    this->pImpl->DrawRect(x, y, w, h, &this->pBgColor);
+    this->pImpl->DrawRect(x, y, w, h, bgColor);
 }
 
 void GameIO::DrawBoard(Board* board)
@@ -112,7 +103,7 @@ void GameIO::DrawBoard(Board* board)
         {
             if (board->IsFilled(i, j))
             {
-                this->internalDrawBlock(board->GetBlockColor(i, j), i, j);
+                this->internalDrawBlock(*(board->GetBlockColor(i, j)), i, j);
             }
         }
     }
@@ -135,7 +126,7 @@ void GameIO::PrintLevel(int level)
 
     sprintf(levelStr, "Level: %d", level);
 
-    this->pImpl->PrintText(levelStr, this->pWindowWidth, 0, HALIGN_RIGHT, VALIGN_TOP, &color_white);
+    this->pImpl->PrintText(levelStr, this->pWindowWidth, 0, HALIGN_RIGHT, VALIGN_TOP, color_white);
 }
 
 void GameIO::PrintScore(int score)
@@ -146,10 +137,10 @@ void GameIO::PrintScore(int score)
 
     sprintf(scoreStr, "Score: %d", score);
 
-    this->pImpl->PrintText(scoreStr, x, 0, HALIGN_LEFT, VALIGN_TOP, &color_white);
+    this->pImpl->PrintText(scoreStr, x, 0, HALIGN_LEFT, VALIGN_TOP, color_white);
 }
 
-void GameIO::Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color)
+void GameIO::Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color color)
 {
     this->pImpl->PrintText(text, x, y, hAlign, vAlign, color);
 }
@@ -162,13 +153,13 @@ void GameIO::internalDrawTetro(Tetromino* tetro, int x, int y)
     	{
     		if (tetro->IsBlockFilled(i, j))
     		{
-    		    this->internalDrawBlock(tetro->GetColor(), (i + x), (j + y));
+    		    this->internalDrawBlock(*(tetro->GetColor()), (i + x), (j + y));
     		}
 		}
 	}
 }
 
-void GameIO::internalDrawBlock(Color* color, int x, int y)
+void GameIO::internalDrawBlock(Color color, int x, int y)
 {
     int block_x, block_y, w, h;
 

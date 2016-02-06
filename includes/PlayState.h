@@ -35,6 +35,7 @@ class PlayState : public GameState
         virtual ~PlayState();
 
         int pGameSpeed, pLevel, pScore, pLinesCleared;
+        bool pMoveToPause;
         Tetromino* pNextTetro;
         Timer* pTimer;
         Board* pBoard;
@@ -47,6 +48,7 @@ class PlayState : public GameState
         static void KeyDownCB(void*, eKeyDirection);
         static void KeyRightCB(void*, eKeyDirection);
         static void KeyLeftCB(void*, eKeyDirection);
+        static void KeySpaceCB(void*, eKeyDirection);
 
         void internalRegisterCBs(void);
 };

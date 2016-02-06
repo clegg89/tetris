@@ -20,7 +20,7 @@ Game::~Game()
 
 bool Game::Init()
 {
-    if (!this->pGameIO->Init(480, 640, Color(0, 0, 0, 0xFF), Color(0, 0xFF, 0xFF, 0xFF)))
+    if (!this->pGameIO->Init(480, 640))
     {
         return false;
     }
@@ -98,6 +98,7 @@ void Game::Update()
 void Game::Render()
 {
     this->pStates.back()->Render(this);
+    this->pGameIO->Present();
 }
 
 bool Game::IsGameOver()

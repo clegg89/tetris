@@ -36,7 +36,7 @@ GameIOImpl::~GameIOImpl()
     delete this->pInternals;
 }
 
-bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color* bgColor)
+bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color bgColor)
 {
     SDL_Surface* loadedSurface;
     const char * blockImagePath = "media/block.bmp";
@@ -86,7 +86,7 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
         return false;
     }
 
-    SDL_SetRenderDrawColor(this->pInternals->pRenderer, bgColor->r, bgColor->g, bgColor->b, bgColor->a);
+    SDL_SetRenderDrawColor(this->pInternals->pRenderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
 
     loadedSurface = SDL_LoadBMP(blockImagePath);
     if( loadedSurface == NULL )
@@ -150,13 +150,13 @@ void GameIOImpl::Close()
     SDL_Quit();
 }
 
-void GameIOImpl::ClearScreen(const Color* bgColor)
+void GameIOImpl::ClearScreen(const Color bgColor)
 {
-    SDL_SetRenderDrawColor(this->pInternals->pRenderer, bgColor->r, bgColor->g, bgColor->b, bgColor->a);
+    SDL_SetRenderDrawColor(this->pInternals->pRenderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
     SDL_RenderClear(this->pInternals->pRenderer);
 }
 
-void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, const Color* color)
+void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, const Color color)
 {
     SDL_Rect fill_rect;
 
@@ -165,11 +165,11 @@ void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, co
     fill_rect.w = w;
     fill_rect.h = h;
 
-    SDL_SetRenderDrawColor(this->pInternals->pRenderer, color->r, color->g, color->b, color->a);
+    SDL_SetRenderDrawColor(this->pInternals->pRenderer, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(this->pInternals->pRenderer, &fill_rect);
 }
 
-void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h, const Color* color)
+void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h, const Color color)
 {
     SDL_Rect fill_rect;
 
@@ -178,15 +178,15 @@ void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h,
     fill_rect.w = w;
     fill_rect.h = h;
 
-    SDL_SetTextureColorMod(this->pInternals->pBlockTexture, color->r, color->g, color->b);
+    SDL_SetTextureColorMod(this->pInternals->pBlockTexture, color.r, color.g, color.b);
     SDL_RenderCopy(this->pInternals->pRenderer, this->pInternals->pBlockTexture, NULL, &fill_rect);
 }
 
-void GameIOImpl::PrintText(const char* text, const int x, const int y, hAlignment hAlign, vAlignment vAlign, const Color* color)
+void GameIOImpl::PrintText(const char* text, const int x, const int y, hAlignment hAlign, vAlignment vAlign, const Color color)
 {
     SDL_Surface* tempSurface;
     SDL_Texture* tempTexture;
-    SDL_Color fgColor = { color->r, color->g, color->b, color->a };
+    SDL_Color fgColor = { color.r, color.g, color.b, color.a };
     SDL_Rect fill_rect;
 
 
@@ -271,6 +271,10 @@ void GameIOImpl::PlayBgMusic()
     {
         Mix_PlayMusic(this->pInternals->pBgMusic, -1);
     }
+    else if (Mix_PausedMusic())
+    {
+        Mix_ResumeMusic();
+    }
 }
 
 void GameIOImpl::PauseBgMusic()
@@ -278,7 +282,7 @@ void GameIOImpl::PauseBgMusic()
     if (!this->pInternals->pBgMusic)
         return;
 
-    if (!Mix_PlayingMusic())
+    if (Mix_PlayingMusic())
     {
         Mix_PauseMusic();
     }

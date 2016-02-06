@@ -35,13 +35,13 @@ class GameIOImpl
         GameIOImpl();
         virtual ~GameIOImpl();
 
-        bool Init(const int windowHeight, const int windowWidth, const Color* bgColor);
+        bool Init(const int windowHeight, const int windowWidth, const Color bgColor);
         void Close();
 
-        void ClearScreen(const Color* bgColor);
-        void DrawRect(const int x, const int y, const int w, const int h, const Color* color);
-        void DrawTexture(const int x, const int y, const int w, const int h, const Color* color);
-        void PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color);
+        void ClearScreen(const Color bgColor);
+        void DrawRect(const int x, const int y, const int w, const int h, const Color color);
+        void DrawTexture(const int x, const int y, const int w, const int h, const Color color);
+        void PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color color);
         void Present();
 
         void LoadFontFromFile(const char* filename, int size);

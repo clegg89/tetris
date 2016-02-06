@@ -19,7 +19,7 @@ class GameIO
     private:
         static GameIO pSelf;
         void internalDrawTetro(Tetromino* tetro, int x, int y);
-        void internalDrawBlock(Color* color, int x, int y);
+        void internalDrawBlock(Color color, int x, int y);
         void callKeyCallback(eKeyCode keycode, eKeyDirection direction);
 
     protected:
@@ -27,25 +27,24 @@ class GameIO
         virtual ~GameIO();
 
         int pWindowHeight, pWindowWidth;
-        Color pBgColor, pBorderColor;
         GameIOImpl* pImpl;
         KeyCallback pKeyCallbacks[NUM_KEYCODES];
 
     public:
-        bool Init(const int windowHeight, const int windowWidth, const Color bgColor, const Color borderColor);
+        bool Init(const int windowHeight, const int windowWidth);
         void Close();
 
         void UnregisterKeyCBs(void);
         void RegisterKeyCB(tKeyCB callback, void* context, eKeyCode keycode);
 
-        void ClearScreen();
-        void DrawBorder();
+        void ClearScreen(const Color bgColor = Color(0x00, 0x00, 0x00, 0xFF));
+        void DrawBorder(const Color borderColor = Color(0x00, 0xFF, 0xFF, 0xFF), const Color bgColor = Color(0x00, 0x00, 0x00, 0xFF));
         void DrawBoard(Board* board);
         void DrawTetromino(Tetromino* tetro);
         void DrawNextTetromino(Tetromino* tetro);
         void PrintLevel(int level);
         void PrintScore(int score);
-        void Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color);
+        void Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color color);
         void Present();
 
         void LoadFontFromFile(const char* filename, int size);

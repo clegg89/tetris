@@ -31,7 +31,7 @@ GameIOImpl::~GameIOImpl()
     delete this->pInternals;
 }
 
-bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color* bgColor)
+bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color bgColor)
 {
     const char * blockImagePath = "media/block.bmp";
 
@@ -40,7 +40,7 @@ bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color
     this->pInternals->pBlockTexture = new sf::Texture();
     this->pInternals->pBlockTexture->loadFromFile(blockImagePath);
 
-    sf::Color bgc(bgColor->r, bgColor->g, bgColor->b, bgColor->a);
+    sf::Color bgc(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
 
     this->pInternals->pWindow->clear(bgc);
 
@@ -85,16 +85,16 @@ void GameIOImpl::Close()
     }
 }
 
-void GameIOImpl::ClearScreen(const Color* bgColor)
+void GameIOImpl::ClearScreen(const Color bgColor)
 {
-    sf::Color bgc(bgColor->r, bgColor->g, bgColor->b, bgColor->a);
+    sf::Color bgc(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
 
     this->pInternals->pWindow->clear(bgc);
 }
 
-void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, const Color* color)
+void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, const Color color)
 {
-    sf::Color col(color->r, color->g, color->b, color->a);
+    sf::Color col(color.r, color.g, color.b, color.a);
     sf::RectangleShape rect(sf::Vector2f(w,h));
     rect.setPosition(x,y);
     rect.setFillColor(col);
@@ -102,9 +102,9 @@ void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, co
     this->pInternals->pWindow->draw(rect);
 }
 
-void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h, const Color* color)
+void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h, const Color color)
 {
-    sf::Color col(color->r, color->g, color->b, color->a);
+    sf::Color col(color.r, color.g, color.b, color.a);
     sf::RectangleShape rect(sf::Vector2f(w,h));
     rect.setPosition(x,y);
     rect.setFillColor(col);
@@ -113,9 +113,9 @@ void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h,
     this->pInternals->pWindow->draw(rect);
 }
 
-void GameIOImpl::PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color* color)
+void GameIOImpl::PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color color)
 {
-    sf::Color col(color->r, color->g, color->b, color->a);
+    sf::Color col(color.r, color.g, color.b, color.a);
     int ox, oy;
 
     ox = oy = 0;

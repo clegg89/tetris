@@ -6,6 +6,7 @@
  */
 
 #include "PlayState.h"
+#include "PauseState.h"
 
 PlayState PlayState::pSelf;
 
@@ -25,6 +26,7 @@ PlayState::PlayState()
     this->pLevel = 0;
     this->pScore = 0;
     this->pLinesCleared = 0;
+    this->pMoveToPause = false;
     this->pNextTetro = NULL;
     this->pTimer = new Timer();
 }
@@ -50,6 +52,8 @@ bool PlayState::Init()
     this->pScore = 0;
     this->pLinesCleared = 0;
 
+    this->pMoveToPause = false;
+
     this->pGameIO->UnregisterKeyCBs();
     this->internalRegisterCBs();
 
@@ -65,7 +69,6 @@ bool PlayState::Init()
 
     this->pGameIO->PlayBgMusic();
 
-
     return true;
 }
 
@@ -75,6 +78,7 @@ void PlayState::Close()
     this->pLevel = 0;
     this->pScore = 0;
     this->pLinesCleared = 0;
+    this->pMoveToPause = false;
     this->pNextTetro = NULL;
     this->pGameIO->UnregisterKeyCBs();
 }
@@ -89,6 +93,7 @@ void PlayState::Resume()
 {
     this->pGameIO->PlayBgMusic();
     this->internalRegisterCBs();
+    this->pMoveToPause = false;
 }
 
 void PlayState::HandleEvents(Game *game)
@@ -103,6 +108,12 @@ void PlayState::Update(Game *game)
 {
     static unsigned int prev_time = 0;
     unsigned int curr_time;
+
+    if (this->pMoveToPause)
+    {
+        game->PushState(PauseState::Instance());
+        return;
+    }
 
     curr_time = this->pTimer->GetMilliSec();
     if ((curr_time - prev_time) >= this->pGameSpeed)
@@ -155,8 +166,6 @@ void PlayState::Render(Game * game)
     this->pGameIO->PrintLevel(this->pLevel);
 
     this->pGameIO->PrintScore(this->pScore);
-
-    this->pGameIO->Present();
 }
 
 void PlayState::KeyUpCB(void* pThis, eKeyDirection direction)
@@ -203,10 +212,21 @@ void PlayState::KeyRightCB(void* pThis, eKeyDirection direction)
     }
 }
 
+void PlayState::KeySpaceCB(void* pThis, eKeyDirection direction)
+{
+    PlayState* self = static_cast<PlayState*>(pThis);
+
+    if (direction == IO_KEY_DOWN)
+    {
+        self->pMoveToPause = true;
+    }
+}
+
 void PlayState::internalRegisterCBs()
 {
     this->pGameIO->RegisterKeyCB(PlayState::KeyUpCB, this, KEYCODE_UP);
     this->pGameIO->RegisterKeyCB(PlayState::KeyDownCB, this, KEYCODE_DOWN);
     this->pGameIO->RegisterKeyCB(PlayState::KeyLeftCB, this, KEYCODE_LEFT);
     this->pGameIO->RegisterKeyCB(PlayState::KeyRightCB, this, KEYCODE_RIGHT);
+    this->pGameIO->RegisterKeyCB(PlayState::KeySpaceCB, this, KEYCODE_SPACE);
 }

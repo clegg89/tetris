@@ -70,9 +70,7 @@ void IntroState::Render(Game *game)
 
     this->pGameIO->ClearScreen();
 
-    this->pGameIO->Print("Press Space to Start", x, y, HALIGN_CENTERED, VALIGN_CENTERED, &color_white);
-
-    this->pGameIO->Present();
+    this->pGameIO->Print("Press Space to Start", x, y, HALIGN_CENTERED, VALIGN_CENTERED, color_white);
 }
 
 void IntroState::KeySpaceCB(void* pThis, eKeyDirection direction)
