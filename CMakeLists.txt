@@ -17,3 +17,5 @@ set(tetris_VERSION_MINOR 0)
 # Define sources and executable
 set(EXECUTABLE_NAME "tetris")
 add_subdirectory(src)
+
+install(DIRECTORY media DESTINATION ${PROJECT_BINARY_DIR}/bin)
