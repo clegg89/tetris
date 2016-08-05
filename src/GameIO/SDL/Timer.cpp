@@ -6,7 +6,7 @@
  */
 
 #include <SDL.h>
-#include <Timer.h>
+#include "Timer.h"
 
 class TimerImpl
 {
