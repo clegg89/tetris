@@ -13,19 +13,34 @@ set(SRC
   ${SRCROOT}/PlayState.cpp
   ${SRCROOT}/Tetromino.cpp
   ${SRCROOT}/TetrominoFactory.cpp
-  ${SRCROOT}/GameIO/SFML/GameIOImpl.cpp
-  ${SRCROOT}/GameIO/SFML/Timer.cpp
+  ${SRCROOT}/GameIO/SDL/GameIOImpl.cpp
+  ${SRCROOT}/GameIO/SDL/Timer.cpp
   )
 add_executable(${EXECUTABLE_NAME} ${SRC})
 set_property(TARGET ${EXECUTABLE_NAME} PROPERTY CXX_STANDARD 11)
-# Detect and add SFML
+
+# Detect and add SDL
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-# Find any version 2.X of SFML
-# See the FindSFML.cmake file for additional details and instructions
-find_package(SFML 2 REQUIRED system window graphics network audio)
-if(SFML_FOUND)
-  include_directories(${SFML_INCLUDE_DIR})
-  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_mixer REQUIRED)
+
+if(SDL2_FOUND)
+  include_directories(
+    ${SDL2_INCLUDE_DIR}
+    ${SDL2_IMAGE_INCLUDE_DIR}
+    ${SDL2_TTF_INCLUDE_DIR}
+    ${SDL2_MIXER_INCLUDE_DIR}
+    )
+
+  target_link_libraries(${EXECUTABLE_NAME}
+    ${SDL2_LIBRARY}
+    ${SDL2_IMAGE_LIBRARY}
+    ${SDL2_TTF_LIBRARY}
+    ${SDL2_MIXER_LIBRARY}
+    )
 endif()
 
 # Install target
