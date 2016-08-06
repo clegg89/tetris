@@ -22,7 +22,8 @@ find_package(SFML 2 COMPONENTS system window graphics network audio)
 
 if(SFML_FOUND)
 
-  list(APPEND ${SRC}
+  set(SRC
+    ${SRC}
     ${SRCROOT}/GameIO/SFML/GameIOImpl.cpp
     ${SRCROOT}/GameIO/SFML/Timer.cpp
     )
@@ -40,7 +41,8 @@ else()
 
   if(SDL2_FOUND)
 
-    list(APPEND ${SRC}
+    set(SRC
+      ${SRC}
       ${SRCROOT}/GameIO/SDL/GameIOImpl.cpp
       ${SRCROOT}/GameIO/SDL/Timer.cpp
       )
