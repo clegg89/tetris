@@ -3,11 +3,12 @@ version: 1.0.{build}
 platform: x86
 
 environment:
-  SFML_ROOT: C:\SFML-2.3.2
+  sfml_version: 2.3.2
 
 install:
-  - cmd: curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-2.3.2-windows-vc14-32-bit.zip
+  - cmd: curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-vc14-32-bit.zip
   - cmd: unzip -q sfml.zip -d C:\
+  - cmd: set SFML_ROOT=SFML-%sfml_version%
 
 build_script:
 - cmd: >-
