@@ -1,5 +1,6 @@
 # Tetris Clone
 [![Build Status](https://travis-ci.org/clegg89/tetris.svg?branch=master)](https://travis-ci.org/clegg89/tetris)
+[![Build status](https://ci.appveyor.com/api/projects/status/r72c16219uxpmda3?svg=true)](https://ci.appveyor.com/project/clegg89/tetris)
 
 ## Introduction
 This is a simple tetris clone written in C++. The project works with either SFML or SDL. It is a work in progress.
