@@ -34,7 +34,7 @@ class PlayState : public GameState
         PlayState();
         virtual ~PlayState();
 
-        int pGameSpeed, pLevel, pScore, pLinesCleared;
+        unsigned int pGameSpeed, pLevel, pScore, pLinesCleared;
         bool pMoveToPause;
         Tetromino* pNextTetro;
         Timer* pTimer;
