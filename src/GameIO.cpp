@@ -5,7 +5,9 @@
  * @date Dec 6, 2015
  */
 
-#include <cstdio>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 #include "GameIO.h"
 
@@ -126,23 +128,23 @@ void GameIO::DrawNextTetromino(Tetromino* tetro)
 
 void GameIO::PrintLevel(int level)
 {
-    static char levelStr[20];
+    std::ostringstream levelStr;
     Color color_white(0xFF, 0xFF, 0xFF, 0xFF);
 
-    sprintf(levelStr, "Level: %d", level);
+    levelStr << "Level: %d" <<  level;
 
-    this->pImpl->PrintText(levelStr, this->pWindowWidth, 0, HALIGN_RIGHT, VALIGN_TOP, color_white);
+    this->pImpl->PrintText(levelStr.str().c_str(), this->pWindowWidth, 0, HALIGN_RIGHT, VALIGN_TOP, color_white);
 }
 
 void GameIO::PrintScore(int score)
 {
-    static char scoreStr[20];
+    std::ostringstream scoreStr;
     int x = ( BORDER_SIZE_PIXELS * 2 ) + ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
     Color color_white(0xFF, 0xFF, 0xFF, 0xFF);
 
-    sprintf(scoreStr, "Score: %d", score);
+    scoreStr << "Score: %d" << score;
 
-    this->pImpl->PrintText(scoreStr, x, 0, HALIGN_LEFT, VALIGN_TOP, color_white);
+    this->pImpl->PrintText(scoreStr.str().c_str(), x, 0, HALIGN_LEFT, VALIGN_TOP, color_white);
 }
 
 void GameIO::Print(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color color)
