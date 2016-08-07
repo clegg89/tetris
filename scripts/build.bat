@@ -1,4 +1,4 @@
 MKDIR build
-CD BUILD
-cmake -G "%GENERATOR%"
+CD build
+cmake -G "%GENERATOR%" ..
 cmake --build .
