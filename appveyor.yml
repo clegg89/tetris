@@ -9,8 +9,6 @@ environment:
 
 install:
   - cmd: if "%PLATFORM%" == "x86" (set BITS=32) else (set BITS=64)
-  - cmd: echo "%PLATFORM%"
-  - cmd: echo "%BITS%"
   - cmd: curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-vc14-%BITS%-bit.zip
   - cmd: unzip -q sfml.zip -d C:\
   - cmd: set SFML_ROOT=C:\SFML-%sfml_version%
