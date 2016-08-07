@@ -95,8 +95,8 @@ void GameIOImpl::ClearScreen(const Color bgColor)
 void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, const Color color)
 {
     sf::Color col(color.r, color.g, color.b, color.a);
-    sf::RectangleShape rect(sf::Vector2f(w,h));
-    rect.setPosition(x,y);
+    sf::RectangleShape rect(sf::Vector2f(static_cast<float>(w),static_cast<float>(h)));
+    rect.setPosition(static_cast<float>(x), static_cast<float>(y));
     rect.setFillColor(col);
 
     this->pInternals->pWindow->draw(rect);
@@ -105,8 +105,8 @@ void GameIOImpl::DrawRect(const int x, const int y, const int w, const int h, co
 void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h, const Color color)
 {
     sf::Color col(color.r, color.g, color.b, color.a);
-    sf::RectangleShape rect(sf::Vector2f(w,h));
-    rect.setPosition(x,y);
+    sf::RectangleShape rect(sf::Vector2f(static_cast<float>(w), static_cast<float>(h)));
+    rect.setPosition(static_cast<float>(x), static_cast<float>(y));
     rect.setFillColor(col);
 
     rect.setTexture(this->pInternals->pBlockTexture);
@@ -116,9 +116,9 @@ void GameIOImpl::DrawTexture(const int x, const int y, const int w, const int h,
 void GameIOImpl::PrintText(const char* text, const int x, const int y, const hAlignment hAlign, vAlignment vAlign, const Color color)
 {
     sf::Color col(color.r, color.g, color.b, color.a);
-    int ox, oy;
+    float ox, oy;
 
-    ox = oy = 0;
+    ox = oy = 0.0f;
 
     if (this->pInternals->pText->getFont() == NULL)
         return;
@@ -145,7 +145,7 @@ void GameIOImpl::PrintText(const char* text, const int x, const int y, const hAl
     }
 
     this->pInternals->pText->setOrigin(ox, oy);
-    this->pInternals->pText->setPosition(x, y);
+    this->pInternals->pText->setPosition(static_cast<float>(x), static_cast<float>(y));
 
     this->pInternals->pWindow->draw(*this->pInternals->pText);
 }
