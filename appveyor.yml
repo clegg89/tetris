@@ -8,7 +8,8 @@ environment:
 install:
   - cmd: curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-vc14-32-bit.zip
   - cmd: unzip -q sfml.zip -d C:\
-  - cmd: set SFML_ROOT=SFML-%sfml_version%
+  - cmd: set SFML_ROOT=C:\SFML-%sfml_version%
+  - cmd: echo %SFML_ROOT%
 
 build_script:
   - cmd: mkdir build
