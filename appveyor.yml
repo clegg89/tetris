@@ -11,8 +11,7 @@ install:
   - cmd: set SFML_ROOT=SFML-%sfml_version%
 
 build_script:
-- cmd: >-
-    mkdir build
-    cd build
-    cmake ..
-    cmake --build .
+  - cmd: mkdir build
+  - cmd: cd build
+  - cmd: cmake ..
+  - cmd: cmake --build .
