@@ -5,22 +5,10 @@ platform:
   - x64
 
 environment:
-  sfml_version: 2.3.2
+  SFML_VERSION: 2.3.2
 
 install:
-  - cmd: if "%PLATFORM%" == "x86" (
-    'set BITS=32'
-    'set GENERATOR=Visual Studio 14 2015'
-    ) else (
-    'set BITS=64'
-    'set GENERATOR=Visual Studio 14 2015 Win64'
-    )
-  - cmd: curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-vc14-%BITS%-bit.zip
-  - cmd: unzip -q sfml.zip -d C:\
-  - cmd: set SFML_ROOT=C:\SFML-%sfml_version%
+  - cmd: scripts/install.bat
 
 build_script:
-  - cmd: mkdir build
-  - cmd: cd build
-  - cmd: cmake -G "%GENERATOR%" ..
-  - cmd: cmake --build .
+  - cmd: scripts/build.bat
