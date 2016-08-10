@@ -5,7 +5,7 @@
  * @date Nov 28, 2015
  */
 
-#include "TetrominoFactory.h"
+#include "TetrominoFactory.hpp"
 
 #include <cstdlib>
 #include <ctime>

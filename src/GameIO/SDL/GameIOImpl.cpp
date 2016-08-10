@@ -9,7 +9,7 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
-#include "GameIOImpl.h"
+#include "GameIOImpl.hpp"
 
 struct ioInternals
 {

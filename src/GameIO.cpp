@@ -9,7 +9,7 @@
 #include <sstream>
 #include <string>
 
-#include "GameIO.h"
+#include "GameIO.hpp"
 
 GameIO GameIO::pSelf;
 

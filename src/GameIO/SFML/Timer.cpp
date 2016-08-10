@@ -6,7 +6,7 @@
  */
 
 #include <SFML/System.hpp>
-#include "Timer.h"
+#include "Timer.hpp"
 
 using namespace sf;
 

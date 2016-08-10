@@ -8,7 +8,7 @@
 #ifndef _GAMESTATE_H_
 #define _GAMESTATE_H_
 
-#include "Game.h"
+#include "Game.hpp"
 
 class GameState
 {

@@ -8,11 +8,11 @@
 #ifndef _PLAYSTATE_H_
 #define _PLAYSTATE_H_
 
-#include "GameState.h"
-#include "Board.h"
-#include "Tetromino.h"
-#include "TetrominoFactory.h"
-#include "Timer.h"
+#include "GameState.hpp"
+#include "Board.hpp"
+#include "Tetromino.hpp"
+#include "TetrominoFactory.hpp"
+#include "Timer.hpp"
 
 class PlayState : public GameState
 {

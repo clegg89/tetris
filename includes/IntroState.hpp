@@ -8,8 +8,8 @@
 #ifndef _INTROSTATE_H_
 #define _INTROSTATE_H_
 
-#include "GameState.h"
-#include "GameIO.h"
+#include "GameState.hpp"
+#include "GameIO.hpp"
 
 class IntroState : public GameState
 {

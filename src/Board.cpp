@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include "Board.h"
+#include "Board.hpp"
 
 static Color empty_block(0, 0, 0, 0xFF);
 

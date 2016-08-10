@@ -8,8 +8,8 @@
 #ifndef _TETROMINO_H_
 #define _TETROMINO_H_
 
-#include "Tetris.h"
-#include "Color.h"
+#include "Tetris.hpp"
+#include "Color.hpp"
 
 class Tetromino
 {

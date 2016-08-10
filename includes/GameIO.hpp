@@ -8,11 +8,11 @@
 #ifndef _GAMEIO_H_
 #define _GAMEIO_H_
 
-#include "Tetris.h"
-#include "Color.h"
-#include "Board.h"
-#include "Tetromino.h"
-#include "GameIOImpl.h"
+#include "Tetris.hpp"
+#include "Color.hpp"
+#include "Board.hpp"
+#include "Tetromino.hpp"
+#include "GameIOImpl.hpp"
 
 class GameIO
 {

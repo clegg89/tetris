@@ -5,8 +5,8 @@
  * @date Feb 3, 2016
  */
 
-#include "PauseState.h"
-#include "Tetris.h"
+#include "PauseState.hpp"
+#include "Tetris.hpp"
 
 PauseState PauseState::pSelf;
 

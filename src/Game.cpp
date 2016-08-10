@@ -5,8 +5,8 @@
  * @author Casey Smith
  */
 
-#include "Game.h"
-#include "GameState.h"
+#include "Game.hpp"
+#include "GameState.hpp"
 
 Game::Game()
 {

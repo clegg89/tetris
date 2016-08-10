@@ -5,7 +5,7 @@
  * @date Nov 28, 2015
  */
 
-#include "Tetromino.h"
+#include "Tetromino.hpp"
 
 #include <cstdlib>
 #include <ctime>

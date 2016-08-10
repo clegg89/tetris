@@ -8,8 +8,8 @@
 #ifndef _PAUSESTATE_H_
 #define _PAUSESTATE_H_
 
-#include "GameState.h"
-#include "PlayState.h"
+#include "GameState.hpp"
+#include "PlayState.hpp"
 
 class PauseState : public GameState
 {

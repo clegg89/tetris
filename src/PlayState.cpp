@@ -5,8 +5,8 @@
  * @date Jan 31, 2016
  */
 
-#include "PlayState.h"
-#include "PauseState.h"
+#include "PlayState.hpp"
+#include "PauseState.hpp"
 
 PlayState PlayState::pSelf;
 

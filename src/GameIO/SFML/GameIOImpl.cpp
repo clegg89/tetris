@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "GameIOImpl.h"
+#include "GameIOImpl.hpp"
 
 struct ioInternals
 {

@@ -5,8 +5,8 @@
  * @date Feb 2, 2016
  */
 
-#include "IntroState.h"
-#include "PlayState.h"
+#include "IntroState.hpp"
+#include "PlayState.hpp"
 
 IntroState IntroState::pSelf;
 

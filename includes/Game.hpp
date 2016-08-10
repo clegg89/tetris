@@ -10,7 +10,7 @@
 
 #include <vector>
 
-#include "GameIO.h"
+#include "GameIO.hpp"
 
 class GameState;
 

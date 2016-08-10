@@ -8,7 +8,7 @@
 #ifndef _TETROMINOFACTORY_H_
 #define _TETROMINOFACTORY_H_
 
-#include "Tetromino.h"
+#include "Tetromino.hpp"
 
 class TetrominoFactory
 {

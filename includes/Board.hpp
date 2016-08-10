@@ -8,9 +8,9 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
-#include "Tetris.h"
-#include "Tetromino.h"
-#include "Color.h"
+#include "Tetris.hpp"
+#include "Tetromino.hpp"
+#include "Color.hpp"
 
 class Board
 {

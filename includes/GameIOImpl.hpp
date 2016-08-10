@@ -8,10 +8,10 @@
 #ifndef _GAMEIOIMPL_H_
 #define _GAMEIOIMPL_H_
 
-#include "Tetris.h"
-#include "Color.h"
-#include "Board.h"
-#include "Tetromino.h"
+#include "Tetris.hpp"
+#include "Color.hpp"
+#include "Board.hpp"
+#include "Tetromino.hpp"
 
 typedef enum
 {

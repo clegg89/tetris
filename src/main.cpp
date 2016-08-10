@@ -7,8 +7,8 @@
 
 #include <iostream>
 
-#include "Game.h"
-#include "IntroState.h"
+#include "Game.hpp"
+#include "IntroState.hpp"
 
 Game* g_pGame;
 
