@@ -131,7 +131,7 @@ void GameIO::PrintLevel(int level)
     std::ostringstream levelStr;
     Color color_white(0xFF, 0xFF, 0xFF, 0xFF);
 
-    levelStr << "Level: %d" <<  level;
+    levelStr << "Level: " <<  level;
 
     this->pImpl->PrintText(levelStr.str().c_str(), this->pWindowWidth, 0, HALIGN_RIGHT, VALIGN_TOP, color_white);
 }
@@ -142,7 +142,7 @@ void GameIO::PrintScore(int score)
     int x = ( BORDER_SIZE_PIXELS * 2 ) + ( BLOCK_SIZE_PIXELS * BOARD_WIDTH );
     Color color_white(0xFF, 0xFF, 0xFF, 0xFF);
 
-    scoreStr << "Score: %d" << score;
+    scoreStr << "Score: " << score;
 
     this->pImpl->PrintText(scoreStr.str().c_str(), x, 0, HALIGN_LEFT, VALIGN_TOP, color_white);
 }
