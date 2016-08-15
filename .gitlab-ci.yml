@@ -1,14 +1,14 @@
-hello-windows:
+tetris-windows:
   before_script:
     - set PATH="E:\Program Files (x86)\CMake\bin";%PATH%
   script:
     - mkdir build && cd build
-    - cmake ..
+    - cmake -G "Visual Studio 14 2015 Win64" -DSFML_ROOT="E:\SFML_VS14" ..
     - cmake --build .
   tags:
     - windows
 
-hello-linux:
+tetris-linux:
   script:
     - mkdir build && cd build
     - cmake ..
