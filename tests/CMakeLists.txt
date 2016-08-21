@@ -24,6 +24,9 @@ set(TEST_EXECUTABLE_NAME "${EXECUTABLE_NAME}Tests")
 set(PROD_LIB_NAME "${EXECUTABLE_NAME}Prod")
 
 find_package(CppUTest REQUIRED)
+if(CppUTest_FOUND)
+    message(STATUS "Found CppUTest ${CppUTest_VERSION_MAJOR}.${CppUTest_VERSION_MINOR}.${CppUTest_VERSION_PATCH} in ${CppUTest_DIR}")
+endif()
 
 add_library(${PROD_LIB_NAME} ${SRC})
 add_executable(${TEST_EXECUTABLE_NAME} AllTests.cpp ${TESTS})
