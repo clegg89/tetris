@@ -13,6 +13,7 @@ set(SRC
   ${SRCROOT}/PlayState.cpp
   ${SRCROOT}/Tetromino.cpp
   ${SRCROOT}/TetrominoFactory.cpp
+  ${SRCROOT}/TetrominoStage.cpp
   )
 
 # Detect and add SDL
