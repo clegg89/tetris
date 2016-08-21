@@ -22,8 +22,10 @@ set(TESTS
 set(TEST_EXECUTABLE_NAME "${EXECUTABLE_NAME}Tests")
 set(PROD_LIB_NAME "${EXECUTABLE_NAME}Prod")
 
+find_package(CppUTest REQUIRED)
+
 add_library(${PROD_LIB_NAME} ${SRC})
 add_executable(${TEST_EXECUTABLE_NAME} AllTests.cpp ${TESTS})
-target_link_libraries(${TEST_EXECUTABLE_NAME} ${PROD_LIB_NAME})
+target_link_libraries(${TEST_EXECUTABLE_NAME} ${PROD_LIB_NAME} ${CppUTest_LIBRARIES})
 set_property(TARGET ${PROD_LIB_NAME} PROPERTY CXX_STANDARD 11)
 set_property(TARGET ${TEST_EXECUTABLE_NAME} PROPERTY CXX_STANDARD 11)
