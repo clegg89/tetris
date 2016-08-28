@@ -23,13 +23,21 @@ set(TESTS
 set(TEST_EXECUTABLE_NAME "${EXECUTABLE_NAME}Tests")
 set(PROD_LIB_NAME "${EXECUTABLE_NAME}Prod")
 
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package(Threads)
+if(Threads_FOUND)
+    message(STATUS "Found ${CMAKE_THREAD_LIBS_INIT}")
+endif()
+
 find_package(CppUTest REQUIRED)
 if(CppUTest_FOUND)
-    message(STATUS "Found CppUTest ${CppUTest_VERSION_MAJOR}.${CppUTest_VERSION_MINOR}.${CppUTest_VERSION_PATCH} in ${CppUTest_DIR}")
+    message(STATUS "Found ${CppUTest_LIBRARIES} ${CppUTest_VERSION_MAJOR}.${CppUTest_VERSION_MINOR}.${CppUTest_VERSION_PATCH}")
 endif()
 
 add_library(${PROD_LIB_NAME} ${SRC})
+include_directories(${CppUTest_INCLUDE_DIR})
 add_executable(${TEST_EXECUTABLE_NAME} AllTests.cpp ${TESTS})
-target_link_libraries(${TEST_EXECUTABLE_NAME} ${PROD_LIB_NAME} ${CppUTest_LIBRARIES})
+target_link_libraries(${TEST_EXECUTABLE_NAME} ${PROD_LIB_NAME} ${CMAKE_THREAD_LIBS_INIT} ${CppUTest_LIBRARIES})
+
 set_property(TARGET ${PROD_LIB_NAME} PROPERTY CXX_STANDARD 11)
 set_property(TARGET ${TEST_EXECUTABLE_NAME} PROPERTY CXX_STANDARD 11)
