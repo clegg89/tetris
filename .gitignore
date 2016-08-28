@@ -6,3 +6,4 @@ SDL_Release
 SFML_Debug
 SFML_Release
 build
+scripts/local
