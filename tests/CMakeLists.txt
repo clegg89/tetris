@@ -13,11 +13,9 @@ set(SRC
   ${SRCROOT}/PlayState.cpp
   ${SRCROOT}/Tetromino.cpp
   ${SRCROOT}/TetrominoFactory.cpp
-  ${SRCROOT}/TetrominoStage.cpp
   )
 
 set(TESTS
-    ${TESTROOT}/TetrominoStage_test.cpp
   )
 
 set(TEST_EXECUTABLE_NAME "${EXECUTABLE_NAME}Tests")
