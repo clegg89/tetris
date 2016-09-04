@@ -16,6 +16,7 @@ set(SRC
   )
 
 set(TESTS
+  ${TESTROOT}/Starter_test.cpp
   )
 
 set(TEST_EXECUTABLE_NAME "${EXECUTABLE_NAME}Tests")
