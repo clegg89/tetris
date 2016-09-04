@@ -14,8 +14,10 @@ project(tetris)
 set(tetris_VERSION_MAJOR 1)
 set(tetris_VERSION_MINOR 0)
 
-# Define sources and executable
-set(EXECUTABLE_NAME "tetris")
+set(PRODUCTION_LIBRARY ${CMAKE_PROJECT_NAME}Library)
+set(PRODUCTION_EXE ${CMAKE_PROJECT_NAME})
+set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
+
 add_subdirectory(src)
 add_subdirectory(tests)
 
