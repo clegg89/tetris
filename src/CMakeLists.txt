@@ -14,9 +14,6 @@ set(SRC
   ${SRCROOT}/TetrominoFactory.cpp
   )
 
-# Detect and add SDL
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-
 find_package(SFML 2 COMPONENTS system window graphics network audio)
 
 if(SFML_FOUND)
