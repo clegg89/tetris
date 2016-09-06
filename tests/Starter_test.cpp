@@ -6,8 +6,8 @@
  * @author C. Smith
  */
 
-#include <CppuTest/TestHarness.h>
-#include <CppuTestExt/MockSupport.h>
+#include <CppUTest/TestHarness.h>
+#include <CppUTestExt/MockSupport.h>
 
 TEST_GROUP(starter)
 {
