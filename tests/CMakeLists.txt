@@ -15,7 +15,7 @@ endif()
 
 find_package(CppUTest REQUIRED)
 if(CppUTest_FOUND)
-    message(STATUS "Found ${CppUTest_LIBRARIES}")
+  message(STATUS "Found CppUTest")
 endif()
 
 include_directories(${CppUTest_INCLUDE_DIR})
