@@ -38,6 +38,7 @@ include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(CppUTest REQUIRED_VARS CppUTest_LIBRARIES_TEMP CppUTest_INCLUDE_DIR)
 
 if (CppUTest_FOUND)
+  message(STATUS "Setting CppUTest variables")
   set(CppUTest_LIBRARIES ${CppUTest_LIBRARIES_TEMP})
   set(CppUTest_INCLUDE_DIRS ${CppUTest_INCLUDE_DIR})
   set(CppUTest_DEFINITIONS )
