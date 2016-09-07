@@ -15,12 +15,12 @@ endif()
 
 find_package(CppUTest REQUIRED)
 if(CppUTest_FOUND)
-    message(STATUS "Found ${CppUTest_LIBRARIES} ${CppUTest_VERSION_MAJOR}.${CppUTest_VERSION_MINOR}.${CppUTest_VERSION_PATCH}")
+    message(STATUS "Found ${CppUTest_LIBRARIES}")
 endif()
 
 include_directories(${CppUTest_INCLUDE_DIR})
 
 add_executable(${TEST_EXE} ${TESTROOT}/AllTests.cpp ${TESTS})
-target_link_libraries(${TEST_EXE} ${PRODUCTION_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${CppUTest_LIBRARIES})
+target_link_libraries(${TEST_EXE} ${PRODUCTION_LIBRARY} ${CppUTest_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 set_property(TARGET ${TEST_EXECUTABLE_NAME} PROPERTY CXX_STANDARD 11)
