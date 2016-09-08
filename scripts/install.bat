@@ -19,7 +19,7 @@ DEL sfml.zip
 SET SFML_ROOT=C:\SFML-%SFML_VERSION%
 
 curl -sSL -o cpputest.zip http://github.com/cpputest/cpputest/releases/download/%CPPUTEST_VERSION%/cpputest-%CPPUTEST_VERSION%.zip
-unzip -q cpputest.zip -d .
+unzip -q cpputest.zip -d .\
 DEL cpputest.zip
 CD .\cpputest-%CPPUTEST_VERSION%\cpputest_build
 @REM Should specify install location
