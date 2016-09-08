@@ -22,7 +22,7 @@ curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download
 unzip -q cpputest.zip -d .
 DEL cpputest.zip
 CD .\cpputest-%CPPUTEST_VERSION%\cpputest_build
-cmake -G %GENERATOR% -DCMAKE_INSTALL_PREFIX=C:\CppUTest-%CPPUTEST_VERSION% -DTESTS=OFF ..
+cmake -G "%GENERATOR%" -DCMAKE_INSTALL_PREFIX=C:\CppUTest-%CPPUTEST_VERSION% -DTESTS=OFF ..
 cmake --build . --target install
 CD ..\..\
 RD cpputest-%CPPUTEST_VERSION%
