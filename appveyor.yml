@@ -5,8 +5,11 @@ platform:
   - x64
 
 environment:
+  MINGW_VERSION: 5.3.0
   SFML_VERSION: 2.3.2
   CPPUTEST_VERSION: 3.8
+  GENERATOR: MinGW Makefiles
+  SFML_COMPILER: windows-gcc-4.9.2-mingw
 
 install:
   - cmd: scripts/install.bat

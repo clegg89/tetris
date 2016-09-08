@@ -1,18 +1,17 @@
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
+choco install mingw --version=%MINGW_VERSION% --x86
 SET BITS=32
-SET GENERATOR=Visual Studio 14 2015
-SET SFML_COMPILER=windows-vc14
 GOTO AFTER
 
 :WIN64
+choco install mingw --version=%MINGW_VERSION%
 SET BITS=64
-SET GENERATOR=Visual Studio 14 2015 Win64
-SET SFML_COMPILER=windows-vc14
 GOTO AFTER
 
 :AFTER
+SET PATH="C:\tools\mingw%BITS%";%PATH%
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d C:\
 DEL sfml.zip
