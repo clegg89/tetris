@@ -6,6 +6,7 @@ platform:
 
 environment:
   SFML_VERSION: 2.3.2
+  CPPUTEST_VERSION: 3.8
 
 install:
   - cmd: scripts/install.bat
