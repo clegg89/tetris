@@ -12,6 +12,7 @@ GOTO AFTER
 
 :AFTER
 SET PATH="C:\tools\mingw%BITS%";%PATH%
+
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d C:\
 DEL sfml.zip
