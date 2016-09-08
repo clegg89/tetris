@@ -1,4 +1,3 @@
-@ECHO ON
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
@@ -19,8 +18,8 @@ unzip -q sfml.zip -d C:\
 DEL sfml.zip
 SET SFML_ROOT=C:\SFML-%SFML_VERSION%
 
-curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download/%CPPUTEST_VERSION%/cpputest-%CPPUTEST_VERSION%.zip
-unzip -q cpputest.zip
+curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download/v%CPPUTEST_VERSION%/cpputest-%CPPUTEST_VERSION%.zip
+unzip -q cpputest.zip -d .
 DEL cpputest.zip
 CD .\cpputest-%CPPUTEST_VERSION%\cpputest_build
 cmake -G %GENERATOR% -DCMAKE_INSTALL_PREFIX=C:\CppUTest-%CPPUTEST_VERSION% -DTESTS=OFF ..
