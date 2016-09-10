@@ -16,3 +16,6 @@ install:
 
 build_script:
   - cmd: scripts/build.bat
+
+test_script:
+  - ctest -V .
