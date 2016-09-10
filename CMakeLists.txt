@@ -23,4 +23,7 @@ set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
 add_subdirectory(src)
 add_subdirectory(tests)
 
+enable_testing()
+add_test(${TEST_EXE} tests/${TEST_EXE})
+
 install(DIRECTORY media DESTINATION ${PROJECT_BINARY_DIR}/bin)
