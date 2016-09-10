@@ -14,7 +14,7 @@ GOTO AFTER
 :AFTER
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
 @REM DIR C:\tools\mingw%BITS%\bin
-@REM RD /s C:\MinGW
+@REM RD /s /q C:\MinGW
 
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d C:\
@@ -32,7 +32,7 @@ cmake -G "%GENERATOR%" -DCMAKE_INSTALL_PREFIX=C:\CppUTest-%CPPUTEST_VERSION% -DT
 SET PATH=%OLD_PATH%
 cmake --build . --target install
 CD ..\..\
-RD /s cpputest-%CPPUTEST_VERSION%
+RD /s /q cpputest-%CPPUTEST_VERSION%
 SET CppUTest_PATH=C:\CppUTest-%CPPUTEST_VERSION%
 
 @ECHO OFF
