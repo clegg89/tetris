@@ -2,7 +2,7 @@
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
-choco install mingw --version=%MINGW_VERSION% -forcex86
+choco install mingw --version=%MINGW_VERSION% --forcex86
 SET BITS=32
 GOTO AFTER
 
@@ -14,7 +14,7 @@ GOTO AFTER
 :AFTER
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
 @REM DIR C:\tools\mingw%BITS%\bin
-@REM RD /s /q C:\MinGW
+RD /s /q C:\MinGW
 
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d C:\
