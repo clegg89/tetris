@@ -14,9 +14,16 @@ project(tetris)
 set(tetris_VERSION_MAJOR 1)
 set(tetris_VERSION_MINOR 0)
 
-# Define sources and executable
-set(EXECUTABLE_NAME "tetris")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+
+set(PRODUCTION_LIBRARY ${CMAKE_PROJECT_NAME}Library)
+set(PRODUCTION_EXE ${CMAKE_PROJECT_NAME})
+set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
+
 add_subdirectory(src)
-#add_subdirectory(tests)
+add_subdirectory(tests)
+
+enable_testing()
+add_test(${TEST_EXE} tests/${TEST_EXE})
 
 install(DIRECTORY media DESTINATION ${PROJECT_BINARY_DIR}/bin)

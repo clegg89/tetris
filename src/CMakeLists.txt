@@ -4,7 +4,6 @@ include_directories("${PROJECT_SOURCE_DIR}/includes")
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src)
 
 set(SRC
-  ${SRCROOT}/main.cpp
   ${SRCROOT}/Game.cpp
   ${SRCROOT}/GameIO.cpp
   ${SRCROOT}/Board.cpp
@@ -14,9 +13,6 @@ set(SRC
   ${SRCROOT}/Tetromino.cpp
   ${SRCROOT}/TetrominoFactory.cpp
   )
-
-# Detect and add SDL
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
 find_package(SFML 2 COMPONENTS system window graphics network audio)
 
@@ -64,9 +60,12 @@ else()
   endif()
 endif()
 
-add_executable(${EXECUTABLE_NAME} ${SRC})
-target_link_libraries(${EXECUTABLE_NAME} ${MEDIA_LIBRARIES})
-set_property(TARGET ${EXECUTABLE_NAME} PROPERTY CXX_STANDARD 11)
+add_library(${PRODUCTION_LIBRARY} ${SRC})
+add_executable(${PRODUCTION_EXE} ${SRCROOT}/main.cpp)
+target_link_libraries(${PRODUCTION_EXE} ${PRODUCTION_LIBRARY} ${MEDIA_LIBRARIES})
+
+set_property(TARGET ${PRODUCTION_LIBRARY} PROPERTY CXX_STANDARD 11)
+set_property(TARGET ${PRODUCTION_EXE} PROPERTY CXX_STANDARD 11)
 
 # Install target
 install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${PROJECT_BINARY_DIR}/bin)
