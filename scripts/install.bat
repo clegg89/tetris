@@ -22,7 +22,16 @@ curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download
 unzip -q cpputest.zip -d .
 DEL cpputest.zip
 CD .\cpputest-%CPPUTEST_VERSION%\cpputest_build
+SET OLD_PATH=%PATH%
+SET PATH=%PATH:C:\MinGW\bin;=%
+SET PATH=%PATH:C:\Program Files\Git\bin;=%
+SET PATH=%PATH:C:\Program Files\Git\cmd;=%
+SET PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+SET PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
+SET PATH=%PATH:C:\Program Files (x86)\Git\cmd;=%
+SET PATH=%PATH:C:\Program Files (x86)\Git\usr\bin;=%
 cmake -G "%GENERATOR%" -DCMAKE_INSTALL_PREFIX=C:\CppUTest-%CPPUTEST_VERSION% -DTESTS=OFF ..
+SET PATH=%OLD_PATH%
 cmake --build . --target install
 CD ..\..\
 RD cpputest-%CPPUTEST_VERSION%
