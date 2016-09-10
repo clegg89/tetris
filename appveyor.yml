@@ -19,3 +19,6 @@ build_script:
 
 test_script:
   - ctest -V .
+
+cache:
+  - dependencies -> appveyor.yml
