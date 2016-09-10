@@ -13,6 +13,8 @@ GOTO AFTER
 
 :AFTER
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
+DIR C:\tools\mingw%BITS%\bin
+RD C:\MinGW
 
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d C:\
@@ -24,12 +26,12 @@ unzip -q cpputest.zip -d .
 DEL cpputest.zip
 CD .\cpputest-%CPPUTEST_VERSION%\cpputest_build
 SET OLD_PATH=%PATH%
-SET PATH=%PATH:C:\MinGW\bin;=%
-SET PATH=%PATH:C:\Program Files\Git\bin;=%
-SET PATH=%PATH:C:\Program Files\Git\cmd;=%
+@REM SET PATH=%PATH:C:\MinGW\bin;=%
+@REM SET PATH=%PATH:C:\Program Files\Git\bin;=%
+@REM SET PATH=%PATH:C:\Program Files\Git\cmd;=%
 SET PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-SET PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
-SET PATH=%PATH:C:\Program Files (x86)\Git\cmd;=%
+@REM SET PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
+@REM SET PATH=%PATH:C:\Program Files (x86)\Git\cmd;=%
 SET PATH=%PATH:C:\Program Files (x86)\Git\usr\bin;=%
 cmake -G "%GENERATOR%" -DCMAKE_INSTALL_PREFIX=C:\CppUTest-%CPPUTEST_VERSION% -DTESTS=OFF ..
 SET PATH=%OLD_PATH%
