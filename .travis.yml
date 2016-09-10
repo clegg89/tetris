@@ -26,3 +26,6 @@ script:
     - mkdir build && cd build
     - cmake -DCMAKE_C_COMPILER=$C_COMPILER -DCMAKE_CXX_COMPILER=$CXX_COMPILER ..
     - cmake --build .
+
+after_success:
+    - ctest -V .
