@@ -13,7 +13,6 @@ GOTO AFTER
 
 :AFTER
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
-@REM DIR C:\tools\mingw%BITS%\bin
 RD /s /q C:\MinGW
 
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
