@@ -5,7 +5,7 @@ platform:
   - x64
 
 environment:
-  MINGW_VERSION: 4.9.2
+  MINGW_VERSION: 4.9.3
   SFML_VERSION: 2.3.2
   CPPUTEST_VERSION: 3.8
   GENERATOR: MinGW Makefiles
