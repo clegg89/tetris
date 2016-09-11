@@ -36,6 +36,8 @@ test:windows:
     - ctest -V .
   dependencies:
     - build:windows
+  tags:
+    - windows
 
 test:linux:
   stage: test
@@ -44,3 +46,5 @@ test:linux:
     - ctest -V .
   dependencies:
     - build:linux
+  tags:
+    - linux
