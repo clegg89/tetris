@@ -12,8 +12,6 @@ tetris-windows:
     - windows
 
 tetris-linux:
-  before_script:
-    - sudo apt-get update -qq
   script:
     - mkdir build && cd build
     - cmake ..
