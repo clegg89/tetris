@@ -11,7 +11,7 @@ SET BITS=64
 GOTO AFTER
 
 :AFTER
-IF EXIST C:\toolsmingw%BITS%\bin GOTO SKIP_MINGW
+IF EXIST C:\tools\mingw%BITS%\bin GOTO SKIP_MINGW
 choco install mingw --version=%MINGW_VERSION% %CHOCO_OPTION%
 
 :SKIP_MINGW
