@@ -25,7 +25,6 @@ The resulting binary will be located in build/bin.
 
 # TODO
 The following is a list of action items
-* Setup automated builds for MinGW on Appveyor (32 and 64 bit)
 * Setup builds for both 32 and 64 bit on travis-CI
 * Setup builds for both SDL and SFML on both appveyor and travis
 * Look into making release packages for deployment on multiple systems
