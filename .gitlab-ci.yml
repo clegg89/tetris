@@ -1,19 +1,50 @@
-tetris-windows:
+build:windows:
+  stage: build
   before_script:
-    - set PATH="E:\Program Files (x86)\CMake\bin";%PATH%
+    - set PATH=E:\Program Files (x86)\CMake\bin;E:\tools\mingw64\bin;%PATH%
+    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
+    - set SFML_ROOT=E:\SFML-MinGW-64-2.3.2
+    - set CppUTest_PATH=E:\CppUTest-64-3.8
   script:
     - mkdir build && cd build
-    - cmake -G "Visual Studio 14 2015 Win64" -DSFML_ROOT="E:\SFML_VS14" ..
+    - cmake -G "MinGW Makefiles" ..
     - cmake --build .
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - build
   tags:
     - windows
 
-tetris-linux:
-  before_script:
-    - sudo apt-get update -qq && sudo apt-get install -qq libsfml-dev cpputest cmake
+build:linux:
+  stage: build
   script:
     - mkdir build && cd build
     - cmake ..
     - cmake --build .
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - build
+  tags:
+    - linux
+
+test:windows:
+  stage: test
+  script:
+    - cd build
+    - ctest -V .
+  dependencies:
+    - build:windows
+  tags:
+    - windows
+
+test:linux:
+  stage: test
+  script:
+    - cd build
+    - ctest -V .
+  dependencies:
+    - build:linux
   tags:
     - linux
