@@ -28,6 +28,3 @@ run-tests:
   script:
     - cd build
     - ctest -V .
-  tags:
-    - linux
-    - windows
