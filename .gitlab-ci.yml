@@ -1,4 +1,4 @@
-tetris-windows:
+build:windows:
   stage: build
   before_script:
     - set PATH=E:\Program Files (x86)\CMake\bin;E:\tools\mingw64\bin;%PATH%
@@ -10,25 +10,37 @@ tetris-windows:
     - cmake -G "MinGW Makefiles" ..
     - cmake --build .
   artifacts:
+    expire_in: 1 week
     paths:
       - build
   tags:
     - windows
 
-tetris-linux:
+build:linux:
   stage: build
   script:
     - mkdir build && cd build
     - cmake ..
     - cmake --build .
   artifacts:
+    expire_in: 1 week
     paths:
       - build
   tags:
     - linux
 
-run-tests:
+test:windows:
   stage: test
   script:
     - cd build
     - ctest -V .
+  dependencies:
+    - build:windows
+
+test:linux:
+  stage: test
+  script:
+    - cd build
+    - ctest -V .
+  dependencies:
+    - build:linux
