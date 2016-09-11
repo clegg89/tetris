@@ -22,4 +22,4 @@ test_script:
 
 cache:
   - dependencies -> appveyor.yml, scripts\install.bat
-  - C:\tools\mingw%BITS% -> appveyor.yml, scripts\install.bat
+  - C:\tools\mingw* -> appveyor.yml, scripts\install.bat
