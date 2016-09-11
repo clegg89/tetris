@@ -1,16 +1,20 @@
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
-choco install mingw --version=%MINGW_VERSION% --forcex86
+set CHOCO_OPTION=--forcex86
 SET BITS=32
 GOTO AFTER
 
 :WIN64
-choco install mingw --version=%MINGW_VERSION%
+set CHOCO_OPTION=
 SET BITS=64
 GOTO AFTER
 
 :AFTER
+IF EXIST C:\toolsmingw%BITS%\bin GOTO SKIP_MINGW
+choco install mingw --version=%MINGW_VERSION% %CHOCO_OPTION%
+
+:SKIP_MINGW
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
 RD /s /q C:\MinGW
 
@@ -20,6 +24,7 @@ IF EXIST dependencies\SFML-%SFML_VERSION% GOTO SKIP_SFML
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d %PROJ_DIR%\dependencies\
 DEL sfml.zip
+
 :SKIP_SFML
 SET SFML_ROOT=%PROJ_DIR%\dependencies\SFML-%SFML_VERSION%
 
@@ -37,5 +42,6 @@ cmake --build . --target install
 CD ..\..\
 RD /s /q cpputest-%CPPUTEST_VERSION%
 CD %PROJ_DIR%
+
 :SKIP_CppUTest
 SET CppUTest_PATH=%PROJ_DIR%\dependencies\CppUTest-%CPPUTEST_VERSION%

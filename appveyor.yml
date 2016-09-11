@@ -22,3 +22,4 @@ test_script:
 
 cache:
   - dependencies -> appveyor.yml
+  - C:\tools -> appveyor.yml
