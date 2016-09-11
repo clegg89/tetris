@@ -2,6 +2,7 @@ build:windows:
   stage: build
   before_script:
     - set PATH=E:\Program Files (x86)\CMake\bin;E:\tools\mingw64\bin;%PATH%
+    - set RESTORE_PATH=%PATH%
     - set PATH=%PATH:E:\Program Files\Git\cmd;=%
     - set SFML_ROOT=E:\SFML-MinGW-64-2.3.2
     - set CppUTest_PATH=E:\CppUTest-64-3.8
@@ -9,6 +10,8 @@ build:windows:
     - mkdir build && cd build
     - cmake -G "MinGW Makefiles" ..
     - cmake --build .
+  after_script:
+    - set PATH=%RESTORE_PATH%
   artifacts:
     expire_in: 1 week
     paths:
