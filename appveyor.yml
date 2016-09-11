@@ -12,14 +12,14 @@ environment:
   SFML_COMPILER: windows-gcc-4.9.2-mingw
 
 install:
-  - cmd: scripts/install.bat
+  - cmd: scripts\install.bat
 
 build_script:
-  - cmd: scripts/build.bat
+  - cmd: scripts\build.bat
 
 test_script:
   - ctest -V .
 
 cache:
-  - dependencies -> appveyor.yml
-  - C:\tools -> appveyor.yml
+  - dependencies -> appveyor.yml, scripts\install.bat
+  - C:\tools\mingw%BITS% -> appveyor.yml, scripts\install.bat
