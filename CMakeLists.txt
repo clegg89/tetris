@@ -25,13 +25,17 @@ add_subdirectory(tests)
 
 add_test(${TEST_EXE} tests/${TEST_EXE})
 
-install(DIRECTORY media DESTINATION ${PROJECT_BINARY_DIR}/bin)
+install(DIRECTORY media DESTINATION etc)
 
 include(InstallRequiredSystemLibraries)
 
 # CPack setup
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A simple Tetris clone")
 set(CPACK_PACKAGE_VENDOR "Clegg")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.md")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_PACKAGE_EXECUTABLES "Tetris" "Tetris")
 
 #Enable CPack
