@@ -9,7 +9,9 @@ tetris-windows:
     - mkdir build && cd build
     - cmake -G "MinGW Makefiles" ..
     - cmake --build .
-    - cd ..
+  artifacts:
+    paths:
+      - build
   tags:
     - windows
 
@@ -19,7 +21,9 @@ tetris-linux:
     - mkdir build && cd build
     - cmake ..
     - cmake --build .
-    - cd ..
+  artifacts:
+    paths:
+      - build
   tags:
     - linux
 
