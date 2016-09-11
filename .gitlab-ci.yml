@@ -1,4 +1,5 @@
 tetris-windows:
+  stage: build
   before_script:
     - set PATH=E:\Program Files (x86)\CMake\bin;E:\tools\mingw64\bin;%PATH%
     - set PATH=%PATH:E:\Program Files\Git\cmd;=%
@@ -8,13 +9,24 @@ tetris-windows:
     - mkdir build && cd build
     - cmake -G "MinGW Makefiles" ..
     - cmake --build .
+    - cd ..
   tags:
     - windows
 
 tetris-linux:
+  stage: build
   script:
     - mkdir build && cd build
     - cmake ..
     - cmake --build .
+    - cd ..
   tags:
     - linux
+
+run-tests:
+  stage: test
+  script:
+    - cd build
+    - ctest -V .
+  tags:
+    - linux, windows
