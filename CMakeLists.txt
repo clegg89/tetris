@@ -9,8 +9,8 @@ endif()
 
 project(tetris)
 
-# Set version information in a config.h file
-# No...
+enable_testing()
+
 set(tetris_VERSION_MAJOR 1)
 set(tetris_VERSION_MINOR 0)
 
@@ -23,7 +23,16 @@ set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
 add_subdirectory(src)
 add_subdirectory(tests)
 
-enable_testing()
 add_test(${TEST_EXE} tests/${TEST_EXE})
 
 install(DIRECTORY media DESTINATION ${PROJECT_BINARY_DIR}/bin)
+
+include(InstallRequiredSystemLibraries)
+
+# CPack setup
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A simple Tetris clone")
+set(CPACK_PACKAGE_VENDOR "Clegg")
+set(CPACK_PACKAGE_EXECUTABLES "Tetris" "Tetris")
+
+#Enable CPack
+include(CPack)
