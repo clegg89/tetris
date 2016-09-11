@@ -29,4 +29,5 @@ run-tests:
     - cd build
     - ctest -V .
   tags:
-    - linux, windows
+    - linux
+    - windows
