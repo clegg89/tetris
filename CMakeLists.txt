@@ -13,6 +13,7 @@ enable_testing()
 
 set(tetris_VERSION_MAJOR 1)
 set(tetris_VERSION_MINOR 0)
+set(tetris_VERSION_PATH 0)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
@@ -25,7 +26,7 @@ add_subdirectory(tests)
 
 add_test(${TEST_EXE} tests/${TEST_EXE})
 
-install(DIRECTORY media DESTINATION etc)
+install(DIRECTORY media DESTINATION etc/${CMAKE_PROJECT_NAME})
 
 include(InstallRequiredSystemLibraries)
 
