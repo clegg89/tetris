@@ -14,6 +14,8 @@ set(SRC
   ${SRCROOT}/TetrominoFactory.cpp
   )
 
+# Statically link SFML
+set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML 2 COMPONENTS system window graphics network audio)
 
 if(SFML_FOUND)
