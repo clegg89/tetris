@@ -21,6 +21,10 @@ set(PRODUCTION_LIBRARY ${CMAKE_PROJECT_NAME}Library)
 set(PRODUCTION_EXE ${CMAKE_PROJECT_NAME})
 set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
 
+set(RESOURCE_DIR "${CMAKE_INSTALL_PREFIX}/etc/${CMAKE_PROJECT_NAME}")
+configure_file(${CMAKE_SOURCE_DIR}/includes/Config.hpp.in ${CMAKE_BINARY_DIR}/includes/Config.hpp)
+include_directories(${CMAKE_BINARY_DIR}/includes)
+
 add_subdirectory(src)
 add_subdirectory(tests)
 
