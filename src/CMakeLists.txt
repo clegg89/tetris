@@ -16,7 +16,7 @@ set(SRC
 
 # Statically link SFML
 set(SFML_STATIC_LIBRARIES TRUE)
-find_package(SFML 2 COMPONENTS system window graphics network audio)
+find_package(SFML 2 COMPONENTS audio graphics window system)
 
 if(SFML_FOUND)
 
