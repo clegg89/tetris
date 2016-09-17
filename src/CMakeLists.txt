@@ -15,7 +15,9 @@ set(SRC
   )
 
 # Statically link SFML
-set(SFML_STATIC_LIBRARIES TRUE)
+if(${WIN32})
+  set(SFML_STATIC_LIBRARIES TRUE)
+endif()
 find_package(SFML 2 COMPONENTS audio graphics window system)
 
 if(SFML_FOUND)

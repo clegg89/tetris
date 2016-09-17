@@ -15,12 +15,6 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - cmake
-      - libxcb-image0-dev
-      - libudev-dev
-      - libopenal-dev
-      - libogg-dev
-      - libvorbis-dev
-      - libflac-dev
       - libsfml-dev
       - cpputest
       - gcc-5
