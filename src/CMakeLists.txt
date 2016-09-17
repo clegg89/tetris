@@ -28,7 +28,7 @@ if(SFML_FOUND)
 
   include_directories(${SFML_INCLUDE_DIR})
 
-  set(MEDIA_LIBRARIES ${SFML_LIBRARIES})
+  set(MEDIA_LIBRARIES ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
 else()
 
