@@ -1,4 +1,3 @@
-@echo on
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
