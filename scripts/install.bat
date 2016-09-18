@@ -15,8 +15,7 @@ GOTO AFTER
 IF EXIST C:\toolchain\mingw GOTO SKIP_MINGW
 curl -sSL -omingw.7z %MINGW_URL%
 7z x -oC:\toolchain\ mingw.7z
-REN C:\toolchain\mingw%BITS% C:\toolchain\mingw
-DIR C:\toolchain\mingw\bin
+REN C:\toolchain\mingw%BITS% mingw
 DEL mingw.7z
 
 :SKIP_MINGW
