@@ -9,6 +9,7 @@
 #define _TETRIS_H_
 
 #include <iostream>
+#include "Config.hpp"
 
 #define NUM_TETROMINO       7
 #define TETROMINO_ROTATIONS 4

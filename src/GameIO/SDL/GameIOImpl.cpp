@@ -36,10 +36,10 @@ GameIOImpl::~GameIOImpl()
     delete this->pInternals;
 }
 
-bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color bgColor)
+bool GameIOImpl::Init(const std::string& blockFile, const int windowHeight, const int windowWidth, const Color bgColor)
 {
     SDL_Surface* loadedSurface;
-    const char * blockImagePath = "media/block.bmp";
+    const char * blockImagePath = blockFile.c_str();
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
     {

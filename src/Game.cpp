@@ -18,15 +18,20 @@ Game::~Game()
 {
 }
 
-bool Game::Init()
+bool Game::Init(const std::string& exePath)
 {
-    if (!this->pGameIO->Init(480, 640))
+  std::string mediaPath = exePath + "/../" + RESOURCE_PREFIX + "/media/";
+  std::string fontFile = mediaPath + "Rupee_Foradian.ttf";
+  std::string musicFile = mediaPath + "tetris.wav";
+  std::string blockFile = mediaPath + "block.bmp";
+
+    if (!this->pGameIO->Init(blockFile, 480, 640))
     {
         return false;
     }
 
-    this->pGameIO->LoadFontFromFile("media/Rupee_Foradian.ttf", 22);
-    this->pGameIO->LoadBgMusicFromFile("media/tetris.wav");
+    this->pGameIO->LoadFontFromFile(fontFile.c_str(), 22);
+    this->pGameIO->LoadBgMusicFromFile(musicFile.c_str());
 
     return true;
 }

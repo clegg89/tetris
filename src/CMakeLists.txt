@@ -1,6 +1,3 @@
-# Add includes directory
-include_directories("${PROJECT_SOURCE_DIR}/includes")
-
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src)
 
 set(SRC
@@ -64,12 +61,15 @@ else()
   endif()
 endif()
 
+set(Boost_USE_STATIC_LIBS)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
 add_library(${PRODUCTION_LIBRARY} ${SRC})
 add_executable(${PRODUCTION_EXE} ${SRCROOT}/main.cpp)
-target_link_libraries(${PRODUCTION_EXE} ${PRODUCTION_LIBRARY} ${MEDIA_LIBRARIES})
+target_link_libraries(${PRODUCTION_EXE} ${PRODUCTION_LIBRARY} ${MEDIA_LIBRARIES} ${Boost_LIBRARIES})
 
 set_property(TARGET ${PRODUCTION_LIBRARY} PROPERTY CXX_STANDARD 11)
 set_property(TARGET ${PRODUCTION_EXE} PROPERTY CXX_STANDARD 11)
 
-# Install target
-install(TARGETS ${PRODUCTION_EXE} DESTINATION bin)
+install(TARGETS ${PRODUCTION_EXE} DESTINATION "bin")

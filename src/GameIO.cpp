@@ -27,14 +27,14 @@ GameIO::~GameIO()
     delete this->pImpl;
 }
 
-bool GameIO::Init(const int windowHeight, const int windowWidth)
+bool GameIO::Init(const std::string& blockFile, const int windowHeight, const int windowWidth)
 {
     this->pWindowHeight = windowHeight;
     this->pWindowWidth = windowWidth;
 
     this->UnregisterKeyCBs();
 
-    return this->pImpl->Init(this->pWindowHeight, this->pWindowWidth, Color(0x00, 0x00, 0x00, 0xFF));
+    return this->pImpl->Init(blockFile, this->pWindowHeight, this->pWindowWidth, Color(0x00, 0x00, 0x00, 0xFF));
 }
 
 void GameIO::Close()

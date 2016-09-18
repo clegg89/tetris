@@ -17,20 +17,23 @@ set(tetris_VERSION_PATH 0)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
-set(PRODUCTION_LIBRARY ${CMAKE_PROJECT_NAME}Library)
+set(PRODUCTION_LIBRARY "${CMAKE_PROJECT_NAME}Code")
 set(PRODUCTION_EXE ${CMAKE_PROJECT_NAME})
-set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
+set(TEST_EXE "${CMAKE_PROJECT_NAME}Test")
 
-set(RESOURCE_DIR "${CMAKE_INSTALL_PREFIX}/etc/${CMAKE_PROJECT_NAME}")
+set(RESOURCE_PREFIX "etc/${CMAKE_PROJECT_NAME}")
 configure_file(${CMAKE_SOURCE_DIR}/includes/Config.hpp.in ${CMAKE_BINARY_DIR}/includes/Config.hpp)
-include_directories(${CMAKE_BINARY_DIR}/includes)
+
+include_directories("${CMAKE_BINARY_DIR}/includes")
+include_directories("${PROJECT_SOURCE_DIR}/includes")
 
 add_subdirectory(src)
 add_subdirectory(tests)
 
-add_test(${TEST_EXE} tests/${TEST_EXE})
+# Install
+install(DIRECTORY media DESTINATION ${RESOURCE_PREFIX})
 
-install(DIRECTORY media DESTINATION etc/${CMAKE_PROJECT_NAME})
+add_test(${TEST_EXE} tests/${TEST_EXE})
 
 include(InstallRequiredSystemLibraries)
 

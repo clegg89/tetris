@@ -9,6 +9,7 @@
 #define _GAME_H_
 
 #include <vector>
+#include <string>
 
 #include "GameIO.hpp"
 
@@ -25,7 +26,7 @@ class Game
         Game();
         virtual ~Game();
 
-        bool Init();
+        bool Init(const std::string& exePath);
         void Close();
 
         void ChangeState(GameState* state);
