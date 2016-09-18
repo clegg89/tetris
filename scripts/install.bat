@@ -1,22 +1,23 @@
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
-SET CHOCO_OPTION=--forcex86
 SET BITS=32
+SET MINGW_URL=https://sourceforge.net/projects/mingw-w64/files/Toolchains%%20targetting%%20Win32/Personal%%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v4-rev2.7z/download
 GOTO AFTER
 
 :WIN64
-SET CHOCO_OPTION=
 SET BITS=64
+SET MINGW_URL=https://sourceforge.net/projects/mingw-w64/files/Toolchains%%20targetting%%20Win64/Personal%%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v4-rev2.7z/download
 GOTO AFTER
 
 :AFTER
 IF EXIST C:\tools\mingw%BITS%\bin GOTO SKIP_MINGW
-choco install mingw --version=%MINGW_VERSION% %CHOCO_OPTION%
+curl -sSL -o mingw.7z %MINGW_URL%
+7z x -o C:\tools\ mingw.7z
+DEL mingw.7z
 
 :SKIP_MINGW
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
-RD /s /q C:\MinGW
 
 SET PROJ_DIR=%cd%
 
