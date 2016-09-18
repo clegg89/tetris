@@ -11,13 +11,14 @@ SET MINGW_URL=https://sourceforge.net/projects/mingw-w64/files/Toolchains%%20tar
 GOTO AFTER
 
 :AFTER
-IF EXIST C:\tools\mingw%BITS%\bin GOTO SKIP_MINGW
-curl -sSL -o mingw.7z %MINGW_URL%
-7z x -o C:\tools\ mingw.7z
+IF EXIST C:\toolchain\mingw GOTO SKIP_MINGW
+curl -sSL -omingw.7z %MINGW_URL%
+7z x -o C:\toolchain\ mingw.7z
+REN C:\toolchain\mingw%BITS% C:\toolchain\mingw
 DEL mingw.7z
 
 :SKIP_MINGW
-SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
+SET PATH=C:\toolchain\mingw\bin;%PATH%
 RD /s /q C:\MinGW
 
 SET PROJ_DIR=%cd%
