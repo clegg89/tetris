@@ -31,6 +31,8 @@ DEL sfml.zip
 :SKIP_SFML
 SET SFML_ROOT=%PROJ_DIR%\dependencies\SFML-%SFML_VERSION%
 
+SET BOOST_ROOT=C:\Libraries\boost_%BOOST_VERSION:.=_%
+
 IF EXIST dependencies\CppUTest-%CPPUTEST_VERSION% GOTO SKIP_CppUTest
 curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download/v%CPPUTEST_VERSION%/cpputest-%CPPUTEST_VERSION%.zip
 unzip -q cpputest.zip -d .

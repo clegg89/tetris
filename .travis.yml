@@ -16,6 +16,7 @@ addons:
     packages:
       - cmake
       - libsfml-dev
+      - libboost-filesystem-dev
       - cpputest
       - gcc-5
       - g++-5
