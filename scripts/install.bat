@@ -1,3 +1,4 @@
+@echo on
 IF "%PLATFORM%" == "x86" (GOTO WIN32) ELSE (GOTO WIN64)
 
 :WIN32
@@ -32,6 +33,7 @@ DEL sfml.zip
 SET SFML_ROOT=%PROJ_DIR%\dependencies\SFML-%SFML_VERSION%
 
 SET BOOST_ROOT=C:\Libraries\boost_%BOOST_VERSION:.=_%
+DIR %BOOST_ROOT%\libs
 
 IF EXIST dependencies\CppUTest-%CPPUTEST_VERSION% GOTO SKIP_CppUTest
 curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download/v%CPPUTEST_VERSION%/cpputest-%CPPUTEST_VERSION%.zip
@@ -50,3 +52,4 @@ CD %PROJ_DIR%
 
 :SKIP_CppUTest
 SET CppUTest_PATH=%PROJ_DIR%\dependencies\CppUTest-%CPPUTEST_VERSION%
+@echo off
