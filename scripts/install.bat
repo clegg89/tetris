@@ -18,6 +18,7 @@ DEL mingw.7z
 
 :SKIP_MINGW
 SET PATH=C:\tools\mingw%BITS%\bin;%PATH%
+RD /s /q C:\MinGW
 
 SET PROJ_DIR=%cd%
 
