@@ -35,7 +35,7 @@ SET SFML_ROOT=%PROJ_DIR%\dependencies\SFML-%SFML_VERSION%
 SET BOOST_ROOT=C:\Libraries\boost_%BOOST_VERSION:.=_%
 DIR %BOOST_ROOT%
 CD %BOOST_ROOT%
-bootstrap.bat mingw
+CALL bootstrap.bat mingw
 b2 variant=release toolset=gcc link=static system filesystem
 CD %PROJ_DIR%
 
