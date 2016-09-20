@@ -24,22 +24,26 @@ RD /s /q C:\MinGW
 
 SET PROJ_DIR=%cd%
 
-IF EXIST dependencies\SFML-%SFML_VERSION% GOTO SKIP_SFML
+IF EXIST dependencies\SFML GOTO SKIP_SFML
 curl -sSL -o sfml.zip http://www.sfml-dev.org/files/SFML-%SFML_VERSION%-%SFML_COMPILER%-%BITS%-bit.zip
 unzip -q sfml.zip -d %PROJ_DIR%\dependencies\
+REN %PROJ_DIR%\dependencies\SFML-%SFML_VERSION% SFML
 DEL sfml.zip
 
 :SKIP_SFML
-SET SFML_ROOT=%PROJ_DIR%\dependencies\SFML-%SFML_VERSION%
+SET SFML_ROOT=%PROJ_DIR%\dependencies\SFML
 
-SET BOOST_ROOT=C:\Libraries\boost_%BOOST_VERSION:.=_%
-DIR %BOOST_ROOT%
+IF EXIST dependencies\Boost GOTO SKIP_BOOST
+CD C:\Libraries\boost_%BOOST_VERSION:.=_%
 CD %BOOST_ROOT%
 CALL bootstrap.bat mingw
-b2 variant=release toolset=gcc link=static system filesystem
+b2 --with-system --with-filesystem --prefix=%PROJ_DIR%\dependencies\Boost variant=release toolset=gcc link=static install
 CD %PROJ_DIR%
 
-IF EXIST dependencies\CppUTest-%CPPUTEST_VERSION% GOTO SKIP_CppUTest
+:SKIP_BOOST
+SET BOOST_ROOT=%PROJ_DIR%\dependencies\Boost
+
+IF EXIST dependencies\CppUTest GOTO SKIP_CppUTest
 curl -sSL -o cpputest.zip https://github.com/cpputest/cpputest/releases/download/v%CPPUTEST_VERSION%/cpputest-%CPPUTEST_VERSION%.zip
 unzip -q cpputest.zip -d .
 DEL cpputest.zip
@@ -47,7 +51,7 @@ CD .\cpputest-%CPPUTEST_VERSION%\cpputest_build
 SET OLD_PATH=%PATH%
 SET PATH=%PATH:C:\Program Files\Git\usr\bin;=%
 SET PATH=%PATH:C:\Program Files (x86)\Git\usr\bin;=%
-cmake -G "%GENERATOR%" -DCMAKE_INSTALL_PREFIX=%PROJ_DIR%\dependencies\CppUTest-%CPPUTEST_VERSION% -DTESTS=OFF ..
+cmake -G "%GENERATOR%" -DCMAKE_INSTALL_PREFIX=%PROJ_DIR%\dependencies\CppUTest -DTESTS=OFF ..
 SET PATH=%OLD_PATH%
 cmake --build . --target install
 CD ..\..\
@@ -55,5 +59,5 @@ RD /s /q cpputest-%CPPUTEST_VERSION%
 CD %PROJ_DIR%
 
 :SKIP_CppUTest
-SET CppUTest_PATH=%PROJ_DIR%\dependencies\CppUTest-%CPPUTEST_VERSION%
+SET CppUTest_PATH=%PROJ_DIR%\dependencies\CppUTest
 @echo off
