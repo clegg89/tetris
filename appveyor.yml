@@ -6,6 +6,7 @@ platform:
 
 environment:
   CMAKE_GENERATOR: MinGW Makefiles
+  BUILD_DIR: build
 
 install:
   - cmd: scripts\install-common.bat
