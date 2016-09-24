@@ -74,8 +74,8 @@ del cpputest.zip
 echo Success
 
 pushd cpputest-%cpputest_version%\cpputest_build
-SET PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-SET PATH=%PATH:C:\Program Files (x86)\Git\usr\bin;=%
+set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+set PATH=%PATH:C:\Program Files (x86)\Git\usr\bin;=%
 
 echo Building CppUTest
 @rem generate
