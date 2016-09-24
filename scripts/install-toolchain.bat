@@ -32,7 +32,12 @@ exit /b 0
 :download_mingw
 
 echo Downloading MinGW
-curl -sSL -o%toolchain%.7z %mingw_url% || exit /b %errorlevel%
+curl -sSL -o%toolchain%.7z %mingw_url%
+if not exist %toolchain%.7z (
+  echo Failed
+  exit /b 1
+  )
+
 echo Success
 
 exit /b 0
@@ -41,7 +46,12 @@ exit /b 0
 :install_mingw
 
 echo Extracting MinGW
-7z x -o%toolchain_path% %toolchain%.7z || exit /b %errorlevel%
+7z x -o%toolchain_path% %toolchain%.7z
+if not exist %toolchain_path%\%toolchain%%bits% (
+  echo Failed
+  exit /b 1
+  )
+
 ren %toolchain_path%\%toolchain%%bits% %toolchain%
 del %toolchain%.7z
 echo Success

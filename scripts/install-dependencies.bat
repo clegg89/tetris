@@ -23,14 +23,15 @@ goto main
 setlocal
 set output_file=%~1
 set url=%~2
-curl -sSL -o%output_file% %url% || exit /b %errorlevel%
+curl -sSL -o%output_file% %url%
+if not exist %output_file% exit /b 1
 exit /b 0
 
 @rem Install SFML
 :install_sfml
 setlocal
 
-unzip -q sfml.zip -d %cd%\dependencies\ || exit /b %errorlevel%
+unzip -q sfml.zip -d %cd%\dependencies\
 ren %cd%\dependencies\SFML-%sfml_version% sfml
 del sfml.zip
 
@@ -69,7 +70,7 @@ exit /b 0
 setlocal
 
 echo Extracting CppUTest
-unzip -q cpputest.zip -d . || exit /b %errorlevel%
+unzip -q cpputest.zip -d .
 del cpputest.zip
 echo Success
 
@@ -102,13 +103,18 @@ exit /b 0
 
 @rem Download everything
 :download_all
+setlocal
+set sfml_url=http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-gcc-4.9.2-mingw-%bits%-bit.zip
+set cpputest_url=https://github.com/cpputest/cpputest/releases/download/v%cpputest_version%/cpputest-%cpputest_version%.zip
 
-echo Downloading SFML
-call :download_dep sfml.zip http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-gcc-4.9.2-mingw-%bits%-bit.zip || exit /b %errorlevel%
+
+echo Downloading SFML from %sfml_url%
+call :download_dep sfml.zip %sfml_url% || exit /b %errorlevel%
+
 echo Success
 
-echo Downloading CppUTest
-call :download_dep cpputest.zip https://github.com/cpputest/cpputest/releases/download/v%cpputest_version%/cpputest-%cpputest_version%.zip || exit /b %errorlevel%
+echo Downloading CppUTest from %cpputest_url%
+call :download_dep cpputest.zip %cpputest_url% || exit /b %errorlevel%
 echo Success
 
 exit /b 0
