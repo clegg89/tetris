@@ -5,6 +5,8 @@ platform:
   - x64
 
 environment:
+  toolchain_path: C:\toolchain
+  toolchain: mingw
   CMAKE_GENERATOR: MinGW Makefiles
   BUILD_DIR: build
 
