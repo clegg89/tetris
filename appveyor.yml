@@ -5,24 +5,22 @@ platform:
   - x64
 
 environment:
-  SFML_VERSION: 2.3.2
-  BOOST_VERSION: 1.60.0
-  CPPUTEST_VERSION: 3.8
-  GENERATOR: MinGW Makefiles
-  SFML_COMPILER: windows-gcc-4.9.2-mingw
+  CMAKE_GENERATOR: MinGW Makefiles
 
 install:
-  - cmd: scripts\install.bat
+  - cmd: scripts\install-common.bat
+  - cmd: scripts\install-toolchain.bat
+  - cmd: scripts\install-dependencies.bat
 
 build_script:
   - cmd: scripts\build.bat
 
 test_script:
-  - ctest -V .
+  - cmd: scripts\test.bat
 
 artifacts:
   - path: tetris*.zip
 
 cache:
-  - dependencies -> appveyor.yml, scripts\install.bat
-  - C:\toolchain\mingw -> appveyor.yml, scripts\install.bat
+  - '%toolchain_path%\%toolchain% -> scripts\install-toolchain.bat, scripts\install-common.bat'
+  - dependencies -> scripts\install-dependencies.bat, scripts\install-common.bat
