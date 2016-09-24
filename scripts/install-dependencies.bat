@@ -142,7 +142,6 @@ if %errorlevel% neq 0 (
 echo Success
 
 echo Installing Boost
-echo %PATH%
 call :install_boost
 if %errorlevel% neq 0 (
   exit /b %errorlevel%

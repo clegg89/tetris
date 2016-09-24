@@ -66,7 +66,7 @@ call :install_mingw || goto error
 
 :success
 endlocal
-set PATH=%toolchain_path%\%toolchain%;%PATH%
+set PATH=%toolchain_path%\%toolchain%\bin;%PATH%
 rd /s /q C:\MinGW
 goto :EOF
 
