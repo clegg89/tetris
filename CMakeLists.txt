@@ -11,8 +11,8 @@ project(tetris)
 
 enable_testing()
 
-set(tetris_VERSION_MAJOR 1)
-set(tetris_VERSION_MINOR 0)
+set(tetris_VERSION_MAJOR 0)
+set(tetris_VERSION_MINOR 1)
 set(tetris_VERSION_PATH 0)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
@@ -41,8 +41,8 @@ include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A simple Tetris clone")
 set(CPACK_PACKAGE_VENDOR "Clegg")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
-set(CPACK_PACKAGE_VERSION_MAJOR "1")
-set(CPACK_PACKAGE_VERSION_MINOR "0")
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "1")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_PACKAGE_EXECUTABLES "Tetris" "Tetris")
 

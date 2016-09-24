@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 0.1.0.{build}-{branch}
 
 platform:
   - x86
@@ -23,6 +23,18 @@ test_script:
 
 artifacts:
   - path: $(BUILD_DIR)\tetris*.zip
+    name: tetris
+
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: a7q6wJf8WGTKjytaB3jEpqzAQUhCoYIYiQqBRPEX5IGFjAOkc9X+B9c1GzwuOpEV
+    artifact: tetris
+    prerelease: true
+    force_update: true
+    on:
+      branch: master
+      appveyor_repo_tag: true
 
 cache:
   - '%toolchain_path%\%toolchain% -> scripts\install-toolchain.bat, scripts\install-common.bat'
