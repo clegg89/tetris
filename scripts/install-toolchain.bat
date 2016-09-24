@@ -18,27 +18,33 @@ goto main
 
 @rem Setup the environment
 :setup_env
+
 if "%PLATFORM%" == "x86" (
   set mingw_url=https://sourceforge.net/projects/mingw-w64/files/Toolchains%%20targetting%%20Win32/Personal%%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v4-rev2.7z/download
   ) else (
   set mingw_url=https://sourceforge.net/projects/mingw-w64/files/Toolchains%%20targetting%%20Win64/Personal%%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v4-rev2.7z/download
   )
+
 exit /b 0
 
 @rem Download mingw
 :download_mingw
+
 echo Downloading MinGW
 curl -sSL -o%toolchain%.7z %mingw_url% || exit /b %errorlevel%
 echo Success
+
 exit /b 0
 
-@rem install mingw
+@rem Install mingw
 :install_mingw
+
 echo Extracting MinGW
 7z x -o%toolchain_path% %toolchain%.7z || exit /b %errorlevel%
 ren %toolchain_path%\%toolchain%%bits% %toolchain%
 del %toolchain%.7z
 echo Success
+
 exit /b 0
 
 :main
