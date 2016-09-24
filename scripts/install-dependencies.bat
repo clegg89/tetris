@@ -71,7 +71,8 @@ popd
 
 exit /b 0
 
-@rem Install CppUTest
+
+
 :install_cpputest
 setlocal
 
@@ -109,6 +110,8 @@ exit /b 0
 
 @rem Download everything
 :download_all
+
+
 setlocal
 set sfml_url=http://www.sfml-dev.org/files/SFML-%sfml_version%-windows-gcc-4.9.2-mingw-%bits%-bit.zip
 set cpputest_url=https://github.com/cpputest/cpputest/releases/download/v%cpputest_version%/cpputest-%cpputest_version%.zip
