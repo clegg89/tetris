@@ -5,7 +5,10 @@
 setlocal
 
 @rem Don't run if already installed
-if exist %toolchain_path%\%toolchain% goto success
+if exist %toolchain_path%\%toolchain% (
+  echo Toolchain found at %toolchain_path%\%toolchain%
+  goto success
+  )
 
 set self=%~nx0
 
