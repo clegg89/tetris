@@ -22,7 +22,7 @@ test_script:
   - cmd: scripts\test.bat
 
 artifacts:
-  - path: tetris*.zip
+  - path: '%BUILD_DIR%\tetris*.zip'
 
 cache:
   - '%toolchain_path%\%toolchain% -> scripts\install-toolchain.bat, scripts\install-common.bat'
