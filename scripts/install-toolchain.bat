@@ -16,7 +16,8 @@ goto main
 
 @rem FUNCTIONS
 
-@rem Setup the environment
+
+
 :setup_env
 
 if "%PLATFORM%" == "x86" (
@@ -27,7 +28,7 @@ if "%PLATFORM%" == "x86" (
 
 exit /b 0
 
-@rem Download mingw
+
 :download_mingw
 
 echo Downloading MinGW
@@ -36,7 +37,7 @@ echo Success
 
 exit /b 0
 
-@rem Install mingw
+
 :install_mingw
 
 echo Extracting MinGW
@@ -58,6 +59,8 @@ set PATH=%toolchain_path%\%toolchain%;%PATH%
 rd /s /q C:\MinGW
 goto :EOF
 
+
 :error
 echo %self% failed with error #%errorlevel%
 exit /b %errorlevel%
+
