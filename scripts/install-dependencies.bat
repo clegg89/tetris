@@ -23,8 +23,14 @@ goto main
 setlocal
 set output_file=%~1
 set url=%~2
+echo curl -sSL -o%output_file% %url%
 curl -sSL -o%output_file% %url%
-if not exist %output_file% exit /b 1
+if not exist %output_file% (
+  echo Failed
+  exit /b 1
+  )
+
+echo Success
 exit /b 0
 
 @rem Install SFML
@@ -109,13 +115,12 @@ set cpputest_url=https://github.com/cpputest/cpputest/releases/download/v%cppute
 
 
 echo Downloading SFML from %sfml_url%
-call :download_dep sfml.zip %sfml_url% || exit /b %errorlevel%
-
-echo Success
+call :download_dep sfml.zip %sfml_url%
+if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo Downloading CppUTest from %cpputest_url%
-call :download_dep cpputest.zip %cpputest_url% || exit /b %errorlevel%
-echo Success
+call :download_dep cpputest.zip %cpputest_url%
+if %errorlevel% neq 0 exit /b %errorlevel%
 
 exit /b 0
 
