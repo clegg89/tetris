@@ -47,7 +47,7 @@ exit /b 0
 :install_boost
 setlocal
 
-pushd C:\Libraries\boot_%boost_version:.=_%
+pushd C:\Libraries\boost_%boost_version:.=_%
 
 echo Bootstrap Boost
 call bootstrap.bat mingw
@@ -130,12 +130,25 @@ setlocal
 set proj_dir=%cd%
 
 echo Installing SFML
-call :install_sfml || exit /b %errorlevel%
+call :install_sfml
+if %errorlevel% neq 0 (
+  echo Failed
+  exit /b %errorlevel%
+  )
+
 echo Success
+
 echo Installing Boost
-call :install_boost || exit /b %errorlevel%
+call :install_boost
+if %errorlevel% neq 0 (
+  exit /b %errorlevel%
+  )
+
 echo Installing CppUTest
-call :install_cpputest || exit /b %errorlevel%
+call :install_cpputest
+if %errorlevel% neq 0 (
+  exit /b %errorlevel%
+  )
 
 exit /b 0
 
