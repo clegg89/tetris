@@ -13,7 +13,9 @@ goto main
 
 :main
 echo Running tests
+pushd %BUILD_DIR%
 ctest -V . || goto error
+popd
 
 :success
 endlocal
