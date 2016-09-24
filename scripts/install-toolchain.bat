@@ -2,8 +2,6 @@
 @rem AUTHOR: C. Smith
 @rem DESC: Install the toolchain for appveyor builds
 @echo off
-set toolchain_path=C:\toolchain
-set toolchain=mingw
 setlocal
 
 @rem Don't run if already installed
