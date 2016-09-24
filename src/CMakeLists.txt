@@ -68,7 +68,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_library(${PRODUCTION_LIBRARY} ${SRC})
 add_executable(${PRODUCTION_EXE} ${SRCROOT}/main.cpp)
 
-if(${WIN32} AND ${CMAKE_COMPILER_IS_GNUCC})
+if(WIN32 AND CMAKE_COMPILER_IS_GNUCC)
   target_link_libraries(${PRODUCTION_EXE} -static-libgcc -static-libstdc++ -static)
 endif()
 
