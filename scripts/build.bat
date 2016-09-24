@@ -6,3 +6,4 @@ SET PATH=%PATH:C:\Program Files (x86)\Git\usr\bin;=%
 cmake -G "%GENERATOR%" ..
 SET PATH=%OLD_PATH%
 cmake --build .
+cpack -G "ZIP" .

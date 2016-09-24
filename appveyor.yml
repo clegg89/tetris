@@ -20,6 +20,9 @@ build_script:
 test_script:
   - ctest -V .
 
+artifacts:
+  - path: tetris*.zip
+
 cache:
   - dependencies -> appveyor.yml, scripts\install.bat
   - C:\toolchain\mingw -> appveyor.yml, scripts\install.bat
