@@ -67,8 +67,8 @@ deploy:windows:
   artifacts:
     paths:
       - build/tetris*.zip
-    tags:
-      - windows
+  tags:
+    - windows
 
 deploy:linux:
   stage: deploy
@@ -80,5 +80,5 @@ deploy:linux:
   artifacts:
     paths:
       - build/tetris*.tar.gz
-    tags:
-      - linux
+  tags:
+    - linux
