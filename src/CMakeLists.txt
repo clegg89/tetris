@@ -69,6 +69,10 @@ add_library(${PRODUCTION_LIBRARY} ${SRC})
 add_executable(${PRODUCTION_EXE} ${SRCROOT}/main.cpp)
 target_link_libraries(${PRODUCTION_EXE} ${PRODUCTION_LIBRARY} ${MEDIA_LIBRARIES} ${Boost_LIBRARIES})
 
+if(${CMAKE_COMPILER_IS_GNUCC})
+  target_link_libraries(${PRODUCTION_EXE} -static-libgcc -static-libstdc++)
+endif()
+
 set_property(TARGET ${PRODUCTION_LIBRARY} PROPERTY CXX_STANDARD 11)
 set_property(TARGET ${PRODUCTION_EXE} PROPERTY CXX_STANDARD 11)
 
