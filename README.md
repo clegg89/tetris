@@ -9,6 +9,8 @@ This is a simple tetris clone written in C++. The project works with either SFML
 # Dependencies
 This project requires either [SFML](www.sfml-dev.org) or [SDL2](www.libsdl.org) to build. CMake will preferentially select SFML. If it cannot locate SFML, it will use SDL2.
 
+The project also uses the boost-filesystem library, which in turn uses boost-system. On linux, simply install libboost-filesystem-dev, which will pickup boost-system as a dependency. Windows requires building and installing Boost manually.
+
 ## Additional SDL2 Libraries
 
 In addition to the main SDL2 development library, the following libraries are also required: [SDL2_image](https://www.libsdl.org/projects/SDL_image), [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer), [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf).
@@ -25,9 +27,6 @@ The resulting binary will be located in build/bin.
 
 # TODO
 The following is a list of action items
-* Setup builds for both 32 and 64 bit on travis-CI
-* Setup builds for both SDL and SFML on both appveyor and travis
-* Look into making release packages for deployment on multiple systems
 * Refactor TetrominoFactory
 * Refactor rest of code that uses C so that it is more C++
 * Unit tests with [CppUTest](cpputest.github.io)
