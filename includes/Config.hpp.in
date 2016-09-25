@@ -1,0 +1,8 @@
+#ifndef _CONFIG_HPP_
+#define _CONFIG_HPP_
+
+#include <string>
+
+static const std::string RESOURCE_PREFIX = "@RESOURCE_PREFIX@";
+
+#endif /* _CONFIG_HPP_ */

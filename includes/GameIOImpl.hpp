@@ -8,6 +8,8 @@
 #ifndef _GAMEIOIMPL_H_
 #define _GAMEIOIMPL_H_
 
+#include <string>
+
 #include "Tetris.hpp"
 #include "Color.hpp"
 #include "Board.hpp"
@@ -35,7 +37,7 @@ class GameIOImpl
         GameIOImpl();
         virtual ~GameIOImpl();
 
-        bool Init(const int windowHeight, const int windowWidth, const Color bgColor);
+        bool Init(const std::string& blockFile, const int windowHeight, const int windowWidth, const Color bgColor);
         void Close();
 
         void ClearScreen(const Color bgColor);

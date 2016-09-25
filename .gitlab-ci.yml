@@ -1,9 +1,11 @@
 build:windows:
   stage: build
   before_script:
-    - set PATH=E:\Program Files (x86)\CMake\bin;E:\tools\mingw64\bin;%PATH%
+    - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
     - set PATH=%PATH:E:\Program Files\Git\cmd;=%
     - set SFML_ROOT=E:\SFML-MinGW-64-2.3.2
+    - set BOOST_ROOT=E:\boost-64-1_60_0
+    - set BOOST_INCLUDEDIR=%BOOST_ROOT%\include\boost-1_60
     - set CppUTest_PATH=E:\CppUTest-64-3.8
   script:
     - mkdir build && cd build
@@ -31,11 +33,18 @@ build:linux:
 
 test:windows:
   stage: test
+  before_script:
+    - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
+    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
   script:
     - cd build
     - ctest -V .
   dependencies:
     - build:windows
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - build
   tags:
     - windows
 
@@ -46,5 +55,38 @@ test:linux:
     - ctest -V .
   dependencies:
     - build:linux
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - build
+  tags:
+    - linux
+
+deploy:windows:
+  stage: deploy
+  before_script:
+    - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
+    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
+  script:
+    - cd build
+    - cpack -G "ZIP" .
+  dependencies:
+    - test:windows
+  artifacts:
+    paths:
+      - build/tetris*.zip
+  tags:
+    - windows
+
+deploy:linux:
+  stage: deploy
+  script:
+    - cd build
+    - cpack -G "TGZ" .
+  dependencies:
+    - test:linux
+  artifacts:
+    paths:
+      - build/tetris*.tar.gz
   tags:
     - linux

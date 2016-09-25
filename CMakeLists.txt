@@ -9,21 +9,42 @@ endif()
 
 project(tetris)
 
-# Set version information in a config.h file
-# No...
-set(tetris_VERSION_MAJOR 1)
-set(tetris_VERSION_MINOR 0)
+enable_testing()
+
+set(tetris_VERSION_MAJOR 0)
+set(tetris_VERSION_MINOR 1)
+set(tetris_VERSION_PATH 0)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
-set(PRODUCTION_LIBRARY ${CMAKE_PROJECT_NAME}Library)
+set(PRODUCTION_LIBRARY "${CMAKE_PROJECT_NAME}Code")
 set(PRODUCTION_EXE ${CMAKE_PROJECT_NAME})
-set(TEST_EXE ${CMAKE_PROJECT_NAME}Test)
+set(TEST_EXE "${CMAKE_PROJECT_NAME}Test")
+
+set(RESOURCE_PREFIX "etc/${CMAKE_PROJECT_NAME}")
+configure_file(${CMAKE_SOURCE_DIR}/includes/Config.hpp.in ${CMAKE_BINARY_DIR}/includes/Config.hpp)
+
+include_directories("${CMAKE_BINARY_DIR}/includes")
+include_directories("${PROJECT_SOURCE_DIR}/includes")
 
 add_subdirectory(src)
 add_subdirectory(tests)
 
-enable_testing()
+# Install
+install(DIRECTORY media DESTINATION ${RESOURCE_PREFIX})
+
 add_test(${TEST_EXE} tests/${TEST_EXE})
 
-install(DIRECTORY media DESTINATION ${PROJECT_BINARY_DIR}/bin)
+include(InstallRequiredSystemLibraries)
+
+# CPack setup
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A simple Tetris clone")
+set(CPACK_PACKAGE_VENDOR "Clegg")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "1")
+set(CPACK_PACKAGE_VERSION_PATCH "0")
+set(CPACK_PACKAGE_EXECUTABLES "Tetris" "Tetris")
+
+#Enable CPack
+include(CPack)

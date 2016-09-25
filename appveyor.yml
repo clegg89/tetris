@@ -1,26 +1,41 @@
-version: 1.0.{build}
+version: 0.1.0.{build}-{branch}
 
 platform:
   - x86
   - x64
 
 environment:
-  MINGW_VERSION: 4.9.3
-  SFML_VERSION: 2.3.2
-  CPPUTEST_VERSION: 3.8
-  GENERATOR: MinGW Makefiles
-  SFML_COMPILER: windows-gcc-4.9.2-mingw
+  toolchain_path: C:\toolchain
+  toolchain: mingw
+  CMAKE_GENERATOR: MinGW Makefiles
+  BUILD_DIR: build
 
 install:
-  - cmd: scripts\install.bat
+  - cmd: scripts\install-common.bat
+  - cmd: scripts\install-toolchain.bat
+  - cmd: scripts\install-dependencies.bat
 
 build_script:
   - cmd: scripts\build.bat
 
 test_script:
-  - ctest -V .
+  - cmd: scripts\test.bat
+
+artifacts:
+  - path: $(BUILD_DIR)\tetris*.zip
+    name: tetris
+
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: a7q6wJf8WGTKjytaB3jEpqzAQUhCoYIYiQqBRPEX5IGFjAOkc9X+B9c1GzwuOpEV
+    artifact: tetris
+    prerelease: true
+    force_update: true
+    on:
+      branch: master
+      appveyor_repo_tag: true
 
 cache:
-  - dependencies -> appveyor.yml, scripts\install.bat
-  - C:\tools\mingw32 -> appveyor.yml, scripts\install.bat
-  - C:\tools\mingw64 -> appveyor.yml, scripts\install.bat
+  - '%toolchain_path%\%toolchain% -> scripts\install-toolchain.bat, scripts\install-common.bat'
+  - dependencies -> scripts\install-dependencies.bat, scripts\install-common.bat

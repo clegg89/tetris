@@ -31,9 +31,9 @@ GameIOImpl::~GameIOImpl()
     delete this->pInternals;
 }
 
-bool GameIOImpl::Init(const int windowHeight, const int windowWidth, const Color bgColor)
+bool GameIOImpl::Init(const std::string& blockFile, const int windowHeight, const int windowWidth, const Color bgColor)
 {
-    const char * blockImagePath = "media/block.bmp";
+    const char * blockImagePath = blockFile.c_str();
 
     this->pInternals->pWindow = new sf::RenderWindow(sf::VideoMode(windowWidth, windowHeight), "Tetris");
 

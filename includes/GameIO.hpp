@@ -8,6 +8,8 @@
 #ifndef _GAMEIO_H_
 #define _GAMEIO_H_
 
+#include <string>
+
 #include "Tetris.hpp"
 #include "Color.hpp"
 #include "Board.hpp"
@@ -31,7 +33,7 @@ class GameIO
         KeyCallback pKeyCallbacks[NUM_KEYCODES];
 
     public:
-        bool Init(const int windowHeight, const int windowWidth);
+        bool Init(const std::string& blockFile, const int windowHeight, const int windowWidth);
         void Close();
 
         void UnregisterKeyCBs(void);

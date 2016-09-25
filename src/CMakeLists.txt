@@ -1,6 +1,3 @@
-# Add includes directory
-include_directories("${PROJECT_SOURCE_DIR}/includes")
-
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src)
 
 set(SRC
@@ -14,7 +11,11 @@ set(SRC
   ${SRCROOT}/TetrominoFactory.cpp
   )
 
-find_package(SFML 2 COMPONENTS system window graphics network audio)
+# Statically link SFML
+if(${WIN32})
+  set(SFML_STATIC_LIBRARIES TRUE)
+endif()
+find_package(SFML 2 COMPONENTS audio graphics window system)
 
 if(SFML_FOUND)
 
@@ -26,7 +27,7 @@ if(SFML_FOUND)
 
   include_directories(${SFML_INCLUDE_DIR})
 
-  set(MEDIA_LIBRARIES ${SFML_LIBRARIES})
+  set(MEDIA_LIBRARIES ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
 else()
 
@@ -60,12 +61,20 @@ else()
   endif()
 endif()
 
+set(Boost_USE_STATIC_LIBS)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
 add_library(${PRODUCTION_LIBRARY} ${SRC})
 add_executable(${PRODUCTION_EXE} ${SRCROOT}/main.cpp)
-target_link_libraries(${PRODUCTION_EXE} ${PRODUCTION_LIBRARY} ${MEDIA_LIBRARIES})
+
+if(WIN32 AND CMAKE_COMPILER_IS_GNUCC)
+  target_link_libraries(${PRODUCTION_EXE} -static-libgcc -static-libstdc++ -static)
+endif()
+
+target_link_libraries(${PRODUCTION_EXE} ${PRODUCTION_LIBRARY} ${MEDIA_LIBRARIES} ${Boost_LIBRARIES})
 
 set_property(TARGET ${PRODUCTION_LIBRARY} PROPERTY CXX_STANDARD 11)
 set_property(TARGET ${PRODUCTION_EXE} PROPERTY CXX_STANDARD 11)
 
-# Install target
-install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${PROJECT_BINARY_DIR}/bin)
+install(TARGETS ${PRODUCTION_EXE} DESTINATION "bin")
