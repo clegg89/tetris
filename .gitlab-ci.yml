@@ -5,6 +5,7 @@ build:windows:
     - set PATH=%PATH:E:\Program Files\Git\cmd;=%
     - set SFML_ROOT=E:\SFML-MinGW-64-2.3.2
     - set BOOST_ROOT=E:\boost-64-1_60_0
+    - set BOOST_INCLUDEDIR-%BOOST_ROOT%\include\boost-1_60
     - set CppUTest_PATH=E:\CppUTest-64-3.8
   script:
     - mkdir build && cd build
