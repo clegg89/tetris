@@ -33,6 +33,9 @@ build:linux:
 
 test:windows:
   stage: test
+  before_script:
+    - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
+    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
   script:
     - cd build
     - ctest -V .
@@ -61,6 +64,9 @@ test:linux:
 
 deploy:windows:
   stage: deploy
+  before_script:
+    - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
+    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
   script:
     - cd build
     - cpack -G "ZIP" .
