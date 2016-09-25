@@ -32,15 +32,22 @@ script:
 after_success:
     - cd build
     - ctest -V .
+    - cd -
+
+before_deploy:
+    - cd build
     - cpack -G "TGZ" .
+    - export RELEASE_TARBALL=$(ls tetris*.tar.gz)
     - cd -
 
 deploy:
   provider: releases
   api_key:
     secure: EHr6yWvX+g3DazxoLkkRqJWcsyYrSU96vztdMrjP+aFyta+7arlEN328/A/r5Bs3VuBuw9FYY+F0Ipp/F9U2qNaBx6QI9wnqN28HbjdwzlLX6WwjvoHhSP1IzJcCMcO5bPnC3RDyM+lV02RtfOIflAE8tZ7RXXRZA6F2bVMr0nRsse8ZhjpdB3xJ6s7E7NcLXNhbZbQ9k/szGWJhoAUcRy/97nt3VzG2ky39fW4EbzX0YBLJZaQ0nb/LfkaYTIQV5h9LBqTiSN96IcWsJyleR+IJk+yd/jC+AflpuOH9NBpA3WNA2Av2HeLAvIXlkhcEGorR+11S8vV1iiP9cCia/tuM080w5R65xqhGRIGvjIUMK9i/d82ddU2yKeUb0xrJc4nN+gBy2v9EyUjzCodR4WKcTX27ZEUs8oywUY+/kMysb5ik59aQp3ufrZAyFagVUf3HUQvbKN/0E/Lhu1fasVrNoCTrhgVnMq59ZYizqrpYvybPf1lGZG4dy8Al71GVJKDRFTFyweHxpbJPbe3INNPw/2VJXhx+golri3jMfPSrB9Rj0hR3P1R6ArWHeFAoOcTyS0UUmGPS9L//kFVjDV018igJP2QLNU7J3ON7YD2Q/m0/VXb0jLU1tVKOSWFzF3n8NAadQOZF3ABwMCDFwLCnsnWW0vs5HNiPXfX+RwE=
-  file: build/tetris*.tar.gz
   skip_cleanup: true
+  overwrite: true
+  file_glob: true
+  file: "build/${RELEASE_TARBALL}"
   on:
     branch: master
     tags: true
