@@ -2,7 +2,6 @@ build:windows:
   stage: build
   before_script:
     - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
-    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
     - set SFML_ROOT=E:\SFML-MinGW-64-2.3.2
     - set BOOST_ROOT=E:\boost-64-1_60_0
     - set BOOST_INCLUDEDIR=%BOOST_ROOT%\include\boost-1_60
@@ -35,7 +34,6 @@ test:windows:
   stage: test
   before_script:
     - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
-    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
   script:
     - cd build
     - ctest -V .
@@ -66,7 +64,6 @@ deploy:windows:
   stage: deploy
   before_script:
     - set PATH=E:\Program Files (x86)\CMake\bin;E:\mingw64\bin;%PATH%
-    - set PATH=%PATH:E:\Program Files\Git\cmd;=%
   script:
     - cd build
     - cpack -G "ZIP" .

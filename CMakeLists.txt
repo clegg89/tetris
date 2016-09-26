@@ -1,21 +1,26 @@
 # Minimum required CMake version
 cmake_minimum_required(VERSION 2.8)
 
+# Allow VERSION argument for project
+if(POLICY CMP0048)
+  cmake_policy(SET CMP0048 NEW)
+endif()
+
 # Enable debug symbols by default
 # must be done before project() statement
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
 endif()
 
-project(tetris)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/third-party")
+
+include(GetGitRevisionDescription)
+git_describe(GIT_VERSION --tags --abbrev=0)
+
+project(tetris VERSION ${GIT_VERSION})
 
 enable_testing()
-
-set(tetris_VERSION_MAJOR 0)
-set(tetris_VERSION_MINOR 1)
-set(tetris_VERSION_PATH 0)
-
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
 set(PRODUCTION_LIBRARY "${CMAKE_PROJECT_NAME}Code")
 set(PRODUCTION_EXE ${CMAKE_PROJECT_NAME})
@@ -41,9 +46,9 @@ include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A simple Tetris clone")
 set(CPACK_PACKAGE_VENDOR "Clegg")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
-set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "1")
-set(CPACK_PACKAGE_VERSION_PATCH "0")
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_EXECUTABLES "Tetris" "Tetris")
 
 #Enable CPack
